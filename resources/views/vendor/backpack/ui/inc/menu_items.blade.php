@@ -9,3 +9,9 @@
 
 <x-backpack::menu-item title='Settings' icon='la la-cog' :link="backpack_url('setting')" />
 <x-backpack::menu-item title='Logs' icon='la la-terminal' :link="backpack_url('log')" />
+<x-backpack::menu-item title="Courses" icon="la la-question" :link="backpack_url('course')" />
+<x-backpack::menu-item title="Students" icon="la la-question" :link="backpack_url('student')" />
+<x-backpack::menu-item title="Subjects" icon="la la-question" :link="backpack_url('subject')" />
+<x-backpack::menu-item title="Teachers" icon="la la-question" :link="backpack_url('teacher')" />
+<x-backpack::menu-item title="Evaluations" icon="la la-question" :link="backpack_url('evaluation')" />
+<x-backpack::menu-item title="Assistances" icon="la la-question" :link="backpack_url('assistance')" />
