@@ -17,7 +17,6 @@ return new class extends Migration
             $table->unsignedBigInteger('course_id');
             $table->string('description')->nullable();
             $table->dateTime('evaluation_date')->nullable();
-            $table->dateTime('date')->nullable();
             $table->bigInteger('order')->default(0);
             $table->boolean('is_active')->default(true);
 

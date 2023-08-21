@@ -21,7 +21,7 @@ class CourseCrudController extends CrudController
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
-     * 
+     *
      * @return void
      */
     public function setup()
@@ -33,23 +33,44 @@ class CourseCrudController extends CrudController
 
     /**
      * Define what happens when the List operation is loaded.
-     * 
+     *
      * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
      * @return void
      */
     protected function setupListOperation()
     {
-        CRUD::setFromDb(); // set columns from db columns.
+        CRUD::addColumn([
+            'name' => 'name',
+            'type' => 'text',
+            'label' => 'Curso'
+        ]);
 
-        /**
-         * Columns can be defined using the fluent syntax:
-         * - CRUD::column('price')->type('number');
-         */
+        CRUD::addColumn([
+            'name' => 'level',
+            'type' => 'text',
+            'label' => 'Nivel'
+        ]);
+
+        CRUD::addColumn([
+            'name' => 'letter',
+            'label' => 'letter'
+        ]);
+
+        CRUD::addColumn([
+            'name' => 'order',
+            'label' => 'Orden'
+        ]);
+
+        CRUD::addColumn([
+            'name' => 'is_active',
+            'type' => 'text',
+            'label' => 'Estado'
+        ]);
     }
 
     /**
      * Define what happens when the Create operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-create
      * @return void
      */
@@ -66,7 +87,7 @@ class CourseCrudController extends CrudController
 
     /**
      * Define what happens when the Update operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-update
      * @return void
      */

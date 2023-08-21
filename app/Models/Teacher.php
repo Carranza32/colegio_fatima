@@ -23,6 +23,7 @@ class Teacher extends Model
     protected $guarded = ['id'];
     // protected $fillable = [];
     // protected $hidden = [];
+    protected $appends = ['full_name'];
 
     /*
     |--------------------------------------------------------------------------
@@ -49,7 +50,10 @@ class Teacher extends Model
     | ACCESSORS
     |--------------------------------------------------------------------------
     */
-
+    public function getFullNameAttribute()
+    {
+        return $this->name . ' ' . $this->last_name;
+    }
     /*
     |--------------------------------------------------------------------------
     | MUTATORS
