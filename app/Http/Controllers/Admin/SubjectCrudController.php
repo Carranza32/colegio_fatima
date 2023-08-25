@@ -72,12 +72,34 @@ class SubjectCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(SubjectRequest::class);
-        CRUD::setFromDb(); // set fields from db columns.
 
-        /**
-         * Fields can be defined using the fluent syntax:
-         * - CRUD::field('price')->type('number');
-         */
+        CRUD::addField([
+            'name' => 'name',
+            'type' => 'text',
+            'label' => 'Asignatura'
+        ]);
+
+        CRUD::addField([
+            'name' => 'course_id',
+            'type' => 'select2',
+            'label' => 'Curso',
+            'entity' => 'course',
+            'attribute' => 'name_letter',
+            'model' => \App\Models\Course::class
+        ]);
+
+        CRUD::addField([
+            'name' => 'is_averaging',
+            'type' => 'switch',
+            'label' => 'Promediable'
+        ]);
+
+        CRUD::addField([
+            'name' => 'is_active',
+            'label' => 'Activo',
+            'type' => 'switch',
+            'default' => 1
+        ]);
     }
 
     /**

@@ -66,6 +66,57 @@ class CourseCrudController extends CrudController
             'type' => 'text',
             'label' => 'Estado'
         ]);
+
+        $this->setupFilters();
+    }
+
+    protected function setupFilters()
+    {
+        CRUD::addFilter([
+            'name' => 'name',
+            'type' => 'select2',
+            'label' => 'Nombre',
+        ], function () {
+            return $this->crud->getModel()::all()->pluck('name', 'id')->toArray();
+        }, function ($value) {
+            $this->crud->addClause('where', 'id', $value);
+        });
+
+        CRUD::addFilter([
+            'name' => 'level',
+            'type' => 'select2',
+            'label' => 'Nivel',
+        ], function () {
+            return $this->crud->getModel()::all()->pluck('level', 'id')->toArray();
+        }, function ($value) {
+            $this->crud->addClause('where', 'id', $value);
+        });
+
+        CRUD::addFilter([
+            'name' => 'letter',
+            'type' => 'select2',
+            'label' => 'Letra',
+        ], function () {
+            return $this->crud->getModel()::all()->pluck('letter', 'id')->toArray();
+        }, function ($value) {
+            $this->crud->addClause('where', 'id', $value);
+        });
+
+        CRUD::addFilter(
+            [
+                'name' => 'is_active',
+                'type' => 'dropdown',
+                'label' => "Estado",
+            ],
+            [
+                0 => __('crud.status.inactive'),
+                1 => __('crud.status.active'),
+            ],
+            function ($value) {
+                $this->crud->addClause('where', 'is_active', $value);
+            }
+        );
+
     }
 
     /**
@@ -77,12 +128,45 @@ class CourseCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(CourseRequest::class);
-        CRUD::setFromDb(); // set fields from db columns.
 
-        /**
-         * Fields can be defined using the fluent syntax:
-         * - CRUD::field('price')->type('number');
-         */
+        CRUD::addField([
+            'name' => 'name',
+            'label' => 'Nombre',
+            'type' => 'text',
+        ]);
+
+        CRUD::addField([
+            'name' => 'level',
+            'label' => 'Nivel',
+            'type' => 'text',
+        ]);
+
+        CRUD::addField([
+            'name' => 'letter',
+            'label' => 'Letra',
+            'type' => 'text',
+        ]);
+
+        CRUD::addField([
+            'name' => 'schedule_file',
+            'type' => 'upload',
+            'label' => 'Horario',
+            'upload' => true,
+            'disk' => 'public',
+        ]);
+
+        CRUD::addField([
+            'name' => 'order',
+            'type' => 'number',
+            'default' => ($this->crud->getModel()::orderByDesc('order')->first()->orden ?? 0) + 1,
+        ]);
+
+        CRUD::addField([
+            'name' => 'is_active',
+            'label' => 'Activo',
+            'type' => 'switch',
+            'default' => 1
+        ]);
     }
 
     /**

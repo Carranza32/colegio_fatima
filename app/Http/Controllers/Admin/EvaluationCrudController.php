@@ -77,12 +77,43 @@ class EvaluationCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(EvaluationRequest::class);
-        CRUD::setFromDb(); // set fields from db columns.
 
-        /**
-         * Fields can be defined using the fluent syntax:
-         * - CRUD::field('price')->type('number');
-         */
+        CRUD::addField([
+            'name' => 'subject_id',
+            'type' => 'select2',
+            'label' => 'Asignatura',
+            'entity' => 'subject',
+            'attribute' => 'name',
+            'model' => \App\Models\Subject::class
+        ]);
+
+        CRUD::addField([
+            'name' => 'course_id',
+            'type' => 'select2',
+            'label' => 'Curso',
+            'entity' => 'course',
+            'attribute' => 'name_letter',
+            'model' => \App\Models\Course::class
+        ]);
+
+        CRUD::addField([
+            'name' => 'evaluation_date',
+            'type' => 'date',
+            'label' => 'Fecha de evaluación'
+        ]);
+
+        CRUD::addField([
+            'name' => 'order',
+            'type' => 'number',
+            'default' => ($this->crud->getModel()::orderByDesc('order')->first()->orden ?? 0) + 1,
+        ]);
+
+        CRUD::addField([
+            'name' => 'is_active',
+            'type' => 'switch',
+            'label' => 'Estado',
+            'default' => 1
+        ]);
     }
 
     /**

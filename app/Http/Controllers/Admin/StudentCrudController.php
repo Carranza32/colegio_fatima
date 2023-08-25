@@ -78,12 +78,46 @@ class StudentCrudController extends CrudController
     protected function setupCreateOperation()
     {
         CRUD::setValidation(StudentRequest::class);
-        CRUD::setFromDb(); // set fields from db columns.
 
-        /**
-         * Fields can be defined using the fluent syntax:
-         * - CRUD::field('price')->type('number');
-         */
+        CRUD::addField([
+            'name' => 'name',
+            'type' => 'text',
+            'label' => 'Nombres'
+        ]);
+
+        CRUD::addField([
+            'name' => 'last_name',
+            'type' => 'text',
+            'label' => 'Apellidos'
+        ]);
+
+        CRUD::addField([
+            'name' => 'student_card',
+            'type' => 'text',
+            'label' => 'Carne'
+        ]);
+
+        CRUD::addField([
+            'name' => 'email',
+            'type' => 'text',
+            'label' => 'Correo'
+        ]);
+
+        CRUD::addField([
+            'name' => 'course_id',
+            'type' => 'select2',
+            'label' => 'Curso',
+            'entity' => 'course',
+            'attribute' => 'name_letter',
+            'model' => \App\Models\Course::class
+        ]);
+
+        CRUD::addField([
+            'name' => 'is_active',
+            'label' => 'Activo',
+            'type' => 'switch',
+            'default' => 1
+        ]);
     }
 
     /**

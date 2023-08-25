@@ -23,6 +23,7 @@ class Course extends Model
     protected $guarded = ['id'];
     // protected $fillable = [];
     // protected $hidden = [];
+    protected $appends = ['name_letter'];
 
     /*
     |--------------------------------------------------------------------------
@@ -47,10 +48,23 @@ class Course extends Model
     | ACCESSORS
     |--------------------------------------------------------------------------
     */
-
+    public function getNameLetterAttribute()
+    {
+        return $this->attributes['name'] . ' ' . $this->letter;
+    }
     /*
     |--------------------------------------------------------------------------
     | MUTATORS
     |--------------------------------------------------------------------------
     */
+    public function setScheduleFileAttribute($value)
+    {
+        if ($value != null) {
+            $attribute_name = "schedule_file";
+            $disk = "public";
+            $destination_path = "horario";
+
+            $this->uploadFileToDisk($value, $attribute_name, $disk, $destination_path);
+        }
+    }
 }
