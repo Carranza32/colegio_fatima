@@ -27,18 +27,18 @@ trait CurrentPeriod{
         static::addGlobalScope('current_period', function ($query) use ($model) {
             $table = $model->getTable();
 
-            $has_column = Schema::hasColumn( $table , 'fecha');
+            $has_column = Schema::hasColumn( $table , 'date_scope');
 
             if ($has_column) {
-                return $query->whereBetween("{$table}.fecha", [session('period')?->fecha_inicio, session('period')?->fecha_fin.' 23:59:59']);
+                return $query->whereBetween("{$table}.date_scope", [session('period')?->fecha_inicio, session('period')?->fecha_fin.' 23:59:59']);
             }
         });
 
         if (backpack_user()) {
             static::creating(function ($model) {
                 try {
-                    if ($model?->fecha == null) {
-                        $model->fecha = date(session('year')?->year.'-m-d');
+                    if ($model?->date_scope == null) {
+                        $model->date_scope = date(session('year')?->year.'-m-d');
                     }
 
                     $model->created_by = backpack_user()?->id;

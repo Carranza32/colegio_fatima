@@ -33,15 +33,10 @@ trait CurrentYear{
         static::addGlobalScope('current_year', function ($query) use ($model) {
             $table = $model->getTable();
 
-            $has_column = Schema::hasColumn( $table , 'fecha');
-            $pago_column = Schema::hasColumn( $table , 'fecha_pago');
+            $has_column = Schema::hasColumn( $table , 'date_scope');
 
             if ($has_column) {
-                return $query->whereYear("{$table}.fecha", session('year')?->year);
-            }
-
-            if ($pago_column) {
-                return $query->whereYear("{$table}.fecha_pago", session('year')?->year);
+                return $query->whereYear("{$table}.date_scope", session('year')?->year);
             }
         });
 
@@ -49,25 +44,18 @@ trait CurrentYear{
             static::creating(function ($model) {
                 $table = $model->getTable();
 
-                $has_column = Schema::hasColumn( $table , 'fecha');
-                $pago_column = Schema::hasColumn( $table , 'fecha_pago');
+                $has_column = Schema::hasColumn( $table , 'date_scope');
 
                 try {
                     if ($has_column) {
-                        if ($model?->fecha == null) {
-                            $model->fecha = date(session('year')?->year.'-m-d');
-                        }
-                    }
-
-                    if ($pago_column) {
-                        if ($model?->fecha_pago == null) {
-                            $model->fecha_pago = date(session('year')?->year.'-m-d');
+                        if ($model?->date_scope == null) {
+                            $model->date_scope = date(session('year')?->year.'-m-d');
                         }
                     }
 
                     $model->created_by = backpack_user()?->id;
 
-                    if ($table == 'alumnos' || $table == 'apoderados'|| $table == 'docentes') {
+                    if ($table == 'alumnos' || $table == 'docentes') {
                             $usuario = User::where('email', $model->email)->first();
 
                             if ($usuario == null) {
@@ -84,9 +72,7 @@ trait CurrentYear{
                             if ($table == 'alumnos') {
                                 $usuario->assignRole(User::ROLE_ALUMNO);
                             }
-                            if ($table == 'apoderados') {
-                                $usuario->assignRole(User::ROLE_APODERADO);
-                            }
+
                             if ($table == 'docentes') {
                                 $usuario->assignRole(User::ROLE_DOCENTE);
                             }
@@ -114,7 +100,7 @@ trait CurrentYear{
 
                     $model->updated_by = backpack_user()?->id;
 
-                    if ($table == 'alumnos' || $table == 'apoderados'|| $table == 'docentes') {
+                    if ($table == 'alumnos' || $table == 'docentes') {
                         try {
                             $usuario = User::where('id', $model->user_id)->first();
 
@@ -127,9 +113,7 @@ trait CurrentYear{
                             if ($table == 'alumnos') {
                                 $usuario->assignRole(User::ROLE_ALUMNO);
                             }
-                            if ($table == 'apoderados') {
-                                $usuario->assignRole(User::ROLE_APODERADO);
-                            }
+
                             if ($table == 'docentes') {
                                 $usuario->assignRole(User::ROLE_DOCENTE);
                             }

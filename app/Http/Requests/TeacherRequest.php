@@ -25,7 +25,9 @@ class TeacherRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
+            'name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required',
         ];
     }
 
@@ -37,7 +39,9 @@ class TeacherRequest extends FormRequest
     public function attributes()
     {
         return [
-            //
+            'name' => 'Nombres',
+            'last_name' => 'Apellidos',
+            'email' => 'Correo electrónico',
         ];
     }
 

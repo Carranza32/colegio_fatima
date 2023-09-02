@@ -22,7 +22,6 @@
                     <table id="table-assistance" style="width: 100%;" class="bg-white table table-striped table-hover nowrap rounded shadow-xs border-xs mt-2">
                         <thead>
                             <th>Alumno</th>
-                            <th>Rut</th>
                             <th class="text-center">Asistencia</th>
                         </thead>
                         <tbody></tbody>
@@ -134,12 +133,10 @@
                 },
             });
 
-            $('.select2').select2({
-                theme: 'bootstrap',
-            });
-
-            $('select[name=curso_id]').on('change', function(){
+            $('select[name=course_id]').on('change', function(){
                 const selected = $(this).val()
+
+                console.log(selected);
 
                 if (selected) {
                     $.ajax({
@@ -162,8 +159,7 @@
 
                                     $('#table-assistance tbody').append(`
                                         <tr>
-                                            <td>${element?.alumno?.nombres} ${element?.alumno?.apellidos}</td>
-                                            <td>${element?.alumno?.rut}</td>
+                                            <td>${element?.alumno?.full_name}</td>
                                             <td class="text-center">
                                                 <label class="switch">
                                                     <input class="assistance_checkbox" type="checkbox" data-alumno="${element?.alumno?.id}" ${checked} ${can_edit}>
@@ -175,11 +171,10 @@
                                 });
                             } else {
                                 console.log(result.data);
-                                result.data?.alumns.forEach(element => {
+                                result.data?.students.forEach(element => {
                                     $('#table-assistance tbody').append(`
                                         <tr>
-                                            <td>${element?.nombres} ${element?.apellidos}</td>
-                                            <td>${element?.rut}</td>
+                                            <td>${element?.full_name}</td>
                                             <td class="text-center">
                                                 <label class="switch">
                                                     <input class="assistance_checkbox" type="checkbox" data-alumno="${element?.id}" checked sabled}>
@@ -190,12 +185,12 @@
                                     `);
                                 });
 
-                                $('select[name=asignatura_id]').empty()
+                                $('select[name=subject_id]').empty()
 
                                 result?.data?.asignaturas?.forEach(element => {
                                     const json = JSON.stringify(element)
 
-                                    $('select[name=asignatura_id]').append(`<option value='${element?.id}'>${element?.nombre}</option>`)
+                                    $('select[name=subject_id]').append(`<option value='${element?.id}'>${element?.name}</option>`)
                                 });
                             }
 
@@ -225,7 +220,7 @@
                 assistances.val( JSON.stringify(assits) )
             })
 
-            $('select[name=curso_id]').trigger('change');
+            $('select[name=course_id]').trigger('change');
         })
 
     </script>

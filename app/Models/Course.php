@@ -2,14 +2,17 @@
 
 namespace App\Models;
 
+use App\Traits\CurrentYear;
+use App\Traits\RecordSignature;
+use App\Traits\StatusDescription;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Course extends Model
 {
-    use CrudTrait;
-    use HasFactory;
+    use CrudTrait, StatusDescription, SoftDeletes, HasFactory;
 
     /*
     |--------------------------------------------------------------------------

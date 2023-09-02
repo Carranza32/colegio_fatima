@@ -28,7 +28,10 @@ class TeacherCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\Teacher::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/teacher');
-        CRUD::setEntityNameStrings('teacher', 'teachers');
+        CRUD::setEntityNameStrings('Profesor', 'Profesores');
+
+        $this->crud->denyAccess('show');
+        $this->crud->enableExportButtons();
     }
 
     /**
@@ -70,10 +73,39 @@ class TeacherCrudController extends CrudController
         ]);
 
         CRUD::addColumn([
-            'name' => 'is_active',
-            'type' => 'text',
-            'label' => 'Estado'
+            'name' => 'status_description',
+            'label' => __('crud.field.status'),
+            'wrapper' => [
+                'element' => 'span',
+                'class' => function ($crud, $column, $entry, $related_key) {
+                    if ($column['text'] == __('crud.status.active')) {
+                        return 'badge bg-success';
+                    }
+
+                    return 'badge bg-secondary';
+                },
+            ],
         ]);
+
+        $this->setupFilters();
+    }
+
+    protected function setupFilters()
+    {
+        CRUD::addFilter(
+            [
+            'name' => 'is_active',
+            'type' => 'dropdown',
+            'label' => __('crud.field.status'),
+        ],
+            [
+            0 => __('crud.status.inactive'),
+            1 => __('crud.status.active'),
+        ],
+            function ($value) {
+                $this->crud->addClause('where', 'is_active', $value);
+            }
+        );
     }
 
     /**
@@ -106,19 +138,27 @@ class TeacherCrudController extends CrudController
 
         CRUD::addField([
             'name' => 'email',
-            'type' => 'text',
+            'type' => 'email',
             'label' => 'Correo'
         ]);
 
         CRUD::addField([
             'name' => 'phone',
-            'type' => 'text',
-            'label' => 'Teléfono'
+            'type' => 'phone',
+            'label' => 'Teléfono',
+            'config' => [
+                'onlyCountries' => ['sv'],
+                'initialCountry' => 'sv', // this needs to be in the allowed country list, either in `onlyCountries` or NOT in `excludeCountries`
+                'separateDialCode' => true,
+                'nationalMode' => true,
+                'autoHideDialCode' => false,
+                'placeholderNumberType' => 'MOBILE',
+            ]
         ]);
 
         CRUD::addField([
             'name' => 'address',
-            'type' => 'text',
+            'type' => 'textarea',
             'label' => 'Dirección'
         ]);
 

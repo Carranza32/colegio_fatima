@@ -11,7 +11,7 @@ use App\Models\Subject;
 use App\Models\User;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
-use Illuminate\Http\Client\Request;
+use Illuminate\Http\Request;
 
 /**
  * Class AssistanceCrudController
@@ -37,7 +37,10 @@ class AssistanceCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\Assistance::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/assistance');
-        CRUD::setEntityNameStrings('assistance', 'assistances');
+        CRUD::setEntityNameStrings('Asistencia', 'Asistencias');
+
+        $this->crud->denyAccess('show');
+        $this->crud->enableExportButtons();
     }
 
     /**
@@ -94,24 +97,26 @@ class AssistanceCrudController extends CrudController
         );
 
         CRUD::addFilter([
+            'name' => 'course_id',
+            'type' => 'select2',
+            'label' => 'Curso',
+        ], function () {
+            return $this->crud->getModel()::with('course')->get()->pluck('course.name', 'course.id')->toArray();
+        }, function ($value) {
+            $this->crud->addClause('where', 'course_id', $value);
+        });
+
+        CRUD::addFilter([
             'name' => 'asignatura',
             'type' => 'select2',
             'label' => 'Asignatura',
         ], function () {
-            return $this->crud->getModel()->whereHas('subject')->get()->pluck('subject.nombre', 'subject.id')->toArray();
+            return $this->crud->getModel()->whereHas('subject')->get()->pluck('subject.name', 'subject.id')->toArray();
         }, function ($value) {
             $this->crud->addClause('where', 'subject_id', $value);
         });
 
-        CRUD::addFilter([
-            'name' => 'curso',
-            'type' => 'select2',
-            'label' => 'Curso',
-        ], function () {
-            return $this->crud->getModel()->whereHas('course')->get()->pluck('course.nombre', 'course.id')->toArray();
-        }, function ($value) {
-            $this->crud->addClause('where', 'course_id', $value);
-        });
+
     }
 
     /**
@@ -206,7 +211,7 @@ class AssistanceCrudController extends CrudController
         return response()->json([
             'message' => 'Alumnos obtenidos correctamente',
             'data' => [
-                'alumns' => $alumns,
+                'students' => $alumns,
                 'asignaturas' => $asignaturas,
             ],
             'edit' => false,

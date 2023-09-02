@@ -25,7 +25,8 @@ class EvaluationRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
+            'subject_id' => 'required',
+            'course_id' => 'required',
         ];
     }
 
@@ -37,7 +38,8 @@ class EvaluationRequest extends FormRequest
     public function attributes()
     {
         return [
-            //
+            'subject_id' => 'Materia',
+            'course_id' => 'Curso',
         ];
     }
 

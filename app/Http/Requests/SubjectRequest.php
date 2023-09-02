@@ -25,7 +25,8 @@ class SubjectRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
+            'name' => 'required',
+            'course_id' => 'required',
         ];
     }
 
@@ -37,7 +38,8 @@ class SubjectRequest extends FormRequest
     public function attributes()
     {
         return [
-            //
+            'course_id' => 'Curso',
+            'name' => 'Nombre',
         ];
     }
 

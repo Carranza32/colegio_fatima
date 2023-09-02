@@ -28,7 +28,10 @@ class EvaluationCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\Evaluation::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/evaluation');
-        CRUD::setEntityNameStrings('evaluation', 'evaluations');
+        CRUD::setEntityNameStrings('Evaluacion', 'Evaluaciones');
+
+        $this->crud->denyAccess('show');
+        $this->crud->enableExportButtons();
     }
 
     /**
@@ -62,10 +65,63 @@ class EvaluationCrudController extends CrudController
         ]);
 
         CRUD::addColumn([
-            'name' => 'is_active',
-            'type' => 'text',
-            'label' => 'Estado'
+            'name' => 'status_description',
+            'label' => __('crud.field.status'),
+            'wrapper' => [
+                'element' => 'span',
+                'class' => function ($crud, $column, $entry, $related_key) {
+                    if ($column['text'] == __('crud.status.active')) {
+                        return 'badge bg-success';
+                    }
+
+                    return 'badge bg-secondary';
+                },
+            ],
         ]);
+
+        $this->setupFilters();
+    }
+
+    protected function setupFilters()
+    {
+        CRUD::addFilter([
+            'name' => 'course_id',
+            'type' => 'select2',
+            'label' => 'Curso',
+        ], function () {
+            return $this->crud->getModel()::with('course')->get()->pluck('course.name', 'course.id')->toArray();
+        }, function ($value) {
+            $this->crud->addClause('where', 'course_id', $value);
+        });
+
+        CRUD::addFilter(
+            [
+            'name' => 'evaluation_dates',
+            'type' => 'date_range',
+            'label' => 'Fecha de evaluación',
+        ],
+            false,
+            function ($value) {
+                $dates = json_decode($value);
+                $this->crud->addClause('where', 'evaluation_date', '>=', $dates->from);
+                $this->crud->addClause('where', 'evaluation_date', '<=', $dates->to . ' 23:59:59');
+            }
+        );
+
+        CRUD::addFilter(
+            [
+            'name' => 'is_active',
+            'type' => 'dropdown',
+            'label' => __('crud.field.status'),
+        ],
+            [
+            0 => __('crud.status.inactive'),
+            1 => __('crud.status.active'),
+        ],
+            function ($value) {
+                $this->crud->addClause('where', 'is_active', $value);
+            }
+        );
     }
 
     /**
@@ -98,7 +154,7 @@ class EvaluationCrudController extends CrudController
 
         CRUD::addField([
             'name' => 'evaluation_date',
-            'type' => 'date',
+            'type' => 'date_picker',
             'label' => 'Fecha de evaluación'
         ]);
 

@@ -25,7 +25,9 @@ class CourseRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
+            'name' => 'required',
+            'level' => 'required',
+            'letter' => 'required',
         ];
     }
 
@@ -37,7 +39,9 @@ class CourseRequest extends FormRequest
     public function attributes()
     {
         return [
-            //
+            'name' => 'Nombre',
+            'level' => 'Nivel',
+            'letter' => 'Letra',
         ];
     }
 

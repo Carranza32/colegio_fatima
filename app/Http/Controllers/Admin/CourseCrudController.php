@@ -28,7 +28,10 @@ class CourseCrudController extends CrudController
     {
         CRUD::setModel(\App\Models\Course::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/course');
-        CRUD::setEntityNameStrings('course', 'courses');
+        CRUD::setEntityNameStrings('Curso', 'Cursos');
+
+        $this->crud->denyAccess('show');
+        $this->crud->enableExportButtons();
     }
 
     /**
@@ -53,7 +56,7 @@ class CourseCrudController extends CrudController
 
         CRUD::addColumn([
             'name' => 'letter',
-            'label' => 'letter'
+            'label' => 'Letra'
         ]);
 
         CRUD::addColumn([
@@ -62,9 +65,18 @@ class CourseCrudController extends CrudController
         ]);
 
         CRUD::addColumn([
-            'name' => 'is_active',
-            'type' => 'text',
-            'label' => 'Estado'
+            'name' => 'status_description',
+            'label' => __('crud.field.status'),
+            'wrapper' => [
+                'element' => 'span',
+                'class' => function ($crud, $column, $entry, $related_key) {
+                    if ($column['text'] == __('crud.status.active')) {
+                        return 'badge bg-success';
+                    }
+
+                    return 'badge bg-secondary';
+                },
+            ],
         ]);
 
         $this->setupFilters();
