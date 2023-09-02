@@ -150,6 +150,7 @@
                             $('#table-assistance tbody').empty();
 
                             if (result.edit) {
+                                console.log(result.data);
                                 result.data.forEach(element => {
                                     let checked = ''
 
@@ -159,10 +160,10 @@
 
                                     $('#table-assistance tbody').append(`
                                         <tr>
-                                            <td>${element?.alumno?.full_name}</td>
+                                            <td>${element?.student?.full_name}</td>
                                             <td class="text-center">
                                                 <label class="switch">
-                                                    <input class="assistance_checkbox" type="checkbox" data-alumno="${element?.alumno?.id}" ${checked} ${can_edit}>
+                                                    <input class="assistance_checkbox" type="checkbox" data-alumno="${element?.student?.id}" ${checked} ${can_edit}>
                                                     <span class="slider round"></span>
                                                 </label>
                                             </td>
@@ -170,7 +171,7 @@
                                     `);
                                 });
                             } else {
-                                console.log(result.data);
+
                                 result.data?.students.forEach(element => {
                                     $('#table-assistance tbody').append(`
                                         <tr>

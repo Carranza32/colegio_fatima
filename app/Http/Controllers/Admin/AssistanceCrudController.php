@@ -12,6 +12,7 @@ use App\Models\User;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class AssistanceCrudController
@@ -159,6 +160,7 @@ class AssistanceCrudController extends CrudController
 
         CRUD::addField([
             'name' => 'course_id',
+            'label' => 'Curso',
             'type' => 'select2_from_array',
             'options' => Course::all()->pluck('name', 'id'),
             'attributes' => $this->disabled,
@@ -166,6 +168,7 @@ class AssistanceCrudController extends CrudController
 
         CRUD::addField([
             'name' => 'subject_id',
+            'label' => 'Asignatura',
             'type' => 'select2_from_array',
             'options' => Subject::pluck('name', 'id'),
             'attributes' => $this->disabled,
@@ -188,6 +191,46 @@ class AssistanceCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+    }
+
+    public function store()
+    {
+        $request = $this->crud->getRequest();
+        $asistencias = $request->input('assistances');
+
+        $response = $this->traitStore();
+
+        $entry = $this->crud->getCurrentEntry();
+
+        foreach (json_decode($asistencias) as $value) {
+            AssistanceDetail::create([
+                'assistance_id' => $entry->id,
+                'student_id' => $value->alumno_id,
+                'has_assistance' => $value->asistencia,
+            ]);
+        }
+
+        return $response;
+    }
+
+    public function update()
+    {
+        $request = $this->crud->getRequest();
+        $asistencias = $request->input('assistances');
+
+        $entry = $this->crud->getCurrentEntry();
+
+        $response = $this->traitUpdate();
+
+        foreach (json_decode($asistencias) as $value) {
+            AssistanceDetail::where('assistance_id', $entry->id)
+                ->where('student_id', $value->alumno_id)
+                ->update([
+                    'has_assistance' => $value->asistencia,
+                ]);
+        }
+
+        return $response;
     }
 
     public function getAlumnsByCourse(Request $request)
