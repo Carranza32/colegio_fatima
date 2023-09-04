@@ -33,6 +33,10 @@
         {
             "type": "path",
             "url": "./packages/backpack-pro"
+        },
+        {
+            "type": "composer",
+            "url": "https://repo.backpackforlaravel.com/"
         }
     ],
     "autoload": {
