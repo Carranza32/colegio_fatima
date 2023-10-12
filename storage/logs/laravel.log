@@ -40,7 +40,7 @@
 #37 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #38 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #39 {main}
-"} 
+"}
 [2023-08-25 09:35:53] local.ERROR: file_put_contents(/Users/equipo/Herd/colegio_fatima/storage/framework/sessions/NqlkF0rZjP6EW050BuNJOnoDg0SDIHI3tJINePgl): Failed to open stream: No such file or directory {"exception":"[object] (ErrorException(code: 0): file_put_contents(/Users/equipo/Herd/colegio_fatima/storage/framework/sessions/NqlkF0rZjP6EW050BuNJOnoDg0SDIHI3tJINePgl): Failed to open stream: No such file or directory at /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php:205)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'file_put_conten...', '/Users/equipo/H...', 205)
@@ -83,7 +83,7 @@
 #37 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #38 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #39 {main}
-"} 
+"}
 [2023-08-25 09:35:54] local.ERROR: file_put_contents(/Users/equipo/Herd/colegio_fatima/storage/framework/sessions/NqlkF0rZjP6EW050BuNJOnoDg0SDIHI3tJINePgl): Failed to open stream: No such file or directory {"exception":"[object] (ErrorException(code: 0): file_put_contents(/Users/equipo/Herd/colegio_fatima/storage/framework/sessions/NqlkF0rZjP6EW050BuNJOnoDg0SDIHI3tJINePgl): Failed to open stream: No such file or directory at /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php:205)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'file_put_conten...', '/Users/equipo/H...', 205)
@@ -126,7 +126,7 @@
 #37 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #38 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #39 {main}
-"} 
+"}
 [2023-08-25 09:35:58] local.ERROR: Please provide a valid cache path. {"exception":"[object] (InvalidArgumentException(code: 0): Please provide a valid cache path. at /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/View/Compilers/Compiler.php:66)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/View/ViewServiceProvider.php(96): Illuminate\\View\\Compilers\\Compiler->__construct(Object(Illuminate\\Filesystem\\Filesystem), false, '', true, 'php')
@@ -192,7 +192,7 @@
 #60 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #61 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #62 {main}
-"} 
+"}
 [2023-08-25 09:35:58] local.ERROR: file_put_contents(/Users/equipo/Herd/colegio_fatima/storage/framework/sessions/NqlkF0rZjP6EW050BuNJOnoDg0SDIHI3tJINePgl): Failed to open stream: No such file or directory {"exception":"[object] (ErrorException(code: 0): file_put_contents(/Users/equipo/Herd/colegio_fatima/storage/framework/sessions/NqlkF0rZjP6EW050BuNJOnoDg0SDIHI3tJINePgl): Failed to open stream: No such file or directory at /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php:205)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'file_put_conten...', '/Users/equipo/H...', 205)
@@ -235,7 +235,7 @@
 #37 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #38 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #39 {main}
-"} 
+"}
 [2023-08-25 09:36:09] local.ERROR: Please provide a valid cache path. {"exception":"[object] (InvalidArgumentException(code: 0): Please provide a valid cache path. at /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/View/Compilers/Compiler.php:66)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/View/ViewServiceProvider.php(96): Illuminate\\View\\Compilers\\Compiler->__construct(Object(Illuminate\\Filesystem\\Filesystem), false, '', true, 'php')
@@ -278,7 +278,7 @@
 #37 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #38 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #39 {main}
-"} 
+"}
 [2023-08-25 09:36:09] local.ERROR: Please provide a valid cache path. {"exception":"[object] (InvalidArgumentException(code: 0): Please provide a valid cache path. at /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/View/Compilers/Compiler.php:66)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/View/ViewServiceProvider.php(96): Illuminate\\View\\Compilers\\Compiler->__construct(Object(Illuminate\\Filesystem\\Filesystem), false, '', true, 'php')
@@ -321,7 +321,7 @@
 #37 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #38 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #39 {main}
-"} 
+"}
 [2023-08-25 09:36:10] local.ERROR: Please provide a valid cache path. {"exception":"[object] (InvalidArgumentException(code: 0): Please provide a valid cache path. at /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/View/Compilers/Compiler.php:66)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/View/ViewServiceProvider.php(96): Illuminate\\View\\Compilers\\Compiler->__construct(Object(Illuminate\\Filesystem\\Filesystem), false, '', true, 'php')
@@ -387,7 +387,7 @@
 #60 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #61 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #62 {main}
-"} 
+"}
 [2023-08-25 09:36:10] local.ERROR: file_put_contents(/Users/equipo/Herd/colegio_fatima/storage/framework/sessions/gfaPLqLGlNYrRPwSjAv4ZcWMm87dvvKXrXpE4bPn): Failed to open stream: No such file or directory {"exception":"[object] (ErrorException(code: 0): file_put_contents(/Users/equipo/Herd/colegio_fatima/storage/framework/sessions/gfaPLqLGlNYrRPwSjAv4ZcWMm87dvvKXrXpE4bPn): Failed to open stream: No such file or directory at /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php:205)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'file_put_conten...', '/Users/equipo/H...', 205)
@@ -430,7 +430,7 @@
 #37 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #38 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #39 {main}
-"} 
+"}
 [2023-08-25 09:37:10] local.ERROR: Uncaught InvalidArgumentException: Please provide a valid cache path. in /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/View/Compilers/Compiler.php:66
 Stack trace:
 #0 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/View/ViewServiceProvider.php(96): Illuminate\View\Compilers\Compiler->__construct(Object(Illuminate\Filesystem\Filesystem), false, '', true, 'php')
@@ -456,7 +456,7 @@ Stack trace:
   thrown at /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/View/Compilers/Compiler.php:66)
 [stacktrace]
 #0 {main}
-"} 
+"}
 [2023-08-25 09:37:23] local.ERROR: Please provide a valid cache path. {"exception":"[object] (InvalidArgumentException(code: 0): Please provide a valid cache path. at /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/View/Compilers/Compiler.php:66)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/View/ViewServiceProvider.php(96): Illuminate\\View\\Compilers\\Compiler->__construct(Object(Illuminate\\Filesystem\\Filesystem), false, '', true, 'php')
@@ -522,7 +522,7 @@ Stack trace:
 #60 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #61 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #62 {main}
-"} 
+"}
 [2023-08-25 09:37:23] local.ERROR: file_put_contents(/Users/equipo/Herd/colegio_fatima/storage/framework/sessions/NqlkF0rZjP6EW050BuNJOnoDg0SDIHI3tJINePgl): Failed to open stream: No such file or directory {"exception":"[object] (ErrorException(code: 0): file_put_contents(/Users/equipo/Herd/colegio_fatima/storage/framework/sessions/NqlkF0rZjP6EW050BuNJOnoDg0SDIHI3tJINePgl): Failed to open stream: No such file or directory at /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php:205)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'file_put_conten...', '/Users/equipo/H...', 205)
@@ -565,7 +565,7 @@ Stack trace:
 #37 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #38 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #39 {main}
-"} 
+"}
 [2023-08-25 09:37:25] local.ERROR: Please provide a valid cache path. {"exception":"[object] (InvalidArgumentException(code: 0): Please provide a valid cache path. at /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/View/Compilers/Compiler.php:66)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/View/ViewServiceProvider.php(96): Illuminate\\View\\Compilers\\Compiler->__construct(Object(Illuminate\\Filesystem\\Filesystem), false, '', true, 'php')
@@ -631,7 +631,7 @@ Stack trace:
 #60 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #61 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #62 {main}
-"} 
+"}
 [2023-08-25 09:37:26] local.ERROR: file_put_contents(/Users/equipo/Herd/colegio_fatima/storage/framework/sessions/NqlkF0rZjP6EW050BuNJOnoDg0SDIHI3tJINePgl): Failed to open stream: No such file or directory {"exception":"[object] (ErrorException(code: 0): file_put_contents(/Users/equipo/Herd/colegio_fatima/storage/framework/sessions/NqlkF0rZjP6EW050BuNJOnoDg0SDIHI3tJINePgl): Failed to open stream: No such file or directory at /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php:205)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'file_put_conten...', '/Users/equipo/H...', 205)
@@ -674,7 +674,7 @@ Stack trace:
 #37 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #38 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #39 {main}
-"} 
+"}
 [2023-08-25 09:37:28] local.ERROR: Please provide a valid cache path. {"exception":"[object] (InvalidArgumentException(code: 0): Please provide a valid cache path. at /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/View/Compilers/Compiler.php:66)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/View/ViewServiceProvider.php(96): Illuminate\\View\\Compilers\\Compiler->__construct(Object(Illuminate\\Filesystem\\Filesystem), false, '', true, 'php')
@@ -740,7 +740,7 @@ Stack trace:
 #60 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #61 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #62 {main}
-"} 
+"}
 [2023-08-25 09:37:28] local.ERROR: file_put_contents(/Users/equipo/Herd/colegio_fatima/storage/framework/sessions/NqlkF0rZjP6EW050BuNJOnoDg0SDIHI3tJINePgl): Failed to open stream: No such file or directory {"exception":"[object] (ErrorException(code: 0): file_put_contents(/Users/equipo/Herd/colegio_fatima/storage/framework/sessions/NqlkF0rZjP6EW050BuNJOnoDg0SDIHI3tJINePgl): Failed to open stream: No such file or directory at /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php:205)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'file_put_conten...', '/Users/equipo/H...', 205)
@@ -783,7 +783,7 @@ Stack trace:
 #37 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #38 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #39 {main}
-"} 
+"}
 [2023-08-25 16:12:47] local.ERROR: Method App\Http\Controllers\Admin\AssistanceCrudController::setupFilters does not exist. {"exception":"[object] (BadMethodCallException(code: 0): Method App\\Http\\Controllers\\Admin\\AssistanceCrudController::setupFilters does not exist. at /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Routing/Controller.php:68)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/app/Http/Controllers/Admin/AssistanceCrudController.php(68): Illuminate\\Routing\\Controller->__call('setupFilters', Array)
@@ -837,7 +837,7 @@ Stack trace:
 #48 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #49 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #50 {main}
-"} 
+"}
 [2023-08-25 16:31:08] local.ERROR: Not enough arguments (missing: "name" or "--from"). {"exception":"[object] (Exception(code: 0): Not enough arguments (missing: \"name\" or \"--from\"). at /Users/equipo/Herd/colegio_fatima/vendor/backpack/generators/src/Console/Commands/Views/PublishOrCreateViewBackpackCommand.php:166)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/backpack/generators/src/Console/Commands/Views/PublishOrCreateViewBackpackCommand.php(61): Backpack\\Generators\\Console\\Commands\\Views\\PublishOrCreateViewBackpackCommand->getNameInput()
@@ -855,7 +855,7 @@ Stack trace:
 #12 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(201): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #13 /Users/equipo/Herd/colegio_fatima/artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #14 {main}
-"} 
+"}
 [2023-08-25 16:32:11] local.ERROR: Route [obtener.alumnos] not defined. {"view":{"view":"/Users/equipo/Herd/colegio_fatima/resources/views/vendor/backpack/crud/fields/alumns_assistances.blade.php","data":{"errors":"<pre class=sf-dump id=sf-dump-1047974906 data-indent-pad=\"  \"><span class=sf-dump-note>Illuminate\\Support\\ViewErrorBag</span> {<a class=sf-dump-ref>#576</a><samp data-depth=1 class=sf-dump-expanded>
   #<span class=sf-dump-protected title=\"Protected property\">bags</span>: []
 </samp>}
@@ -1543,7 +1543,7 @@ Stack trace:
 #85 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #86 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #87 {main}
-"} 
+"}
 [2023-08-29 17:39:46] local.ERROR: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'name' cannot be null (Connection: mysql, SQL: insert into `courses` (`name`, `level`, `letter`, `order`, `is_active`, `updated_at`, `created_at`) values (?, ?, ?, 1, 1, 2023-08-29 17:39:46, 2023-08-29 17:39:46)) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 23000): SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'name' cannot be null (Connection: mysql, SQL: insert into `courses` (`name`, `level`, `letter`, `order`, `is_active`, `updated_at`, `created_at`) values (?, ?, ?, 1, 1, 2023-08-29 17:39:46, 2023-08-29 17:39:46)) at /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Database/Connection.php:795)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Database/Connection.php(755): Illuminate\\Database\\Connection->runQueryCallback('insert into `co...', Array, Object(Closure))
@@ -1693,7 +1693,7 @@ Stack trace:
 #70 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #71 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #72 {main}
-"} 
+"}
 [2023-09-01 14:13:59] local.ERROR: Unknown format "dni" {"exception":"[object] (InvalidArgumentException(code: 0): Unknown format \"dni\" at /Users/equipo/Herd/colegio_fatima/vendor/fakerphp/faker/src/Faker/Generator.php:731)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/fakerphp/faker/src/Faker/Generator.php(696): Faker\\Generator->getFormatter('dni')
@@ -1735,7 +1735,7 @@ Stack trace:
 #36 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(201): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #37 /Users/equipo/Herd/colegio_fatima/artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #38 {main}
-"} 
+"}
 [2023-09-01 14:14:29] local.ERROR: Call to undefined method App\Models\Course::random() {"exception":"[object] (BadMethodCallException(code: 0): Call to undefined method App\\Models\\Course::random() at /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:67)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php(36): Illuminate\\Database\\Eloquent\\Model::throwBadMethodCallException('random')
@@ -1776,7 +1776,7 @@ Stack trace:
 #35 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(201): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #36 /Users/equipo/Herd/colegio_fatima/artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #37 {main}
-"} 
+"}
 [2023-09-01 14:14:53] local.ERROR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'phone' in 'field list' (Connection: mysql, SQL: insert into `students` (`name`, `last_name`, `student_card`, `phone`, `email`, `course_id`, `is_active`, `updated_at`, `created_at`) values (Kaci Wunsch I, Becker, 7605255874, +1.248.666.8721, lhudson@example.com, 1, 1, 2023-09-01 14:14:53, 2023-09-01 14:14:53)) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S22): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'phone' in 'field list' (Connection: mysql, SQL: insert into `students` (`name`, `last_name`, `student_card`, `phone`, `email`, `course_id`, `is_active`, `updated_at`, `created_at`) values (Kaci Wunsch I, Becker, 7605255874, +1.248.666.8721, lhudson@example.com, 1, 1, 2023-09-01 14:14:53, 2023-09-01 14:14:53)) at /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Database/Connection.php:795)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Database/Connection.php(755): Illuminate\\Database\\Connection->runQueryCallback('insert into `st...', Array, Object(Closure))
@@ -1860,7 +1860,7 @@ Stack trace:
 #37 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(201): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #38 /Users/equipo/Herd/colegio_fatima/artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #39 {main}
-"} 
+"}
 [2023-09-01 14:26:30] local.ERROR: Unresolvable dependency resolving [Parameter #0 [ <required> $request ]] in class Illuminate\Http\Client\Request {"exception":"[object] (Illuminate\\Contracts\\Container\\BindingResolutionException(code: 0): Unresolvable dependency resolving [Parameter #0 [ <required> $request ]] in class Illuminate\\Http\\Client\\Request at /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Container/Container.php:1141)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Container/Container.php(1050): Illuminate\\Container\\Container->unresolvablePrimitive(Object(ReflectionParameter))
@@ -1928,7 +1928,7 @@ Stack trace:
 #62 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #63 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #64 {main}
-"} 
+"}
 [2023-09-01 14:26:30] local.ERROR: Unresolvable dependency resolving [Parameter #0 [ <required> $request ]] in class Illuminate\Http\Client\Request {"exception":"[object] (Illuminate\\Contracts\\Container\\BindingResolutionException(code: 0): Unresolvable dependency resolving [Parameter #0 [ <required> $request ]] in class Illuminate\\Http\\Client\\Request at /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Container/Container.php:1141)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Container/Container.php(1050): Illuminate\\Container\\Container->unresolvablePrimitive(Object(ReflectionParameter))
@@ -1996,7 +1996,7 @@ Stack trace:
 #62 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #63 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #64 {main}
-"} 
+"}
 [2023-09-01 14:28:14] local.ERROR: Unresolvable dependency resolving [Parameter #0 [ <required> $request ]] in class Illuminate\Http\Client\Request {"exception":"[object] (Illuminate\\Contracts\\Container\\BindingResolutionException(code: 0): Unresolvable dependency resolving [Parameter #0 [ <required> $request ]] in class Illuminate\\Http\\Client\\Request at /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Container/Container.php:1141)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Container/Container.php(1050): Illuminate\\Container\\Container->unresolvablePrimitive(Object(ReflectionParameter))
@@ -2064,7 +2064,7 @@ Stack trace:
 #62 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #63 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #64 {main}
-"} 
+"}
 [2023-09-01 14:28:14] local.ERROR: Unresolvable dependency resolving [Parameter #0 [ <required> $request ]] in class Illuminate\Http\Client\Request {"exception":"[object] (Illuminate\\Contracts\\Container\\BindingResolutionException(code: 0): Unresolvable dependency resolving [Parameter #0 [ <required> $request ]] in class Illuminate\\Http\\Client\\Request at /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Container/Container.php:1141)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Container/Container.php(1050): Illuminate\\Container\\Container->unresolvablePrimitive(Object(ReflectionParameter))
@@ -2132,7 +2132,7 @@ Stack trace:
 #62 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #63 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #64 {main}
-"} 
+"}
 [2023-09-01 14:28:18] local.ERROR: Unresolvable dependency resolving [Parameter #0 [ <required> $request ]] in class Illuminate\Http\Client\Request {"exception":"[object] (Illuminate\\Contracts\\Container\\BindingResolutionException(code: 0): Unresolvable dependency resolving [Parameter #0 [ <required> $request ]] in class Illuminate\\Http\\Client\\Request at /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Container/Container.php:1141)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Container/Container.php(1050): Illuminate\\Container\\Container->unresolvablePrimitive(Object(ReflectionParameter))
@@ -2200,7 +2200,7 @@ Stack trace:
 #62 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #63 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #64 {main}
-"} 
+"}
 [2023-09-01 14:28:18] local.ERROR: Unresolvable dependency resolving [Parameter #0 [ <required> $request ]] in class Illuminate\Http\Client\Request {"exception":"[object] (Illuminate\\Contracts\\Container\\BindingResolutionException(code: 0): Unresolvable dependency resolving [Parameter #0 [ <required> $request ]] in class Illuminate\\Http\\Client\\Request at /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Container/Container.php:1141)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Container/Container.php(1050): Illuminate\\Container\\Container->unresolvablePrimitive(Object(ReflectionParameter))
@@ -2268,7 +2268,7 @@ Stack trace:
 #62 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #63 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #64 {main}
-"} 
+"}
 [2023-09-01 17:30:44] local.ERROR: Undefined variable $students {"exception":"[object] (ErrorException(code: 0): Undefined variable $students at /Users/equipo/Herd/colegio_fatima/app/Http/Controllers/Admin/AssistanceCrudController.php:212)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Undefined varia...', '/Users/equipo/H...', 212)
@@ -2328,7 +2328,7 @@ Stack trace:
 #54 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #55 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #56 {main}
-"} 
+"}
 [2023-09-01 17:30:44] local.ERROR: Undefined variable $students {"exception":"[object] (ErrorException(code: 0): Undefined variable $students at /Users/equipo/Herd/colegio_fatima/app/Http/Controllers/Admin/AssistanceCrudController.php:212)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/HandleExceptions.php(254): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'Undefined varia...', '/Users/equipo/H...', 212)
@@ -2388,7 +2388,7 @@ Stack trace:
 #54 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #55 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #56 {main}
-"} 
+"}
 [2023-09-01 19:34:26] local.ERROR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'users.deleted_at' in 'where clause' (Connection: mysql, SQL: select * from `users` where `id` = 1 and `users`.`deleted_at` is null limit 1) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S22): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'users.deleted_at' in 'where clause' (Connection: mysql, SQL: select * from `users` where `id` = 1 and `users`.`deleted_at` is null limit 1) at /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Database/Connection.php:795)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Database/Connection.php(755): Illuminate\\Database\\Connection->runQueryCallback('select * from `...', Array, Object(Closure))
@@ -2512,7 +2512,7 @@ Stack trace:
 #57 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #58 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #59 {main}
-"} 
+"}
 [2023-09-01 19:34:26] local.ERROR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'users.deleted_at' in 'where clause' (Connection: mysql, SQL: select * from `users` where `id` = 1 and `users`.`deleted_at` is null limit 1) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S22): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'users.deleted_at' in 'where clause' (Connection: mysql, SQL: select * from `users` where `id` = 1 and `users`.`deleted_at` is null limit 1) at /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Database/Connection.php:795)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Database/Connection.php(755): Illuminate\\Database\\Connection->runQueryCallback('select * from `...', Array, Object(Closure))
@@ -2568,7 +2568,7 @@ Stack trace:
 #23 /Users/equipo/Herd/colegio_fatima/public/index.php(55): Illuminate\\Foundation\\Http\\Kernel->terminate(Object(Illuminate\\Http\\Request), Object(Illuminate\\Http\\Response))
 #24 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #25 {main}
-"} 
+"}
 [2023-09-01 19:39:55] local.ERROR: Array to string conversion {"view":{"view":"/Users/equipo/Herd/colegio_fatima/vendor/backpack/crud/src/resources/views/crud/list.blade.php","data":{"errors":"<pre class=sf-dump id=sf-dump-1366686619 data-indent-pad=\"  \"><span class=sf-dump-note>Illuminate\\Support\\ViewErrorBag</span> {<a class=sf-dump-ref>#550</a><samp data-depth=1 class=sf-dump-expanded>
   #<span class=sf-dump-protected title=\"Protected property\">bags</span>: []
 </samp>}
@@ -3078,7 +3078,7 @@ Stack trace:
 #61 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #62 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #63 {main}
-"} 
+"}
 [2023-09-01 20:10:33] local.ERROR: Method App\Http\Controllers\Admin\TeacherCrudController::setupFilters does not exist. {"exception":"[object] (BadMethodCallException(code: 0): Method App\\Http\\Controllers\\Admin\\TeacherCrudController::setupFilters does not exist. at /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Routing/Controller.php:68)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/app/Http/Controllers/Admin/TeacherCrudController.php(90): Illuminate\\Routing\\Controller->__call('setupFilters', Array)
@@ -3132,7 +3132,7 @@ Stack trace:
 #48 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #49 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #50 {main}
-"} 
+"}
 [2023-09-01 20:48:01] local.ERROR: Class "App\Http\Controllers\Admin\AsistenciaDetalle" not found {"exception":"[object] (Error(code: 0): Class \"App\\Http\\Controllers\\Admin\\AsistenciaDetalle\" not found at /Users/equipo/Herd/colegio_fatima/app/Http/Controllers/Admin/AssistanceCrudController.php:224)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): App\\Http\\Controllers\\Admin\\AssistanceCrudController->update('3')
@@ -3190,7 +3190,7 @@ Stack trace:
 #52 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #53 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #54 {main}
-"} 
+"}
 [2023-09-03 19:24:37] local.ERROR: SQLSTATE[HY000] [2002] Connection refused (Connection: mysql, SQL: select * from information_schema.tables where table_schema = colegio_fatima and table_name = settings and table_type = 'BASE TABLE') {"exception":"[object] (Illuminate\\Database\\QueryException(code: 2002): SQLSTATE[HY000] [2002] Connection refused (Connection: mysql, SQL: select * from information_schema.tables where table_schema = colegio_fatima and table_name = settings and table_type = 'BASE TABLE') at /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Database/Connection.php:795)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Database/Connection.php(934): Illuminate\\Database\\Connection->runQueryCallback('select * from i...', Array, Object(Closure))
@@ -3256,7 +3256,7 @@ Stack trace:
 #32 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #33 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #34 {main}
-"} 
+"}
 [2023-09-18 14:37:30] local.ERROR: SQLSTATE[HY000] [2002] Connection refused (Connection: mysql, SQL: select * from information_schema.tables where table_schema = colegio_fatima and table_name = settings and table_type = 'BASE TABLE') {"exception":"[object] (Illuminate\\Database\\QueryException(code: 2002): SQLSTATE[HY000] [2002] Connection refused (Connection: mysql, SQL: select * from information_schema.tables where table_schema = colegio_fatima and table_name = settings and table_type = 'BASE TABLE') at /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Database/Connection.php:795)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Database/Connection.php(934): Illuminate\\Database\\Connection->runQueryCallback('select * from i...', Array, Object(Closure))
@@ -3322,7 +3322,7 @@ Stack trace:
 #32 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #33 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #34 {main}
-"} 
+"}
 [2023-09-18 16:06:53] local.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'colegio_fatima.school_years' doesn't exist (Connection: mysql, SQL: select * from `school_years` where `year` is null and `school_years`.`deleted_at` is null limit 1) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'colegio_fatima.school_years' doesn't exist (Connection: mysql, SQL: select * from `school_years` where `year` is null and `school_years`.`deleted_at` is null limit 1) at /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Database/Connection.php:795)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Database/Connection.php(755): Illuminate\\Database\\Connection->runQueryCallback('select * from `...', Array, Object(Closure))
@@ -3466,7 +3466,7 @@ Stack trace:
 #67 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #68 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #69 {main}
-"} 
+"}
 [2023-09-18 16:06:59] local.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'colegio_fatima.calendars' doesn't exist (Connection: mysql, SQL: select * from `calendars` order by `id` desc limit 10) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'colegio_fatima.calendars' doesn't exist (Connection: mysql, SQL: select * from `calendars` order by `id` desc limit 10) at /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Database/Connection.php:795)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Database/Connection.php(755): Illuminate\\Database\\Connection->runQueryCallback('select * from `...', Array, Object(Closure))
@@ -3604,7 +3604,7 @@ Stack trace:
 #64 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #65 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #66 {main}
-"} 
+"}
 [2023-09-18 16:06:59] local.ERROR: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'colegio_fatima.calendars' doesn't exist (Connection: mysql, SQL: select * from `calendars` order by `id` desc limit 10) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S02): SQLSTATE[42S02]: Base table or view not found: 1146 Table 'colegio_fatima.calendars' doesn't exist (Connection: mysql, SQL: select * from `calendars` order by `id` desc limit 10) at /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Database/Connection.php:795)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Database/Connection.php(755): Illuminate\\Database\\Connection->runQueryCallback('select * from `...', Array, Object(Closure))
@@ -3742,7 +3742,7 @@ Stack trace:
 #64 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #65 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #66 {main}
-"} 
+"}
 [2023-09-18 16:11:42] local.ERROR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'fecha_inicio' in 'where clause' (Connection: mysql, SQL: select * from `periods` where `fecha_inicio` <= 2023-09-18 and `fecha_fin` >= 2023-09-18 and `periods`.`deleted_at` is null limit 1) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S22): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'fecha_inicio' in 'where clause' (Connection: mysql, SQL: select * from `periods` where `fecha_inicio` <= 2023-09-18 and `fecha_fin` >= 2023-09-18 and `periods`.`deleted_at` is null limit 1) at /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Database/Connection.php:795)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Database/Connection.php(755): Illuminate\\Database\\Connection->runQueryCallback('select * from `...', Array, Object(Closure))
@@ -3886,7 +3886,7 @@ Stack trace:
 #67 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #68 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #69 {main}
-"} 
+"}
 [2023-09-18 16:11:47] local.ERROR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'fecha_inicio' in 'where clause' (Connection: mysql, SQL: select * from `periods` where `fecha_inicio` <= 2023-09-18 and `fecha_fin` >= 2023-09-18 and `periods`.`deleted_at` is null limit 1) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S22): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'fecha_inicio' in 'where clause' (Connection: mysql, SQL: select * from `periods` where `fecha_inicio` <= 2023-09-18 and `fecha_fin` >= 2023-09-18 and `periods`.`deleted_at` is null limit 1) at /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Database/Connection.php:795)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Database/Connection.php(755): Illuminate\\Database\\Connection->runQueryCallback('select * from `...', Array, Object(Closure))
@@ -4030,7 +4030,7 @@ Stack trace:
 #67 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #68 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #69 {main}
-"} 
+"}
 [2023-09-18 16:12:56] local.ERROR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'fecha_inicio' in 'where clause' (Connection: mysql, SQL: select * from `periods` where `fecha_inicio` <= 2023-09-18 and `fecha_fin` >= 2023-09-18 and `periods`.`deleted_at` is null limit 1) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S22): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'fecha_inicio' in 'where clause' (Connection: mysql, SQL: select * from `periods` where `fecha_inicio` <= 2023-09-18 and `fecha_fin` >= 2023-09-18 and `periods`.`deleted_at` is null limit 1) at /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Database/Connection.php:795)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Database/Connection.php(755): Illuminate\\Database\\Connection->runQueryCallback('select * from `...', Array, Object(Closure))
@@ -4174,7 +4174,7 @@ Stack trace:
 #67 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #68 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #69 {main}
-"} 
+"}
 [2023-09-18 16:14:03] local.ERROR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'fecha_inicio' in 'where clause' (Connection: mysql, SQL: select * from `periods` where `fecha_inicio` <= 2023-09-18 and `fecha_fin` >= 2023-09-18 and `periods`.`deleted_at` is null limit 1) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S22): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'fecha_inicio' in 'where clause' (Connection: mysql, SQL: select * from `periods` where `fecha_inicio` <= 2023-09-18 and `fecha_fin` >= 2023-09-18 and `periods`.`deleted_at` is null limit 1) at /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Database/Connection.php:795)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Database/Connection.php(755): Illuminate\\Database\\Connection->runQueryCallback('select * from `...', Array, Object(Closure))
@@ -4318,7 +4318,7 @@ Stack trace:
 #67 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #68 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #69 {main}
-"} 
+"}
 [2023-09-18 16:14:05] local.ERROR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'fecha_inicio' in 'where clause' (Connection: mysql, SQL: select * from `periods` where `fecha_inicio` <= 2023-09-18 and `fecha_fin` >= 2023-09-18 and `periods`.`deleted_at` is null limit 1) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S22): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'fecha_inicio' in 'where clause' (Connection: mysql, SQL: select * from `periods` where `fecha_inicio` <= 2023-09-18 and `fecha_fin` >= 2023-09-18 and `periods`.`deleted_at` is null limit 1) at /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Database/Connection.php:795)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Database/Connection.php(755): Illuminate\\Database\\Connection->runQueryCallback('select * from `...', Array, Object(Closure))
@@ -4462,7 +4462,7 @@ Stack trace:
 #67 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #68 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #69 {main}
-"} 
+"}
 [2023-09-18 16:14:51] local.ERROR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'fecha_inicio' in 'where clause' (Connection: mysql, SQL: select * from `periods` where `fecha_inicio` <= 2023-09-18 and `fecha_fin` >= 2023-09-18 and `periods`.`deleted_at` is null limit 1) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S22): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'fecha_inicio' in 'where clause' (Connection: mysql, SQL: select * from `periods` where `fecha_inicio` <= 2023-09-18 and `fecha_fin` >= 2023-09-18 and `periods`.`deleted_at` is null limit 1) at /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Database/Connection.php:795)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Database/Connection.php(755): Illuminate\\Database\\Connection->runQueryCallback('select * from `...', Array, Object(Closure))
@@ -4606,7 +4606,7 @@ Stack trace:
 #67 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #68 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #69 {main}
-"} 
+"}
 [2023-09-18 16:15:46] local.ERROR: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'fecha_inicio' in 'where clause' (Connection: mysql, SQL: select * from `periods` where `fecha_inicio` <= 2023-09-18 and `fecha_fin` >= 2023-09-18 and `periods`.`deleted_at` is null limit 1) {"exception":"[object] (Illuminate\\Database\\QueryException(code: 42S22): SQLSTATE[42S22]: Column not found: 1054 Unknown column 'fecha_inicio' in 'where clause' (Connection: mysql, SQL: select * from `periods` where `fecha_inicio` <= 2023-09-18 and `fecha_fin` >= 2023-09-18 and `periods`.`deleted_at` is null limit 1) at /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Database/Connection.php:795)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Database/Connection.php(755): Illuminate\\Database\\Connection->runQueryCallback('select * from `...', Array, Object(Closure))
@@ -4750,7 +4750,7 @@ Stack trace:
 #67 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #68 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #69 {main}
-"} 
+"}
 [2023-10-11 19:41:52] local.ERROR: SQLSTATE[HY000] [2002] Connection refused (Connection: mysql, SQL: select * from information_schema.tables where table_schema = colegio_fatima and table_name = settings and table_type = 'BASE TABLE') {"exception":"[object] (Illuminate\\Database\\QueryException(code: 2002): SQLSTATE[HY000] [2002] Connection refused (Connection: mysql, SQL: select * from information_schema.tables where table_schema = colegio_fatima and table_name = settings and table_type = 'BASE TABLE') at /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Database/Connection.php:795)
 [stacktrace]
 #0 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Database/Connection.php(934): Illuminate\\Database\\Connection->runQueryCallback('select * from i...', Array, Object(Closure))
@@ -4816,4 +4816,80 @@ Stack trace:
 #32 /Users/equipo/Herd/colegio_fatima/public/index.php(51): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #33 /Applications/Herd.app/Contents/Resources/valet/server.php(120): require('/Users/equipo/H...')
 #34 {main}
-"} 
+"}
+[2023-10-11 20:33:24] local.ERROR: syntax error, unexpected token "<<" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\" at /Users/equipo/Herd/colegio_fatima/routes/backpack/custom.php:26)
+[stacktrace]
+#0 /Users/equipo/Herd/colegio_fatima/vendor/backpack/crud/src/BackpackServiceProvider.php(202): Illuminate\\Support\\ServiceProvider->loadRoutesFrom('/Users/equipo/H...')
+#1 /Users/equipo/Herd/colegio_fatima/vendor/backpack/crud/src/BackpackServiceProvider.php(59): Backpack\\CRUD\\BackpackServiceProvider->setupCustomRoutes(Object(Illuminate\\Routing\\Router))
+#2 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(36): Backpack\\CRUD\\BackpackServiceProvider->boot(Object(Illuminate\\Routing\\Router))
+#3 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Container/Util.php(41): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#4 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#5 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(37): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#6 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Container/Container.php(662): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#7 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1006): Illuminate\\Container\\Container->call(Array)
+#8 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(987): Illuminate\\Foundation\\Application->bootProvider(Object(Backpack\\CRUD\\BackpackServiceProvider))
+#9 [internal function]: Illuminate\\Foundation\\Application->Illuminate\\Foundation\\{closure}(Object(Backpack\\CRUD\\BackpackServiceProvider), 17)
+#10 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(988): array_walk(Array, Object(Closure))
+#11 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/BootProviders.php(17): Illuminate\\Foundation\\Application->boot()
+#12 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(261): Illuminate\\Foundation\\Bootstrap\\BootProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#13 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#14 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#15 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#16 {main}
+"}
+[2023-10-11 20:34:17] local.ERROR: syntax error, unexpected token "<<" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\" at /Users/equipo/Herd/colegio_fatima/routes/backpack/custom.php:26)
+[stacktrace]
+#0 /Users/equipo/Herd/colegio_fatima/vendor/backpack/crud/src/BackpackServiceProvider.php(202): Illuminate\\Support\\ServiceProvider->loadRoutesFrom('/Users/equipo/H...')
+#1 /Users/equipo/Herd/colegio_fatima/vendor/backpack/crud/src/BackpackServiceProvider.php(59): Backpack\\CRUD\\BackpackServiceProvider->setupCustomRoutes(Object(Illuminate\\Routing\\Router))
+#2 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(36): Backpack\\CRUD\\BackpackServiceProvider->boot(Object(Illuminate\\Routing\\Router))
+#3 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Container/Util.php(41): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#4 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#5 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(37): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#6 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Container/Container.php(662): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#7 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1006): Illuminate\\Container\\Container->call(Array)
+#8 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(987): Illuminate\\Foundation\\Application->bootProvider(Object(Backpack\\CRUD\\BackpackServiceProvider))
+#9 [internal function]: Illuminate\\Foundation\\Application->Illuminate\\Foundation\\{closure}(Object(Backpack\\CRUD\\BackpackServiceProvider), 17)
+#10 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(988): array_walk(Array, Object(Closure))
+#11 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/BootProviders.php(17): Illuminate\\Foundation\\Application->boot()
+#12 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(261): Illuminate\\Foundation\\Bootstrap\\BootProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#13 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#14 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#15 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#16 {main}
+"}
+[2023-10-11 20:34:17] local.ERROR: syntax error, unexpected token "<<" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"<<\" at /Users/equipo/Herd/colegio_fatima/routes/backpack/custom.php:26)
+[stacktrace]
+#0 /Users/equipo/Herd/colegio_fatima/vendor/backpack/crud/src/BackpackServiceProvider.php(202): Illuminate\\Support\\ServiceProvider->loadRoutesFrom('/Users/equipo/H...')
+#1 /Users/equipo/Herd/colegio_fatima/vendor/backpack/crud/src/BackpackServiceProvider.php(59): Backpack\\CRUD\\BackpackServiceProvider->setupCustomRoutes(Object(Illuminate\\Routing\\Router))
+#2 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(36): Backpack\\CRUD\\BackpackServiceProvider->boot(Object(Illuminate\\Routing\\Router))
+#3 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Container/Util.php(41): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#4 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure(Object(Closure))
+#5 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(37): Illuminate\\Container\\BoundMethod::callBoundMethod(Object(Illuminate\\Foundation\\Application), Array, Object(Closure))
+#6 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Container/Container.php(662): Illuminate\\Container\\BoundMethod::call(Object(Illuminate\\Foundation\\Application), Array, Array, NULL)
+#7 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(1006): Illuminate\\Container\\Container->call(Array)
+#8 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(987): Illuminate\\Foundation\\Application->bootProvider(Object(Backpack\\CRUD\\BackpackServiceProvider))
+#9 [internal function]: Illuminate\\Foundation\\Application->Illuminate\\Foundation\\{closure}(Object(Backpack\\CRUD\\BackpackServiceProvider), 17)
+#10 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(988): array_walk(Array, Object(Closure))
+#11 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Foundation/Bootstrap/BootProviders.php(17): Illuminate\\Foundation\\Application->boot()
+#12 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(261): Illuminate\\Foundation\\Bootstrap\\BootProviders->bootstrap(Object(Illuminate\\Foundation\\Application))
+#13 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(447): Illuminate\\Foundation\\Application->bootstrapWith(Array)
+#14 /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(199): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#15 Command line code(1): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#16 {main}
+"}
+[2023-10-11 20:34:17] local.ERROR: Uncaught RuntimeException: Unable to detect application namespace. in /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Foundation/Application.php:1502
+Stack trace:
+#0 Command line code(1): Illuminate\Foundation\Application->getNamespace()
+#1 [internal function]: {closure}('/Users/equipo/H...')
+#2 Command line code(1): array_map(Object(Closure), Array)
+#3 {main}
+  thrown {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Uncaught RuntimeException: Unable to detect application namespace. in /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Foundation/Application.php:1502
+Stack trace:
+#0 Command line code(1): Illuminate\\Foundation\\Application->getNamespace()
+#1 [internal function]: {closure}('/Users/equipo/H...')
+#2 Command line code(1): array_map(Object(Closure), Array)
+#3 {main}
+  thrown at /Users/equipo/Herd/colegio_fatima/vendor/laravel/framework/src/Illuminate/Foundation/Application.php:1502)
+[stacktrace]
+#0 {main}
+"}
