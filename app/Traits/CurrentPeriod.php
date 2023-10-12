@@ -19,8 +19,8 @@ trait CurrentPeriod{
 
         if (!session()->has('period')) {
             session(['period' =>
-                Period::where('fecha_inicio', '<=', date(session('year')?->year.'-m-d'))
-                ->where('fecha_fin', '>=', date(session('year')?->year.'-m-d'))
+                Period::where('start_date', '<=', date(session('year')?->year.'-m-d'))
+                ->where('end_date', '>=', date(session('year')?->year.'-m-d'))
                 ->first()]);
         }
 
@@ -30,7 +30,7 @@ trait CurrentPeriod{
             $has_column = Schema::hasColumn( $table , 'date_scope');
 
             if ($has_column) {
-                return $query->whereBetween("{$table}.date_scope", [session('period')?->fecha_inicio, session('period')?->fecha_fin.' 23:59:59']);
+                return $query->whereBetween("{$table}.date_scope", [session('period')?->start_date, session('period')?->end_date.' 23:59:59']);
             }
         });
 

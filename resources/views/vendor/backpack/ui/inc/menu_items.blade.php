@@ -15,3 +15,7 @@
 <x-backpack::menu-item title="Profesores" icon="la la-user-tie" :link="backpack_url('teacher')" />
 <x-backpack::menu-item title="Evaluaciones" icon="la la-chalkboard-teacher" :link="backpack_url('evaluation')" />
 <x-backpack::menu-item title="Asistencias" icon="la la-user-check" :link="backpack_url('assistance')" />
+
+<x-backpack::menu-item title="Periods" icon="la la-question" :link="backpack_url('period')" />
+<x-backpack::menu-item title="School years" icon="la la-question" :link="backpack_url('school-year')" />
+<x-backpack::menu-item title="Calendars" icon="la la-question" :link="backpack_url('calendar')" />

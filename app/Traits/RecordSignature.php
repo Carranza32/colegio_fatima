@@ -19,8 +19,8 @@ trait RecordSignature
 
         if (!session()->has('period')) {
             session(['period' =>
-                Period::where('fecha_inicio', '<=', date('Y-m-d'))
-                ->where('fecha_fin', '>=', date('Y-m-d'))
+                Period::where('start_date', '<=', date('Y-m-d'))
+                ->where('end_date', '>=', date('Y-m-d'))
                 ->first()]);
         }
 

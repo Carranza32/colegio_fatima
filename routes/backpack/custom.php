@@ -23,4 +23,7 @@ Route::group([
     Route::crud('evaluation', 'EvaluationCrudController');
     Route::crud('assistance', 'AssistanceCrudController');
     Route::post('obtener-alumnos', 'AssistanceCrudController@getAlumnsByCourse')->name('obtener.alumnos');
+    Route::crud('period', 'PeriodCrudController');
+    Route::crud('school-year', 'SchoolYearCrudController');
+    Route::crud('calendar', 'CalendarCrudController');
 }); // this should be the absolute last line of this file
