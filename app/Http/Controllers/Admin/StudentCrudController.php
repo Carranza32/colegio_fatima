@@ -216,6 +216,12 @@ class StudentCrudController extends CrudController
     ]);
 
     CRUD::addField([
+        'name' => 'comentario',
+        'type' => 'text',
+        'label' => 'Comentario Adicional'
+    ]);
+
+    CRUD::addField([
         'name' => 'nombre_del_padre',
         'type' => 'text',
         'label' => 'Nombre del Padre'
@@ -387,7 +393,17 @@ class StudentCrudController extends CrudController
         'name' => 'documentos',
         'type' => 'select_from_array',
         'label' => 'Documentos',
-        'options' => ['Partida de nacimiento', 'Fotografia', 'Certificado', 'Diploma', 'Constancia BC', 'Vacunas', 'Copia de DUI de los padres', 'Tarjeta Calificaciones', 'Solvencia de donde estudio'],
+        'options' => [
+            'Partida de nacimiento' => 'Partida de nacimiento',
+            'Fotografia' => 'Fotografia',
+            'Certificado' => 'Certificado',
+            'Diploma' => 'Diploma',
+            'Constancia BC' => 'Constancia BC',
+            'Vacunas' => 'Vacunas',
+            'Copia de DUI de los padres' => 'Copia de DUI de los padres',
+            'Tarjeta Calificaciones' => 'Tarjeta Calificaciones',
+            'Solvencia de donde estudio' => 'Solvencia de donde estudio'
+        ],
         'allows_multiple' => true
     ]);
 
@@ -413,7 +429,22 @@ class StudentCrudController extends CrudController
         'name' => 'condicion_de_discapacidad',
         'type' => 'select_from_array',
         'label' => 'Condición de Discapacidad',
-        'options' => ['Ceguera', 'Sordera', 'Sordo-Ceguera', 'Hipoacusia', 'Síndrome de Down', 'Ausencia de Miembros', 'Baja Visión', 'Multidiscapacidad', 'Discapacidad Intelectual', 'Discapacidad Motora', 'Psicosocial', 'Trastorno del espectro autista', 'Posee diagnóstico clínico', 'No aplica'],
+        'options' => [
+            'Ceguera' => 'Ceguera',
+            'Sordera' => 'Sordera',
+            'Sordo-Ceguera' => 'Sordo-Ceguera',
+            'Hipoacusia' => 'Hipoacusia',
+            'Síndrome de Down' => 'Síndrome de Down',
+            'Ausencia de Miembros' => 'Ausencia de Miembros',
+            'Baja Visión' => 'Baja Visión',
+            'Multidiscapacidad' => 'Multidiscapacidad',
+            'Discapacidad Intelectual' => 'Discapacidad Intelectual',
+            'Discapacidad Motora' => 'Discapacidad Motora',
+            'Psicosocial' => 'Psicosocial',
+            'Trastorno del espectro autista' => 'Trastorno del espectro autista',
+            'Posee diagnóstico clínico' => 'Posee diagnóstico clínico',
+            'No aplica' => 'No aplica'
+        ],
         'allows_multiple' => true
     ]);
 
@@ -427,7 +458,11 @@ class StudentCrudController extends CrudController
         'name' => 'estudiante_referido_a',
         'type' => 'select_from_array',
         'label' => 'Estudiante referido a',
-        'options' => ['No aplica' => 'No aplica', 'Docente Apoyo a la inclusión' => 'Docente Apoyo a la inclusión', 'Centro de Orientación' => 'Centro de Orientación'],
+        'options' => [
+            'No aplica' => 'No aplica',
+            'Docente Apoyo a la inclusión' => 'Docente Apoyo a la inclusión',
+            'Centro de Orientación' => 'Centro de Orientación'
+        ],
         'allows_multiple' => true
     ]);
 
@@ -453,16 +488,14 @@ class StudentCrudController extends CrudController
 
     CRUD::addField([
         'name' => 'whatsapp',
-        'type' => 'select_from_array',
-        'label' => 'WhatsApp',
-        'options' => ['Si' => 'Si', 'No' => 'No']
+        'type' => 'enum',
+        'label' => 'WhatsApp'
     ]);
 
     CRUD::addField([
         'name' => 'convivencia_familiar',
-        'type' => 'select_from_array',
-        'label' => 'Convivencia Familiar',
-        'options' => ['Vive solo con Madre' => 'Vive solo con Madre', 'Vive solo con el Padre' => 'Vive solo con el Padre', 'Vive con Padre y Madre' => 'Vive con Padre y Madre', 'Vive con familiares' => 'Vive con familiares', 'Vive con Madre y Padrastro' => 'Vive con Madre y Padrastro', 'Vive con Padre y Madrastra' => 'Vive con Padre y Madrastra']
+        'type' => 'enum',
+        'label' => 'Convivencia Familiar'
     ]);
 
     CRUD::addField([
@@ -473,16 +506,14 @@ class StudentCrudController extends CrudController
 
     CRUD::addField([
         'name' => 'tiene_acceso_a_internet',
-        'type' => 'select_from_array',
-        'label' => 'Tiene Acceso a Internet',
-        'options' => ['Si' => 'Si', 'No' => 'No']
+        'type' => 'enum',
+        'label' => 'Tiene Acceso a Internet'
     ]);
 
     CRUD::addField([
         'name' => 'tiene_internet_residencial',
-        'type' => 'select_from_array',
-        'label' => 'Tiene Internet Residencial',
-        'options' => ['Si' => 'Si', 'No' => 'No']
+        'type' => 'enum',
+        'label' => 'Tiene Internet Residencial'
     ]);
 
     CRUD::addField([
@@ -493,30 +524,26 @@ class StudentCrudController extends CrudController
 
     CRUD::addField([
         'name' => 'puede_sintonizar_canal_10',
-        'type' => 'select_from_array',
-        'label' => 'Puede Sintonizar Canal 10',
-        'options' => ['Si' => 'Si', 'No' => 'No']
+        'type' => 'enum',
+        'label' => 'Puede Sintonizar Canal 10'
     ]);
 
     CRUD::addField([
         'name' => 'sintoniza_la_franja_educativa',
-        'type' => 'select_from_array',
-        'label' => 'Sintoniza la Franja Educativa',
-        'options' => ['Si' => 'Si', 'No' => 'No']
+        'type' => 'enum',
+        'label' => 'Sintoniza la Franja Educativa'
     ]);
 
     CRUD::addField([
         'name' => 'posee_computadora',
-        'type' => 'select_from_array',
-        'label' => 'Posee Computadora',
-        'options' => ['Si' => 'Si', 'No' => 'No']
+        'type' => 'enum',
+        'label' => 'Posee Computadora'
     ]);
 
     CRUD::addField([
         'name' => 'recibira_sus_clases_de_forma',
-        'type' => 'select_from_array',
-        'label' => 'Recibirá sus Clases de Forma',
-        'options' => ['Presencial' => 'Presencial', 'Virtual' => 'Virtual']
+        'type' => 'enum',
+        'label' => 'Recibirá sus Clases de Forma'
     ]);
 
     CRUD::addField([
@@ -527,11 +554,12 @@ class StudentCrudController extends CrudController
 
     CRUD::addField([
         'name' => 'ultimo_grado_de_escolaridad_del_padre_o_madre',
-        'type' => 'select_from_array',
-        'label' => 'Último Grado de Escolaridad del Padre o Madre',
-        'options' => ['Ninguno' => 'Ninguno', 'Inicial' => 'Inicial', 'Parvularia' => 'Parvularia', 'Básico Ciclo I' => 'Básico Ciclo I', 'Básico Ciclo II' => 'Básico Ciclo II', 'Básico Ciclo III' => 'Básico Ciclo III', 'Media' => 'Media', 'Superior' => 'Superior']
+        'type' => 'enum',
+        'label' => 'Último Grado de Escolaridad del Padre o Madre'
     ]);
     }
+
+    
 
     /**
      * Define what happens when the Update operation is loaded.

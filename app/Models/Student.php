@@ -31,6 +31,23 @@ class Student extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+    public function setDocumentosAttribute($value)
+    {
+        $this->attributes['documentos'] = is_array($value) ? implode(',',$value) : '' ;
+    }
+    public function setCondicionDeDiscapacidadAttribute($value)
+    {
+        $this->attributes['condicion_de_discapacidad'] = is_array($value) ? implode(',',$value) : '' ;
+    }
+    public function setEstudianteReferidoAAttribute($value)
+    {
+        $this->attributes['estudiante_referido_a'] = is_array($value) ? implode(',',$value) : '' ;
+    }
+    public function setEstudianteRecibeAttribute($value)
+    {
+        $this->attributes['estudiante_recibe'] = is_array($value) ? implode(',',$value) : '' ;
+    }
+    
 
     /*
     |--------------------------------------------------------------------------
