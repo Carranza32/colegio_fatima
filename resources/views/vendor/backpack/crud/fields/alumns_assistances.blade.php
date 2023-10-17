@@ -23,10 +23,20 @@
                         <thead>
                             <th>Alumno</th>
                             <th class="text-center">Asistencia</th>
+                            <th class="text-center">Justificación</th>
                         </thead>
                         <tbody></tbody>
                     </table>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="form-floating">
+                <textarea class="form-control" placeholder="Observaciones" id="obs"></textarea>
+                <label for="obs">Observación</label>
             </div>
         </div>
     </div>
@@ -167,6 +177,11 @@
                                                     <span class="slider round"></span>
                                                 </label>
                                             </td>
+                                            <td>
+                                                <div class="form-floating mb-3">
+                                                    <textarea class="form-control" id="justificacion"></textarea>
+                                                </div>
+                                            </td>
                                         </tr>
                                     `);
                                 });
@@ -181,6 +196,11 @@
                                                     <input class="assistance_checkbox" type="checkbox" data-alumno="${element?.id}" checked sabled}>
                                                     <span class="slider round"></span>
                                                 </label>
+                                            </td>
+                                            <td>
+                                                <div class="form-floating mb-3">
+                                                    <textarea class="form-control" id="justificacion"></textarea>
+                                                </div>
                                             </td>
                                         </tr>
                                     `);
