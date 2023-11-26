@@ -49,17 +49,6 @@ class CourseCrudController extends CrudController
         ]);
 
         CRUD::addColumn([
-            'name' => 'level',
-            'type' => 'text',
-            'label' => 'Nivel'
-        ]);
-
-        CRUD::addColumn([
-            'name' => 'letter',
-            'label' => 'Letra'
-        ]);
-
-        CRUD::addColumn([
             'name' => 'order',
             'label' => 'Orden'
         ]);
@@ -94,26 +83,6 @@ class CourseCrudController extends CrudController
             $this->crud->addClause('where', 'id', $value);
         });
 
-        CRUD::addFilter([
-            'name' => 'level',
-            'type' => 'select2',
-            'label' => 'Nivel',
-        ], function () {
-            return $this->crud->getModel()::all()->pluck('level', 'id')->toArray();
-        }, function ($value) {
-            $this->crud->addClause('where', 'id', $value);
-        });
-
-        CRUD::addFilter([
-            'name' => 'letter',
-            'type' => 'select2',
-            'label' => 'Letra',
-        ], function () {
-            return $this->crud->getModel()::all()->pluck('letter', 'id')->toArray();
-        }, function ($value) {
-            $this->crud->addClause('where', 'id', $value);
-        });
-
         CRUD::addFilter(
             [
                 'name' => 'is_active',
@@ -144,18 +113,6 @@ class CourseCrudController extends CrudController
         CRUD::addField([
             'name' => 'name',
             'label' => 'Nombre',
-            'type' => 'text',
-        ]);
-
-        CRUD::addField([
-            'name' => 'level',
-            'label' => 'Nivel',
-            'type' => 'text',
-        ]);
-
-        CRUD::addField([
-            'name' => 'letter',
-            'label' => 'Letra',
             'type' => 'text',
         ]);
 

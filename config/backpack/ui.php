@@ -136,12 +136,12 @@ return [
          * Use this as fallback config for themes to pass classes to the table displayed in List Operation
          * It defaults to: "table table-striped table-hover nowrap rounded card-table table-vcenter card-table shadow-xs border-xs".
          */
-        'table' => null,
+        'table' => "rounded-3",
 
         /**
          * Use this as fallback config for themes to pass classes to the table wrapper component displayed in List Operation.
          */
-        'tableWrapper' => null,
+        'tableWrapper' => "rounded-3",
     ],
 
 ];

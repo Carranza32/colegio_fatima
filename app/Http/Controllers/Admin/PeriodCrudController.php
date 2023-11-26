@@ -7,7 +7,7 @@ use App\Models\Period;
 use App\Models\SchoolYear;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
-use http\Client\Request;
+use Illuminate\Http\Request;
 
 /**
  * Class PeriodCrudController
@@ -116,14 +116,16 @@ class PeriodCrudController extends CrudController
             'type' => 'textarea',
         ]);
 
-        CRUD::field('start_date');
-        CRUD::field('end_date');
+        CRUD::addField([
+            'name' => 'start_date',
+            'label' => 'Fecha de Inicio',
+            'type' => 'date_picker',
+        ]);
 
         CRUD::addField([
-            'name' => 'fecha',
-            'label' => 'Fecha',
-            'type' => 'hidden',
-            'default' => date('Y-m-d'),
+            'name' => 'end_date',
+            'label' => 'Fecha de Inicio',
+            'type' => 'date_picker',
         ]);
     }
 
@@ -132,7 +134,6 @@ class PeriodCrudController extends CrudController
         $request = $this->crud->getRequest();
 
         $start_date = $request->input('start_date');
-        $this->crud->getRequest()->request->add(['fecha'=> $start_date]);
 
         $response = $this->traitStore();
 
@@ -144,7 +145,6 @@ class PeriodCrudController extends CrudController
         $request = $this->crud->getRequest();
 
         $start_date = $request->input('start_date');
-        $this->crud->getRequest()->request->add(['fecha'=> $start_date]);
 
         $response = $this->traitUpdate();
 

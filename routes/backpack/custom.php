@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ReportController;
 use Illuminate\Support\Facades\Route;
 
 // --------------------------
@@ -26,4 +27,28 @@ Route::group([
     Route::crud('period', 'PeriodCrudController');
     Route::crud('school-year', 'SchoolYearCrudController');
     Route::crud('calendar', 'CalendarCrudController');
+    Route::crud('inscription', 'InscriptionCrudController');
+    Route::get('update/year/period/session', 'PeriodCrudController@updateYearPeriodSession')->name('update.year.period.session');
+
+    //Notas
+    Route::get('notas-alumno', 'StudentScoreController@index')->name('notas-alumno');
+    Route::post('asignatura-by-course', 'StudentScoreController@asignaturaByCourse')->name('asignatura.by_course');
+    Route::post('notas-alumno-save', 'StudentScoreController@saveScores')->name('notas-alumno.save');
+
+    //Reportes
+    Route::controller(ReportController::class)->prefix('reporte')->group(function () {
+        Route::get('/notas', 'notas')->name('reporte.notas');
+
+        //Asistencia
+        Route::get('/asistencia', 'asistencia')->name('reporte.asistencia');
+        Route::post('/downloadPeriodAsistReport', 'downloadPeriodAsistReport')->name('reporte.asistencia_period.download');
+
+
+        Route::post('/generateReport', 'generateReport')->name('reporte.generate');
+
+        Route::post('/downloadYearScoreReport', 'downloadYearScoreReport')->name('reporte.notas_year.download');
+        Route::post('/downloadPeriodScoreReport', 'downloadPeriodScoreReport')->name('reporte.notas_period.download');
+
+        Route::post('alumns-course', 'alumnsByCourse')->name('alumns.by_course');
+    });
 }); // this should be the absolute last line of this file

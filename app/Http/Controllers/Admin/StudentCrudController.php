@@ -117,10 +117,27 @@ class StudentCrudController extends CrudController
     {
         CRUD::setValidation(StudentRequest::class);
 
+        $this->setupStudents('Estudiante');
+        $this->setupParents('Padres');
+        $this->setupOcupation('Ocupación');
+        $this->setupDocuments('Documentos');
+        $this->setupObservation('Observaciones');
+        $this->setupSigies('SIGIES');
+    }
+
+    function setupStudents($tab) {
+        CRUD::addField([
+            'name' => 'inscription_header',
+            'type' => 'view',
+            'tab' => $tab,
+            'view' => 'partials/inscription_header'
+        ]);
+
         CRUD::addField([
             'name'  => 'html_alumno',
             'type'  => 'custom_html',
-            'value' => '<h2>Genarales del alumno<h2/>'
+            'value' => '<h2>Genarales del alumno<h2/>',
+            'tab' => $tab
         ]);
 
         CRUD::addField([
@@ -129,20 +146,23 @@ class StudentCrudController extends CrudController
             'label' => 'Curso',
             'entity' => 'course',
             'attribute' => 'name_letter',
-            'model' => \App\Models\Course::class
+            'model' => \App\Models\Course::class,
+            'tab' => $tab
         ]);
 
         CRUD::addField([
             'name' => 'NIE',
             'type' => 'text',
             'label' => 'NIE',
-            'wrapper' => ['class' => 'col-sm-4 mb-4']
+            'wrapper' => ['class' => 'col-sm-4 mb-4'],
+            'tab' => $tab
         ]);
 
         CRUD::addField([
             'name' => 'grado_a_estudiar',
             'type' => 'enum',
             'label' => 'Grado a Estudiar',
+            'tab' => $tab,
             'wrapper' => ['class' => 'col-sm-4 mb-4']
         ]);
 
@@ -150,6 +170,7 @@ class StudentCrudController extends CrudController
             'name' => 'edad',
             'type' => 'text',
             'label' => 'Edad',
+            'tab' => $tab,
             'wrapper' => ['class' => 'col-sm-4 mb-4']
         ]);
 
@@ -157,6 +178,7 @@ class StudentCrudController extends CrudController
             'name' => 'name',
             'type' => 'text',
             'label' => 'Nombres',
+            'tab' => $tab,
             'wrapper' => ['class' => 'col-sm-6 mb-4']
         ]);
 
@@ -164,6 +186,7 @@ class StudentCrudController extends CrudController
             'name' => 'last_name',
             'type' => 'text',
             'label' => 'Apellidos',
+            'tab' => $tab,
             'wrapper' => ['class' => 'col-sm-6 mb-4']
         ]);
         // Nuevos campos
@@ -172,6 +195,7 @@ class StudentCrudController extends CrudController
         CRUD::addField([
             'name' => 'nombre_segun_partida_de_nacimiento',
             'type' => 'text',
+            'tab' => $tab,
             'label' => 'Nombre según partida de nacimiento'
         ]);
 
@@ -179,241 +203,281 @@ class StudentCrudController extends CrudController
         CRUD::addField([
             'name' => 'lugar_y_fecha_de_nacimiento',
             'type' => 'textarea',
+            'tab' => $tab,
             'label' => 'Lugar y Fecha de Nacimiento'
         ]);
 
         CRUD::addField([
             'name' => 'institucion_donde_estudio_anterior',
             'type' => 'text',
+            'tab' => $tab,
             'label' => 'Institución donde Estudió el Año Anterior'
         ]);
 
         CRUD::addField([
             'name' => 'enfermedad_permanente',
             'type' => 'text',
+            'tab' => $tab,
             'label' => 'Enfermedad Permanente'
         ]);
 
         CRUD::addField([
             'name' => 'tipo_de_sangre',
             'type' => 'text',
+            'tab' => $tab,
             'label' => 'Tipo de Sangre'
         ]);
 
         CRUD::addField([
             'name' => 'comentario',
             'type' => 'textarea',
+            'tab' => $tab,
             'label' => 'Comentario Adicional'
         ]);
+    }
 
-        CRUD::addField([
-            'name'  => 'separator1',
-            'type'  => 'custom_html',
-            'value' => '<hr>'
-        ]);
-
+    function setupParents($tab) {
         CRUD::addField([
             'name'  => 'html_padres',
             'type'  => 'custom_html',
+            'tab' => $tab,
             'value' => '<h2>Genarales de los padres<h2/>'
         ]);
 
-        CRUD::addField([
-            'name' => 'nombre_del_padre',
-            'type' => 'text',
-            'label' => 'Nombre del Padre'
+        CRUD::addField([   // repeatable
+            'name'  => 'parent_data',
+            'label' => 'Padres y encargados',
+            'type'  => 'repeatable',
+            'tab' => $tab,
+            'subfields' => [
+                [
+                    'name'    => 'family_type',
+                    'type'    => 'radio',
+                    'label'   => 'Parentesco',
+                    'wrapper' => ['class' => 'form-group col-md-12'],
+                    'options' => [
+                        'Padre' => 'Padre',
+                        'Madre' => 'Madre',
+                        'Encargado' => 'Encargado',
+                    ],
+                    'inline' => true,
+                ],
+                [
+                    'name'    => 'names',
+                    'type'    => 'text',
+                    'label'   => 'Nombre completo',
+                    'wrapper' => ['class' => 'form-group col-md-8'],
+                ],
+                [
+                    'name'    => 'dui',
+                    'type'    => 'text',
+                    'label'   => 'DUI',
+                    'wrapper' => ['class' => 'form-group col-md-4'],
+                ],
+                [
+                    'name'    => 'work_phone',
+                    'type'    => 'phone',
+                    'label'   => 'Teléfono de trabajo',
+                    'wrapper' => ['class' => 'form-group col-md-4'],
+                    'config' => [
+                        'onlyCountries' => ['sv'],
+                        'initialCountry' => 'sv',
+                    ]
+                ],
+                [
+                    'name'    => 'cell_phone',
+                    'type'    => 'phone',
+                    'label'   => 'Teléfono celular',
+                    'wrapper' => ['class' => 'form-group col-md-4'],
+                    'config' => [
+                        'onlyCountries' => ['sv'],
+                        'initialCountry' => 'sv',
+                    ]
+                ],
+            ],
+            // optional
+            'new_item_label'  => 'Agregar', // customize the text of the button
+            'min_rows' => 1, // minimum rows allowed, when reached the "delete" buttons will be hidden
         ]);
 
         CRUD::addField([
-            'name' => 'DUI_del_padre',
-            'type' => 'text',
-            'label' => 'DUI del Padre'
-        ]);
-
-        CRUD::addField([
-            'name' => 'nombre_de_la_madre',
-            'type' => 'text',
-            'label' => 'Nombre de la Madre'
-        ]);
-
-        CRUD::addField([
-            'name' => 'DUI_de_la_madre',
-            'type' => 'text',
-            'label' => 'DUI de la Madre'
+            'name'  => 'html_datos_del_padre',
+            'type'  => 'custom_html',
+            'tab' => $tab,
+            'value' => '<h3>Datos de los padres<h3/>'
         ]);
 
         CRUD::addField([
             'name' => 'estado_civil',
-            'type' => 'enum',
             'label' => 'Estado Civil',
+            'type' => 'radio',
+            'options'     => [
+                'Casados' => 'Casados',
+                'Acompañados' => 'Acompañados',
+                'Soltero' => 'Soltero',
+                'Viudo' => 'Viudo'
+            ],
+            'inline' => true,
+            'tab' => $tab,
         ]);
 
         CRUD::addField([
             'name' => 'fecha_del_matrimonio_civil',
-            'type' => 'date',
+            'type' => 'date_picker',
+            'tab' => $tab,
+            'wrapper' => ['class' => 'form-group col-md-6'],
             'label' => 'Fecha del Matrimonio Civil'
         ]);
 
         CRUD::addField([
             'name' => 'fecha_del_matrimonio_religioso',
-            'type' => 'date',
+            'type' => 'date_picker',
+            'wrapper' => ['class' => 'form-group col-md-6'],
+            'tab' => $tab,
             'label' => 'Fecha del Matrimonio Religioso'
         ]);
 
         CRUD::addField([
             'name' => 'religion',
             'type' => 'text',
+            'wrapper' => ['class' => 'form-group col-md-6'],
+            'tab' => $tab,
             'label' => 'Religión'
         ]);
 
         CRUD::addField([
             'name' => 'estan_juntos',
-            'type' => 'enum',
-            'label' => 'Están Juntos'
+            'type' => 'radio',
+            'inline' => true,
+            'options' => [
+                'Si' => 'Si',
+                'No' => 'No'
+            ],
+            'tab' => $tab,
+            'wrapper' => ['class' => 'form-group col-md-6'],
+            'label' => 'Están Juntos?'
         ]);
 
         CRUD::addField([
             'name' => 'direccion_particular',
             'type' => 'textarea',
+            'tab' => $tab,
             'label' => 'Dirección Particular'
         ]);
 
         CRUD::addField([
             'name' => 'telefono_de_casa',
-            'type' => 'text',
-            'label' => 'Teléfono de Casa'
-        ]);
-
-        CRUD::addField([
-            'name' => 'telefono_de_trabajo_del_padre',
-            'type' => 'text',
-            'label' => 'Teléfono de Trabajo del Padre'
-        ]);
-
-        CRUD::addField([
-            'name' => 'telefono_celular_del_padre',
-            'type' => 'text',
-            'label' => 'Teléfono Celular del Padre'
-        ]);
-
-        CRUD::addField([
-            'name' => 'telefono_de_trabajo_de_la_madre',
-            'type' => 'text',
-            'label' => 'Teléfono de Trabajo de la Madre'
-        ]);
-
-        CRUD::addField([
-            'name' => 'telefono_celular_de_la_madre',
-            'type' => 'text',
-            'label' => 'Teléfono Celular de la Madre'
+            'type' => 'phone',
+            'config' => [
+                'onlyCountries' => ['sv'],
+                'initialCountry' => 'sv',
+            ],
+            'tab' => $tab,
+            'label' => 'Teléfono de casa'
         ]);
 
         CRUD::addField([
             'name' => 'casa',
-            'type' => 'enum',
+            'type' => 'radio',
+            'inline' => true,
+            'options' => [
+                'Propia' => 'Propia',
+                'Alquilada' => 'Alquilada',
+            ],
+            'tab' => $tab,
+            'wrapper' => ['class' => 'form-group col-md-4'],
             'label' => 'Casa'
         ]);
 
         CRUD::addField([
             'name' => 'remesas',
-            'type' => 'enum',
+            'type' => 'radio',
+            'inline' => true,
+            'options' => [
+                'Si' => 'Si',
+                'No' => 'No'
+            ],
+            'tab' => $tab,
+            'wrapper' => ['class' => 'form-group col-md-4'],
             'label' => 'Remesas',
         ]);
 
         CRUD::addField([
             'name' => 'numero_de_personas_en_el_grupo_familiar',
             'type' => 'number',
+            'attributes' => [
+                'min' => 0
+            ],
+            'tab' => $tab,
+            'wrapper' => ['class' => 'form-group col-md-4'],
             'label' => 'Número de Personas en el Grupo Familiar'
         ]);
+    }
 
-        CRUD::addField([
-            'name' => 'nombre_del_encargado',
-            'type' => 'text',
-            'label' => 'Nombre del Encargado'
-        ]);
-
-        CRUD::addField([
-            'name' => 'parentesco_del_encargado',
-            'type' => 'text',
-            'label' => 'Parentesco del Encargado'
-        ]);
-
-        CRUD::addField([
-            'name' => 'telefono_del_encargado',
-            'type' => 'text',
-            'label' => 'Teléfono del Encargado'
-        ]);
-
-        CRUD::addField([
-            'name' => 'DUI_del_encargado',
-            'type' => 'text',
-            'label' => 'DUI del Encargado'
-        ]);
-
-        CRUD::addField([
-            'name'  => 'separator2',
-            'type'  => 'custom_html',
-            'value' => '<hr>'
-        ]);
-
+    function setupOcupation($tab) {
         CRUD::addField([
             'name'  => 'html_ocupacion_padre',
             'type'  => 'custom_html',
+            'tab' => $tab,
             'value' => '<h2>Ocupacion<h2/>'
         ]);
 
         CRUD::addField([
             'name' => 'ocupacion_del_padre',
             'type' => 'text',
+            'tab' => $tab,
             'label' => 'Ocupación del Padre'
         ]);
 
         CRUD::addField([
             'name' => 'lugar_de_trabajo_del_padre',
             'type' => 'text',
+            'tab' => $tab,
             'label' => 'Lugar de Trabajo del Padre'
         ]);
 
         CRUD::addField([
             'name' => 'cargo_del_padre',
             'type' => 'text',
+            'tab' => $tab,
             'label' => 'Cargo del Padre'
         ]);
 
         CRUD::addField([
             'name' => 'ocupacion_de_la_madre',
             'type' => 'text',
+            'tab' => $tab,
             'label' => 'Ocupación de la Madre'
         ]);
 
         CRUD::addField([
             'name' => 'lugar_de_trabajo_de_la_madre',
             'type' => 'text',
+            'tab' => $tab,
             'label' => 'Lugar de Trabajo de la Madre'
         ]);
 
         CRUD::addField([
             'name' => 'cargo_de_la_madre',
             'type' => 'text',
+            'tab' => $tab,
             'label' => 'Cargo de la Madre'
         ]);
+    }
 
-        CRUD::addField([
-            'name'  => 'separator3',
-            'type'  => 'custom_html',
-            'value' => '<hr>'
-        ]);
-
+    function setupDocuments($tab) {
         CRUD::addField([
             'name'  => 'html_documentos',
             'type'  => 'custom_html',
+            'tab' => $tab,
             'value' => '<h2>Documentos que presenta<h2/>'
         ]);
 
         CRUD::addField([
             'name' => 'documentos',
-            'type' => 'select_from_array',
+            'type' => 'select2_from_array',
             'label' => 'Documentos',
+            'tab' => $tab,
             'options' => [
                 'Partida de nacimiento' => 'Partida de nacimiento',
                 'Fotografia' => 'Fotografia',
@@ -425,54 +489,58 @@ class StudentCrudController extends CrudController
                 'Tarjeta Calificaciones' => 'Tarjeta Calificaciones',
                 'Solvencia de donde estudio' => 'Solvencia de donde estudio'
             ],
-            'allows_multiple' => true
+            'allows_multiple' => true,
+            'select_all' => true,
         ]);
+    }
 
-        CRUD::addField([
-            'name'  => 'separator4',
-            'type'  => 'custom_html',
-            'value' => '<hr>'
-        ]);
-
+    function setupObservation($tab) {
         CRUD::addField([
             'name'  => 'html_observaciones',
             'type'  => 'custom_html',
+            'tab' => $tab,
             'value' => '<h2>Observaciones<h2/>'
         ]);
 
         CRUD::addField([
             'name' => 'observaciones',
             'type' => 'textarea',
+            'tab' => $tab,
             'label' => 'Observaciones'
         ]);
+    }
 
-        CRUD::addField([
-            'name'  => 'separator5',
-            'type'  => 'custom_html',
-            'value' => '<hr>'
-        ]);
-
+    function setupSigies($tab) {
         CRUD::addField([
             'name'  => 'sigies',
             'type'  => 'custom_html',
+            'tab' => $tab,
             'value' => '<h2>SIGIES<h2/>'
         ]);
 
         CRUD::addField([
             'name' => 'nacionalidad',
             'type' => 'text',
+            'tab' => $tab,
             'label' => 'Nacionalidad'
         ]);
 
         CRUD::addField([
             'name' => 'retornado',
-            'type' => 'enum',
+            'type' => 'radio',
+            'inline' => true,
+            'options' => [
+                'Si' => 'Si',
+                'No' => 'No'
+            ],
+            'tab' => $tab,
             'label' => 'Retornado'
         ]);
 
         CRUD::addField([
             'name' => 'condicion_de_discapacidad',
-            'type' => 'select_from_array',
+            'type' => 'select2_from_array',
+            'tab' => $tab,
             'label' => 'Condición de Discapacidad',
             'options' => [
                 'Ceguera' => 'Ceguera',
@@ -495,14 +563,22 @@ class StudentCrudController extends CrudController
 
         CRUD::addField([
             'name' => 'posee_diagnostico_clinico',
-            'type' => 'enum',
+            'type' => 'radio',
+            'inline' => true,
+            'options' => [
+                'Si' => 'Si',
+                'No' => 'No',
+                'No aplica' => 'No aplica'
+            ],
+            'tab' => $tab,
             'label' => 'Posee diagnóstico clínico'
         ]);
 
         CRUD::addField([
             'name' => 'estudiante_referido_a',
-            'type' => 'select_from_array',
+            'type' => 'select2_from_array',
             'label' => 'Estudiante referido a',
+            'tab' => $tab,
             'options' => [
                 'No aplica' => 'No aplica',
                 'Docente Apoyo a la inclusión' => 'Docente Apoyo a la inclusión',
@@ -513,8 +589,9 @@ class StudentCrudController extends CrudController
 
         CRUD::addField([
             'name' => 'estudiante_recibe',
-            'type' => 'select_from_array',
+            'type' => 'select2_from_array',
             'label' => 'Estudiante recibe',
+            'tab' => $tab,
             'options' => ['No aplica' => 'No aplica', 'Terapia de Rehabilitación' => 'Terapia de Rehabilitación', 'Atención Psiquiátrica' => 'Atención Psiquiátrica', 'Terapia de lenguaje' => 'Terapia de lenguaje', 'Fisioterapia' => 'Fisioterapia', 'Atención Neurológica' => 'Atención Neurológica', 'Terapia de Audición y Lenguaje' => 'Terapia de Audición y Lenguaje', 'Atención Psicológica' => 'Atención Psicológica', 'Otros' => 'Otros'],
             'allows_multiple' => true
         ]);
@@ -522,89 +599,151 @@ class StudentCrudController extends CrudController
         CRUD::addField([
             'name' => 'correo_electronico_del_estudiante',
             'type' => 'email',
+            'wrapper' => ['class' => 'form-group col-md-6'],
+            'tab' => $tab,
             'label' => 'Correo Electrónico del Estudiante'
         ]);
 
         CRUD::addField([
             'name' => 'telefono_de_contacto_del_estudiante',
             'type' => 'text',
+            'wrapper' => ['class' => 'form-group col-md-6'],
+            'tab' => $tab,
             'label' => 'Teléfono de Contacto del Estudiante'
         ]);
 
         CRUD::addField([
             'name' => 'whatsapp',
-            'type' => 'enum',
+            'type' => 'radio',
+            'inline' => true,
+            'options' => [
+                'Si' => 'Si',
+                'No' => 'No'
+            ],
+            'tab' => $tab,
             'label' => 'WhatsApp'
         ]);
 
         CRUD::addField([
             'name' => 'convivencia_familiar',
             'type' => 'enum',
+            'wrapper' => ['class' => 'form-group col-md-6'],
+            'tab' => $tab,
             'label' => 'Convivencia Familiar'
         ]);
 
         CRUD::addField([
             'name' => 'cantidad_de_personas_que_viven_con_el_estudiante',
             'type' => 'number',
+            'wrapper' => ['class' => 'form-group col-md-6'],
+            'attributes' => [
+                'min' => 0
+            ],
+            'tab' => $tab,
             'label' => 'Cantidad de Personas que Viven con el Estudiante'
         ]);
 
         CRUD::addField([
             'name' => 'tiene_acceso_a_internet',
-            'type' => 'enum',
+            'type' => 'radio',
+            'inline' => true,
+            'options' => [
+                'Si' => 'Si',
+                'No' => 'No'
+            ],
+            'wrapper' => ['class' => 'form-group col-md-6'],
+            'tab' => $tab,
             'label' => 'Tiene Acceso a Internet'
         ]);
 
         CRUD::addField([
             'name' => 'tiene_internet_residencial',
-            'type' => 'enum',
+            'type' => 'radio',
+            'inline' => true,
+            'options' => [
+                'Si' => 'Si',
+                'No' => 'No'
+            ],
+            'wrapper' => ['class' => 'form-group col-md-6'],
+            'tab' => $tab,
             'label' => 'Tiene Internet Residencial'
         ]);
 
         CRUD::addField([
             'name' => 'compañia_de_internet',
             'type' => 'text',
+            'tab' => $tab,
+            'wrapper' => ['class' => 'form-group col-md-6'],
             'label' => 'Compañía de Internet'
         ]);
 
         CRUD::addField([
             'name' => 'puede_sintonizar_canal_10',
-            'type' => 'enum',
+            'type' => 'radio',
+            'inline' => true,
+            'options' => [
+                'Si' => 'Si',
+                'No' => 'No'
+            ],
+            'tab' => $tab,
+            'wrapper' => ['class' => 'form-group col-md-6'],
             'label' => 'Puede Sintonizar Canal 10'
         ]);
 
         CRUD::addField([
             'name' => 'sintoniza_la_franja_educativa',
-            'type' => 'enum',
+            'type' => 'radio',
+            'inline' => true,
+            'options' => [
+                'Si' => 'Si',
+                'No' => 'No'
+            ],
+            'wrapper' => ['class' => 'form-group col-md-6'],
+            'tab' => $tab,
             'label' => 'Sintoniza la Franja Educativa'
         ]);
 
         CRUD::addField([
             'name' => 'posee_computadora',
-            'type' => 'enum',
+            'type' => 'radio',
+            'inline' => true,
+            'options' => [
+                'Si' => 'Si',
+                'No' => 'No'
+            ],
+            'wrapper' => ['class' => 'form-group col-md-6'],
+            'tab' => $tab,
             'label' => 'Posee Computadora'
         ]);
 
         CRUD::addField([
             'name' => 'recibira_sus_clases_de_forma',
-            'type' => 'enum',
+            'type' => 'radio',
+            'inline' => true,
+            'options' => [
+                'Presencial' => 'Presencial',
+                'Virtual' => 'Virtual'
+            ],
+            'tab' => $tab,
             'label' => 'Recibirá sus Clases de Forma'
         ]);
 
         CRUD::addField([
             'name' => 'correo_electronico_del_padre_o_madre',
             'type' => 'email',
+            'tab' => $tab,
+            'wrapper' => ['class' => 'form-group col-md-6'],
             'label' => 'Correo Electrónico del Padre o Madre'
         ]);
 
         CRUD::addField([
             'name' => 'ultimo_grado_de_escolaridad_del_padre_o_madre',
             'type' => 'enum',
+            'tab' => $tab,
+            'wrapper' => ['class' => 'form-group col-md-6'],
             'label' => 'Último Grado de Escolaridad del Padre o Madre'
         ]);
     }
-
-
 
     /**
      * Define what happens when the Update operation is loaded.

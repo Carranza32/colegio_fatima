@@ -14,11 +14,16 @@ return new class extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->unsignedBigInteger('course_id');
             $table->string('name');
             $table->string('last_name');
-            $table->string('student_card')->nullable();
+            $table->string('nie')->nullable();
             $table->string('email')->nullable();
+            $table->string('birth_date')->nullable();
+            $table->string('birth_place')->nullable();
+            $table->string('last_school')->nullable();
+            $table->string('permanent_sickness')->nullable();
+            $table->string('blood_type')->nullable();
+            $table->string('comments')->nullable();
             $table->boolean('is_active')->default(true);
 
             //Global scopes

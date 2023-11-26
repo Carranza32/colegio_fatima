@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\EvaluationRequest;
+use App\Models\Score;
+use App\Models\Student;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -14,9 +16,9 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 class EvaluationCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation { store as traitStore; }
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation { destroy as traitDestroy; }
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
     /**
@@ -170,6 +172,41 @@ class EvaluationCrudController extends CrudController
             'label' => 'Estado',
             'default' => 1
         ]);
+    }
+
+    public function store()
+    {
+        $request = $this->crud->getRequest();
+
+        $asignatura_id = $request->input('subject_id');
+        $curso_id = $request->input('course_id');
+
+        $response = $this->traitStore();
+
+        $entry = $this->crud->getCurrentEntry();
+
+        Student::where('course_id', $entry->course_id)->get()->each(function ($alumno) use ($entry, $asignatura_id) {
+            Score::create([
+                'evaluation_id' => $entry->id,
+                'student_id' => $alumno->id,
+                'course_id' => $entry->course_id,
+                'subject_id' => $asignatura_id,
+                'score' => 0,
+            ]);
+        });
+
+        return $response;
+    }
+
+    public function destroy($id)
+    {
+        $this->crud->hasAccessOrFail('delete');
+
+        $response = $this->crud->delete($id);
+
+        Score::where('evaluation_id', $id)->delete();
+
+        return $response;
     }
 
     /**

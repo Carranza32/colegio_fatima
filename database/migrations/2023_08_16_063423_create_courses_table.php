@@ -14,8 +14,6 @@ return new class extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->unique();
-            $table->integer('level');
-            $table->string('letter');
             $table->text('schedule_file')->nullable();
             $table->bigInteger('order')->default(0);
             $table->boolean('is_active')->default(true);

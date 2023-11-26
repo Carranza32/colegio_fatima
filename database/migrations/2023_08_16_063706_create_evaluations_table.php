@@ -15,11 +15,11 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('subject_id');
             $table->unsignedBigInteger('course_id');
+            $table->unsignedBigInteger('period_id')->nullable();
             $table->string('description')->nullable();
             $table->dateTime('evaluation_date')->nullable();
             $table->bigInteger('order')->default(0);
             $table->boolean('is_active')->default(true);
-
 
             //Global scopes
             $table->date('date_scope')->nullable();
@@ -36,6 +36,7 @@ return new class extends Migration
 
             $table->foreign('subject_id')->references('id')->on('subjects');
             $table->foreign('course_id')->references('id')->on('courses');
+            $table->foreign('period_id')->references('id')->on('periods');
         });
     }
 

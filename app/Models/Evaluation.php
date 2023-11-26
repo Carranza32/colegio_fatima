@@ -43,6 +43,10 @@ class Evaluation extends Model
     function course() {
         return $this->belongsTo(Course::class);
     }
+
+    function period() {
+        return $this->belongsTo(Period::class);
+    }
     /*
     |--------------------------------------------------------------------------
     | SCOPES
