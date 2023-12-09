@@ -29,6 +29,8 @@ Route::group([
     Route::crud('calendar', 'CalendarCrudController');
     Route::crud('inscription', 'InscriptionCrudController');
     Route::get('update/year/period/session', 'PeriodCrudController@updateYearPeriodSession')->name('update.year.period.session');
+    Route::get('update/period/session/{id?}', 'PeriodCrudController@updatePeriodSession')->name('update.period.session');
+    Route::get('update/year/session/{id?}', 'PeriodCrudController@updateYearSession')->name('update.year.session');
 
     //Notas
     Route::get('notas-alumno', 'StudentScoreController@index')->name('notas-alumno');
@@ -51,4 +53,7 @@ Route::group([
 
         Route::post('alumns-course', 'alumnsByCourse')->name('alumns.by_course');
     });
+
+    //Dashboard
+    Route::get('dashboard', 'DashboardController@index')->name('dashboard');
 }); // this should be the absolute last line of this file

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->date('start_date');
             $table->date('end_date');
+            $table->integer('evaluations');
 
             //Global scopes
             $table->date('date_scope')->nullable();

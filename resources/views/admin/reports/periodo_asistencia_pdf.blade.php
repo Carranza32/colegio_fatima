@@ -147,7 +147,7 @@
                 <h4>{{ $periodo->name }}</h4>
             </div>
             <div class="col-md-4 col-lg-12" style="float: right">
-                <img src="https://colegionovaduc.cl/wp-content/uploads/2022/05/LOGO-NOVADUC-ACTUAL-R-XXsmall-COLEGIO.png" alt="" height="50">
+                <img src="{{ asset('Logo Colegio Pedro Geoffroy Rivas.jpeg') }}" alt="" height="50">
             </div>
         </div>
     </div>
@@ -192,7 +192,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th scope="col">Fecha</th>
-            
+
                                                             @foreach ($asistencia_header as $key => $item)
                                                                 <th class="text-center">{{ $item->nombre }}</th>
                                                             @endforeach
@@ -210,18 +210,18 @@
                                                                             *<i class="las la-check-circle" style="color: green"></i>
                                                                         </td>
                                                                     @endif
-            
+
                                                                     @if ($item_asis->has_assistance === 0)
                                                                         <td class="text-center">
                                                                             X<i class="lar la-times-circle" style="color: red"></i>
                                                                         </td>
                                                                     @endif
-            
+
                                                                     @if (is_null($item_asis->has_assistance))
                                                                         <td class="text-center"></td>
                                                                     @endif
                                                             @endif
-            
+
                                                             @if ($loop->iteration != 1)
                                                                 @if ($item_asis->fecha != $asistencia_view[$key - 1]->fecha)
                                                                     <tr>
@@ -231,31 +231,31 @@
                                                                             *<i class="las la-check-circle" style="color: green"></i>
                                                                         </td>
                                                                     @endif
-            
+
                                                                     @if ($item_asis->has_assistance === 0)
                                                                         <td class="text-center">
                                                                             X<i class="lar la-times-circle" style="color: red"></i>
                                                                         </td>
                                                                     @endif
-            
+
                                                                     @if (is_null($item_asis->has_assistance))
                                                                         <td class="text-center"></td>
                                                                     @endif
                                                                 @endif
-            
+
                                                                 @if ($item_asis->fecha == $asistencia_view[$key - 1]->fecha)
                                                                     @if ($item_asis->has_assistance == 1)
                                                                         <td class="text-center">
                                                                             *<i class="las la-check-circle" style="color: green"></i>
                                                                         </td>
                                                                     @endif
-            
+
                                                                     @if ($item_asis->has_assistance === 0)
                                                                         <td class="text-center">
                                                                             X<i class="lar la-times-circle" style="color: red"></i>
                                                                         </td>
                                                                     @endif
-            
+
                                                                     @if (is_null($item_asis->has_assistance))
                                                                         <td class="text-center"></td>
                                                                     @endif

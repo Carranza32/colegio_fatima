@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\CurrentYear;
 use App\Traits\StatusDescription;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Student extends Model
 {
-    use CrudTrait, StatusDescription, SoftDeletes;
+    use CrudTrait, StatusDescription, SoftDeletes, CurrentYear;
 
     /*
     |--------------------------------------------------------------------------
@@ -25,6 +26,11 @@ class Student extends Model
     // protected $fillable = [];
     // protected $hidden = [];
     protected $appends = ['full_name'];
+
+    protected $casts = [
+        'documentos' => 'array',
+        'parent_data' => 'array',
+    ];
 
     /*
     |--------------------------------------------------------------------------
@@ -47,7 +53,7 @@ class Student extends Model
     {
         $this->attributes['estudiante_recibe'] = is_array($value) ? implode(',',$value) : '' ;
     }
-    
+
 
     /*
     |--------------------------------------------------------------------------

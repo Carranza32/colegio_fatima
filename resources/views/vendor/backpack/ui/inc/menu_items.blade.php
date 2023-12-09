@@ -4,18 +4,42 @@
         session(['year' => \App\Models\SchoolYear::where('year', \Backpack\Settings\app\Models\Setting::get('year_selected'))->first() ]);
     }
 
+    if (!session()->has('period')) {
+        session(['period' =>
+            \App\Models\Period::where('start_date', '<=', date(session('year')?->year.'-m-d'))
+            ->where('end_date', '>=', date(session('year')?->year.'-m-d'))
+            ->first()]);
+    }
+
     $year = session('year');
+    $period = session('period');
 @endphp
 
 <x-backpack::menu-dropdown :title="($year) ? $year->year : 'Ningún año seleccionado.'" icon="">
     @if ($year)
         @foreach (\App\Models\SchoolYear::all() as $item)
             @php
-                $url = route('update.year.period.session', [$item?->id]);
+                $url = route('update.year.session', [$item?->id]);
 
                 echo "
                     <a class='dropdown-item' href='{$url}'>
                         <span>{$item?->year}</span>
+                    </a>
+                ";
+            @endphp
+        @endforeach
+    @endif
+</x-backpack::menu-dropdown>
+
+<x-backpack::menu-dropdown :title="($period) ? $period->name : 'Ningún periodo seleccionado.'" icon="">
+    @if ($period)
+        @foreach (\App\Models\Period::all() as $item)
+            @php
+                $url = route('update.period.session', [$item?->id]);
+
+                echo "
+                    <a class='dropdown-item' href='{$url}'>
+                        <span>{$item?->name}</span>
                     </a>
                 ";
             @endphp
@@ -39,7 +63,6 @@
 </x-backpack::menu-dropdown>
 
 <x-backpack::menu-dropdown title="Evaluaciones" icon="la la-chalkboard-teacher">
-    <x-backpack::menu-dropdown-item title="Evaluaciones" icon="la la-chalkboard-teacher" :link="backpack_url('evaluation')" />
     <x-backpack::menu-dropdown-item title="Notas" icon="la la-terminal" :link="backpack_url('notas-alumno')" />
 </x-backpack::menu-dropdown>
 
@@ -55,7 +78,3 @@
 <x-backpack::menu-item title="Profesores" icon="la la-user-tie" :link="backpack_url('teacher')" />
 
 <x-backpack::menu-item title="Asistencias" icon="la la-user-check" :link="backpack_url('assistance')" />
-
-
-
-<x-backpack::menu-item title="Inscripciones" icon="la la-question" :link="backpack_url('inscription')" />

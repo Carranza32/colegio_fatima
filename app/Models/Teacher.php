@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Traits\CreateUser;
+use App\Traits\CurrentYear;
+use App\Traits\RecordSignature;
 use App\Traits\StatusDescription;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,7 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Teacher extends Model
 {
-    use CrudTrait, StatusDescription, SoftDeletes;
+    use CrudTrait, StatusDescription, SoftDeletes, RecordSignature;
 
     /*
     |--------------------------------------------------------------------------
@@ -39,6 +42,10 @@ class Teacher extends Model
     */
     function user() {
         return $this->belongsTo(User::class);
+    }
+
+    function course() {
+        return $this->belongsTo(Course::class);
     }
     /*
     |--------------------------------------------------------------------------

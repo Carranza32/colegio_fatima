@@ -144,7 +144,7 @@
             </h1>
         </div>
         <div class="col-md-4 col-lg-12" style="float: right">
-            <img src="https://colegionovaduc.cl/wp-content/uploads/2022/05/LOGO-NOVADUC-ACTUAL-R-XXsmall-COLEGIO.png" alt="" height="50">
+            <img src="{{ asset('Logo Colegio Pedro Geoffroy Rivas.jpeg') }}" alt="" height="50">
         </div>
     </div>
     @if (isset($anual))
@@ -175,15 +175,23 @@
                         <div class="table-responsive">
                             <table class="table table-striped table-hover" id="tabla-notas">
                                 <thead>
-                                    <tr>
-                                        <th scope="col" rowspan="2"><div class="text-center">Asignaturas</div></th>
-                                        <th scope="col" rowspan="1" colspan="{{ count($periodos) }}"><div class="text-center">Promedios</div></th>
-                                        <th scope="col" rowspan="2" ><div class="text-center">Promedio</div></th>
+                                    {{-- <tr>
+                                        <th scope="col" rowspan="4"><div class="text-center">Asignaturas</div></th>
+                                        <th rowspan="1" colspan="10"><div class="text-center">Promedios</div></th>
+                                        <th scope="col" rowspan="4" ><div class="text-center">Promedio</div></th>
                                     </tr>
                                     <tr>
                                         @php
                                             foreach ($periodos as $periodo) {
-                                                echo "<th scope='col' class='text-center'>{$periodo->name}</th>";
+                                                echo "<th colspan='{$periodo->evaluations}' class='text-center'>{$periodo->name}</th>";
+
+                                                echo "<tr>";
+
+                                                for ($i=0; $i < $periodo->evaluations; $i++) {
+                                                    echo "<th class='text-center'>Evaluación ".($i)."</th>";
+                                                }
+
+                                                echo "</tr>";
                                             }
 
                                             $sumPromedios = 0;
@@ -191,85 +199,52 @@
                                             $sum_promedio_general = 0;
                                             $cant_promedio_general = 0;
                                         @endphp
+                                    </tr> --}}
+                                    <tr>
+                                        <th scope="col" rowspan="4"><div class="text-center">Asignaturas</div></th>
+                                        @foreach ($periodos as $periodo)
+                                            <th colspan="{{ $periodo->evaluations }}" class="text-center">{{ $periodo->name }}</th>
+                                        @endforeach
+                                        <th scope="col" rowspan="4"><div class="text-center">Promedio</div></th>
+                                    </tr>
+                                    <tr>
+                                        @foreach ($periodos as $periodo)
+                                            @for ($i = 0; $i < $periodo->evaluations; $i++)
+                                                <th class='text-center'>Evaluación {{ $i + 1 }}</th>
+                                            @endfor
+                                        @endforeach
                                     </tr>
                                 </thead>
+
+                                @php
+                                    $sumPromedios = 0;
+                                    $promedio_materia = 0;
+                                    $sum_promedio_general = 0;
+                                    $cant_promedio_general = 0;
+                                @endphp
+
                                 <tbody>
                                     @foreach ($anual as $key => $item)
                                         <tr>
                                             <td class="text-center">{{ $key }}</td>
+                                            @php
 
-                                            @foreach ($item as $nota)
-                                                @php
-                                                    $sumPromedios += $nota;
+                                            @endphp
 
-                                                @endphp
+                                            @foreach ($periodos as $periodo)
+                                                @for ($i = 0; $i < $periodo->evaluations; $i++)
+                                                    @php
+                                                        $score = getScoreByPeriod($periodo, $alumno, $item, $i + 1);
+                                                    @endphp
 
-                                                <td class="text-center">{{ $nota }}</td>
-
-                                                @if ($loop->last)
-                                                    @if (count($item) < count($periodos))
-                                                        <td class="text-center">-</td>
-                                                    @endif
-                                                @endif
+                                                    <th class='text-center'>{{ $score }}</th>
+                                                @endfor
                                             @endforeach
 
-                                            @php
-                                                try {
-                                                    $promedio_materia = round($sumPromedios / count($item));
-
-                                                    $sum_promedio_general += $promedio_materia;
-                                                    $cant_promedio_general = $cant_promedio_general + ($promedio_materia < 10 ? 0 : 1);
-
-
-                                                    echo "<th class='text-center'>{$promedio_materia}</th>";
-                                                } catch (\Throwable $th) {
-                                                    echo "<th class='text-center'>-</th>";
-                                                }
-                                            @endphp
+                                            <th class='text-center'>{{ getStudentAverageByYear($alumno, $item) }}</th>
                                         </tr>
                                     @endforeach
                                 </tbody>
-                                <tfoot>
-                                    <th class="text-center">Promedios</th>
-
-                                    @php
-                                        $peri = [];
-                                        $materias_cant = 0;
-                                    @endphp
-
-                                    @for ($i = 0; $i < count($periodos); $i++)
-                                        @foreach ($anual as $periodos)
-                                            @php
-                                            $peri[] = $periodos[$i];
-                                            $materias_cant++;
-                                            @endphp
-                                        @endforeach
-
-                                        @php
-                                            try {
-                                                $sum_per = collect($peri)->sum();
-                                                $promedio_period = round($sum_per / $materias_cant);
-
-                                                echo "<th class='text-center'>{$promedio_period}</th>";
-
-                                                $materias_cant = 0;
-                                            } catch (\Throwable $th) {
-                                                echo "<th class='text-center'>-</th>";
-                                            }
-                                        @endphp
-                                    @endfor
-
-
-                                    @php
-                                        try {
-                                            $promedio_general = round($sum_promedio_general / $cant_promedio_general);
-
-                                            echo "<th class='text-center'>{$promedio_general}</th>";
-                                        } catch (\Throwable $th) {
-                                            echo "<th class='text-center'>-</th>";
-                                        }
-                                    @endphp
-                                </tfoot>
                             </table>
                         </div>
 

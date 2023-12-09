@@ -28,6 +28,10 @@ class StudentRequest extends FormRequest
             'course_id' => 'required',
             'name' => 'required',
             'last_name' => 'required',
+            'NIE' => 'required',
+            'parent_data.*.family_type' => 'required',
+            'parent_data.*.names' => 'required',
+            'parent_data.*.dui' => 'required',
         ];
     }
 
@@ -43,6 +47,11 @@ class StudentRequest extends FormRequest
             'name' => 'Nombres',
             'last_name' => 'Apellidos',
             'email' => 'Correo electrónico',
+            'NIE' => 'NIE',
+            'parent_data' => 'Datos del padre/madre/tutor',
+            'parent_data.*.family_type' => 'Parentesco',
+            'parent_data.*.names' => 'Nombres',
+            'parent_data.*.dui' => 'DUI',
         ];
     }
 

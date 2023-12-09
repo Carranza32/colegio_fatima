@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\EvaluationRequest;
 use App\Models\Score;
 use App\Models\Student;
+use App\Traits\CheckPermissionsCrud;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -20,6 +21,7 @@ class EvaluationCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation { destroy as traitDestroy; }
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
+    use CheckPermissionsCrud;
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -163,7 +165,8 @@ class EvaluationCrudController extends CrudController
         CRUD::addField([
             'name' => 'order',
             'type' => 'number',
-            'default' => ($this->crud->getModel()::orderByDesc('order')->first()->orden ?? 0) + 1,
+            'label' => 'Orden',
+            'default' => ($this->crud->getModel()::orderByDesc('order')->first()->order ?? 0) + 1,
         ]);
 
         CRUD::addField([

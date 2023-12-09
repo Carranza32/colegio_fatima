@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\TeacherRequest;
+use App\Traits\CheckPermissionsCrud;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -18,6 +19,7 @@ class TeacherCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
+    use CheckPermissionsCrud;
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -128,6 +130,15 @@ class TeacherCrudController extends CrudController
             'name' => 'last_name',
             'type' => 'text',
             'label' => 'Apellidos'
+        ]);
+
+        CRUD::addField([
+            'name' => 'course_id',
+            'type' => 'select2',
+            'label' => 'Curso',
+            'entity' => 'course',
+            'attribute' => 'name_letter',
+            'model' => \App\Models\Course::class
         ]);
 
         CRUD::addField([

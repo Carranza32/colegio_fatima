@@ -55,35 +55,31 @@ trait CurrentYear{
 
                     $model->created_by = backpack_user()?->id;
 
-                    if ($table == 'alumnos' || $table == 'docentes') {
+                    if ($table == 'teachers') {
                             $usuario = User::where('email', $model->email)->first();
 
                             if ($usuario == null) {
                                 $usuario = new User;
-                                $usuario->password = bcrypt(substr(str_replace('-', '', str_replace('.', '', $model->rut)),0,4));
+                                $usuario->password = bcrypt(str_replace('-', '', $model->dui));
                             }
 
-                            $usuario->name = $model->nombres." ".$model->apellidos;
+                            $usuario->name = $model->name." ".$model->last_name;
                             $usuario->email = $model->email;
                             $usuario->save();
 
                             $model->user_id = $usuario->id;
 
-                            if ($table == 'alumnos') {
-                                $usuario->assignRole(User::ROLE_ALUMNO);
-                            }
-
-                            if ($table == 'docentes') {
+                            if ($table == 'teachers') {
                                 $usuario->assignRole(User::ROLE_DOCENTE);
                             }
 
                             $emailData = [
                                 'name' => $usuario->name,
                                 'email' => $usuario->email,
-                                'password' => substr(str_replace('-', '', str_replace('.', '', $model->rut)),0,4)
+                                'password' => bcrypt(str_replace('-', '', $model->dui))
                             ];
 
-                            Mail::to($usuario->email)->cc([Setting::get('copy_email')])->send(new NewAccountMail($emailData));
+                            // Mail::to($usuario->email)->cc([Setting::get('copy_email')])->send(new NewAccountMail($emailData));
                         try {
                         } catch (\Throwable $th) {
                             Log::error($th);
@@ -100,21 +96,17 @@ trait CurrentYear{
 
                     $model->updated_by = backpack_user()?->id;
 
-                    if ($table == 'alumnos' || $table == 'docentes') {
+                    if ($table == 'teachers') {
                         try {
                             $usuario = User::where('id', $model->user_id)->first();
 
                             $usuario->update([
-                                'name' => $model->nombres." ".$model->apellidos,
+                                'name' => $model->name." ".$model->last_name,
                                 'email' => $model->email,
                                 // 'password' => bcrypt(substr(str_replace('-', '', str_replace('.', '', $model->rut)),0,4))
                             ]);
 
-                            if ($table == 'alumnos') {
-                                $usuario->assignRole(User::ROLE_ALUMNO);
-                            }
-
-                            if ($table == 'docentes') {
+                            if ($table == 'teachers') {
                                 $usuario->assignRole(User::ROLE_DOCENTE);
                             }
                         } catch (\Throwable $th) {

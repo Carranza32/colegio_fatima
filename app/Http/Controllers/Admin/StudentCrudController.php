@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\StudentRequest;
 use App\Models\Course;
+use App\Traits\CheckPermissionsCrud;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -19,6 +20,7 @@ class StudentCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
+    use CheckPermissionsCrud;
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -119,10 +121,15 @@ class StudentCrudController extends CrudController
 
         $this->setupStudents('Estudiante');
         $this->setupParents('Padres');
-        $this->setupOcupation('Ocupación');
-        $this->setupDocuments('Documentos');
-        $this->setupObservation('Observaciones');
+        // $this->setupOcupation('Ocupación');
+        $this->setupDocuments('Información adicional');
         $this->setupSigies('SIGIES');
+
+        CRUD::addField([
+            'name' => 'custom_scripts',
+            'type' => 'student.custom_scripts',
+            'tab' => 'Estudiante',
+        ]);
     }
 
     function setupStudents($tab) {
@@ -141,16 +148,6 @@ class StudentCrudController extends CrudController
         ]);
 
         CRUD::addField([
-            'name' => 'course_id',
-            'type' => 'select2',
-            'label' => 'Curso',
-            'entity' => 'course',
-            'attribute' => 'name_letter',
-            'model' => \App\Models\Course::class,
-            'tab' => $tab
-        ]);
-
-        CRUD::addField([
             'name' => 'NIE',
             'type' => 'text',
             'label' => 'NIE',
@@ -159,11 +156,14 @@ class StudentCrudController extends CrudController
         ]);
 
         CRUD::addField([
-            'name' => 'grado_a_estudiar',
-            'type' => 'enum',
-            'label' => 'Grado a Estudiar',
-            'tab' => $tab,
-            'wrapper' => ['class' => 'col-sm-4 mb-4']
+            'name' => 'course_id',
+            'type' => 'select2',
+            'label' => 'Curso',
+            'entity' => 'course',
+            'attribute' => 'name_letter',
+            'model' => \App\Models\Course::class,
+            'wrapper' => ['class' => 'col-sm-4 mb-4'],
+            'tab' => $tab
         ]);
 
         CRUD::addField([
@@ -249,18 +249,33 @@ class StudentCrudController extends CrudController
             'label' => 'Padres y encargados',
             'type'  => 'repeatable',
             'tab' => $tab,
+            'wrapper'   => [
+                'id' => 'parent_data_table'
+            ],
             'subfields' => [
                 [
                     'name'    => 'family_type',
                     'type'    => 'radio',
                     'label'   => 'Parentesco',
-                    'wrapper' => ['class' => 'form-group col-md-12'],
+                    'wrapper' => [
+                        'class' => 'form-group col-md-12',
+                        'id'=> 'family_type'
+                    ],
                     'options' => [
                         'Padre' => 'Padre',
                         'Madre' => 'Madre',
                         'Encargado' => 'Encargado',
                     ],
                     'inline' => true,
+                ],
+                [
+                    'name'    => 'parentesque_person',
+                    'type'    => 'text',
+                    'label'   => 'Parentesco del encargado',
+                    'wrapper' => [
+                        'class' => 'form-group col-md-12 d-none',
+                        'id'=> 'parentesque_person'
+                    ],
                 ],
                 [
                     'name'    => 'names',
@@ -272,6 +287,24 @@ class StudentCrudController extends CrudController
                     'name'    => 'dui',
                     'type'    => 'text',
                     'label'   => 'DUI',
+                    'wrapper' => ['class' => 'form-group col-md-4'],
+                ],
+                [
+                    'name'    => 'ocupation',
+                    'type'    => 'text',
+                    'label'   => 'Ocupación',
+                    'wrapper' => ['class' => 'form-group col-md-4'],
+                ],
+                [
+                    'name'    => 'work_place',
+                    'type'    => 'text',
+                    'label'   => 'Lugar de trabajo',
+                    'wrapper' => ['class' => 'form-group col-md-4'],
+                ],
+                [
+                    'name'    => 'position',
+                    'type'    => 'text',
+                    'label'   => 'Cargo',
                     'wrapper' => ['class' => 'form-group col-md-4'],
                 ],
                 [
@@ -470,13 +503,13 @@ class StudentCrudController extends CrudController
             'name'  => 'html_documentos',
             'type'  => 'custom_html',
             'tab' => $tab,
-            'value' => '<h2>Documentos que presenta<h2/>'
+            'value' => '<h2>Información adicional<h2/>'
         ]);
 
         CRUD::addField([
             'name' => 'documentos',
             'type' => 'select2_from_array',
-            'label' => 'Documentos',
+            'label' => 'Documentos que presenta',
             'tab' => $tab,
             'options' => [
                 'Partida de nacimiento' => 'Partida de nacimiento',
@@ -491,6 +524,13 @@ class StudentCrudController extends CrudController
             ],
             'allows_multiple' => true,
             'select_all' => true,
+        ]);
+
+        CRUD::addField([
+            'name' => 'observaciones',
+            'type' => 'textarea',
+            'tab' => $tab,
+            'label' => 'Observaciones'
         ]);
     }
 

@@ -18,7 +18,7 @@
                             <label for="sel_curso">Curso</label>
                             <select name="curso" class="form-control" id="sel_curso" aria-label="Select curso" required>
                                 @foreach ($cursos as $item)
-                                    <option value="{{ $item->id }}" {{ request()->get('curso') == $item->id ? "selected" : "" }}>{{ $item->nombre }}</option>
+                                    <option value="{{ $item->id }}" {{ request()->get('curso') == $item->id ? "selected" : "" }}>{{ $item->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -26,7 +26,7 @@
                             <label for="sel_alumno">Alumno</label>
                             <select name="alumno_id" class="form-control" id="sel_alumno" required>
                                 @foreach ($alumnos as $item)
-                                    <option value="{{ $item->id }}" @selected(request()->get('alumno_id') == $item->id) >{{ $item->full_name_rut }}</option>
+                                    <option value="{{ $item->id }}" @selected(request()->get('alumno_id') == $item->id) >{{ $item->full_name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -145,7 +145,7 @@
                     if (response) {
                         response?.forEach(el => {
                             $('#sel_alumno').append(`
-                                <option value="${el?.id}">${el?.full_name_rut}</option>
+                                <option value="${el?.id}">${el?.full_name}</option>
                             `)
                         })
                     }

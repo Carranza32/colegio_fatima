@@ -1,8 +1,9 @@
 @extends(backpack_view('blank'))
+@include('backpack.ui::inc.scripts')
 
 @section('content')
     <div class="row mt-5">
-        <div class="col-md-4 col-lg-12">
+        <div class="col-12">
             <h1 class="header-title mb-3">
                 Ingreso de notas
             </h1>
@@ -19,7 +20,7 @@
                                         <th scope="row">
                                             <div class="form-group">
                                                 <label for="sel_curso">Curso</label>
-                                                <select name="curso" class="form-control" id="sel_curso" aria-label="Select curso">
+                                                <select name="curso" class="form-control select2" id="sel_curso" aria-label="Select curso">
                                                     <option>Seleccione Curso</option>
                                                     @foreach ($cursos as $item)
                                                         <option value="{{ $item->id }}" {{ request()->get('curso') == $item->id ? "selected" : "" }}>{{ $item->name }}</option>
@@ -30,7 +31,7 @@
                                         <th>
                                             <div class="form-group">
                                                 <label for="sel_curso">Asignatura</label>
-                                                <select name="asignatura" class="form-control" id="sel_asignatura" aria-label="Select asignatura">
+                                                <select name="asignatura" class="form-control select2" id="sel_asignatura" aria-label="Select asignatura">
                                                     <option>Seleccione Asignatura</option>
                                                     @foreach ($asignaturas as $item)
                                                         <option value="{{ $item->id }}" {{ request()->get('asignatura') == $item->id ? "selected" : "" }}>{{ $item->name }}</option>
@@ -54,9 +55,9 @@
         </div>
     </div>
 
-    @if (isset($evaluaciones))
+    @if (isset($students))
         <div class="row">
-            <div class="col-md-4 col-lg-12">
+            <div class="col-lg-12">
                 <form class="card custom-card-shadow" action="{{ route('notas-alumno.save') }}" method="POST" id="score-table">
                     <input type="hidden" name="scores">
                     @csrf
@@ -68,34 +69,45 @@
                                         <th scope="col" rowspan="2">NIE</th>
                                         <th scope="col" rowspan="2">Alumno</th>
                                         {{-- <th scope="col" rowspan="2">Asignatura</th> --}}
-                                        <th scope="col" colspan="{{ count($evaluaciones) }}"><div class="text-center">Notas</div></th>
+                                        <th scope="col" colspan="{{ $cantidad_evaluaciones }}"><div class="text-center">Notas</div></th>
                                         <th scope="col" rowspan="2" colspan="1"><div class="text-center">Promedio</div></th>
                                     </tr>
                                     <tr>
-                                        @foreach ($evaluaciones as $item)
-                                            <th scope="col" class="text-center">N{{ ($loop->index + 1) }}</th>
-                                        @endforeach
+                                        @for ($i = 0; $i < $cantidad_evaluaciones; $i++)
+                                            <th scope="col" class="text-center">N{{ ($i + 1) }}</th>
+                                        @endfor
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($notas as $key => $item)
-                                        @php
-                                            $alumno = json_decode($key);
+                                    @if ($students == null || $students->count() == 0)
+                                        <tr>
+                                            <td colspan="{{ $cantidad_evaluaciones + 3 }}" class="text-center">No hay alumnos registrados en este curso</td>
+                                        </tr>
+                                    @endif
 
+                                    @foreach ($students as $student)
+                                        @php
                                             $min_score =  \Backpack\Settings\app\Models\Setting::get('min_score');
                                             $max_score =  \Backpack\Settings\app\Models\Setting::get('max_score');
                                         @endphp
-                                        @if ($alumno != null)
+                                        @if ($student != null)
                                             <tr>
-                                                <td>{{ $alumno?->NIE }}</td>
-                                                <td>{{ $alumno?->full_name }}</td>
-                                                {{-- <td>{{ $selected_asignatura?->nombre }}</td> --}}
+                                                <td>{{ $student?->NIE }}</td>
+                                                <td>{{ $student?->full_name }}</td>
 
-                                                @foreach ($item as $nota)
-                                                    <td><input class="form-control w-100" maxlength="2" min="0" max="10"  data-used="1" data-i="{{$loop->iteration}}" type="number" data-score="{{ $nota->id }}" name="notas[]" value="{{ $nota->score }}"></td>
-                                                @endforeach
+                                                @for ($i = 0; $i < $cantidad_evaluaciones; $i++)
+                                                    @php
+                                                        $score = getStudentScore($student->id, $selected_asignatura->id, $selected_curso->id, $i + 1);
 
-                                                <td><input class="form-control w-100" type="number" disabled value="{{ getStudentAverage($alumno->id, $selected_asignatura->id) }}"></td>
+                                                        $index = $i + 1;
+                                                    @endphp
+
+                                                    <td>
+                                                        <input type="number" name="notas[]" data-student_id="{{ $student->id }}" data-course_id="{{ $selected_curso->id }}" data-subject_id="{{ $selected_asignatura->id }}" data-index="{{ $index }}" class="form-control w-100" value="{{ $score }}">
+                                                    </td>
+                                                @endfor
+
+                                                <td><input class="form-control w-100" type="number" disabled value="{{ getStudentAverageByPeriod($student->id, $selected_asignatura->id, $selected_curso->id) }}"></td>
                                             </tr>
                                         @endif
                                     @endforeach
@@ -103,8 +115,8 @@
                             </table>
                         </div>
                     </div>
-                    <div class="card-footer">
-                        <button type="button" class="btn btn-primary btn-lg btn-block">Guardar notas</button>
+                    <div class="card-footer text-end">
+                        <button type="button" class="btn btn-primary btn-block">Guardar notas</button>
                     </div>
                 </form>
             </div>
@@ -149,9 +161,13 @@
 
             function getScores() {
                 var scores = [];
+
                 $('#tabla-notas input[name="notas[]"]').each(function() {
                     scores.push({
-                        id: $(this).data('score'),
+                        student_id: $(this).data('student_id'),
+                        course_id: $(this).data('course_id'),
+                        subject_id: $(this).data('subject_id'),
+                        index: $(this).data('index'),
                         nota: $(this).val()
                     });
                 });

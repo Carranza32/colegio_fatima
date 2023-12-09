@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\SubjectRequest;
+use App\Traits\CheckPermissionsCrud;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -18,6 +19,7 @@ class SubjectCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
+    use CheckPermissionsCrud;
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -48,11 +50,11 @@ class SubjectCrudController extends CrudController
             'label' => 'Asignatura'
         ]);
 
-        CRUD::addColumn([
-            'name' => 'course.name',
-            'type' => 'text',
-            'label' => 'Curso'
-        ]);
+        // CRUD::addColumn([
+        //     'name' => 'course.name',
+        //     'type' => 'text',
+        //     'label' => 'Curso'
+        // ]);
 
         CRUD::addColumn([
             'name' => 'is_averaging',
@@ -81,15 +83,15 @@ class SubjectCrudController extends CrudController
 
     protected function setupFilters()
     {
-        CRUD::addFilter([
-            'name' => 'course_id',
-            'type' => 'select2',
-            'label' => 'Curso',
-        ], function () {
-            return $this->crud->getModel()::with('course')->get()->pluck('course.name', 'course.id')->toArray();
-        }, function ($value) {
-            $this->crud->addClause('where', 'course_id', $value);
-        });
+        // CRUD::addFilter([
+        //     'name' => 'course_id',
+        //     'type' => 'select2',
+        //     'label' => 'Curso',
+        // ], function () {
+        //     return $this->crud->getModel()::with('course')->get()->pluck('course.name', 'course.id')->toArray();
+        // }, function ($value) {
+        //     $this->crud->addClause('where', 'course_id', $value);
+        // });
 
         CRUD::addFilter(
             [
@@ -138,14 +140,14 @@ class SubjectCrudController extends CrudController
             'label' => 'Asignatura'
         ]);
 
-        CRUD::addField([
-            'name' => 'course_id',
-            'type' => 'select2',
-            'label' => 'Curso',
-            'entity' => 'course',
-            'attribute' => 'name_letter',
-            'model' => \App\Models\Course::class
-        ]);
+        // CRUD::addField([
+        //     'name' => 'course_id',
+        //     'type' => 'select2',
+        //     'label' => 'Curso',
+        //     'entity' => 'course',
+        //     'attribute' => 'name_letter',
+        //     'model' => \App\Models\Course::class
+        // ]);
 
         CRUD::addField([
             'name' => 'is_averaging',

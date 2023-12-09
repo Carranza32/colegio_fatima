@@ -7,12 +7,10 @@ use App\Traits\RecordSignature;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\Activitylog\LogOptions;
-use Spatie\Activitylog\Traits\LogsActivity;
 
 class Score extends Model
 {
-    use CrudTrait, SoftDeletes;
+    use CrudTrait, SoftDeletes, CurrentPeriod;
 
     /*
     |--------------------------------------------------------------------------

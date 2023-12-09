@@ -147,7 +147,7 @@
                 <h4>{{ $periodo->name }}</h4>
             </div>
             <div class="col-md-4 col-lg-12" style="float: right">
-                <img src="https://colegionovaduc.cl/wp-content/uploads/2022/05/LOGO-NOVADUC-ACTUAL-R-XXsmall-COLEGIO.png" alt="" height="50">
+                <img src="{{ asset('Logo Colegio Pedro Geoffroy Rivas.jpeg') }}" alt="" height="50">
             </div>
         </div>
     </div>
@@ -159,7 +159,7 @@
                     <div class="card shadow-none border-0 mb-0">
                         <div class="card-body">
                             <p>Alumno: <strong> {{ $alumno?->full_name }}</strong></p>
-                            <p>Curso: <strong>{{ $alumno?->curso?->nombre }}</strong></p>
+                            <p>Curso: <strong>{{ $alumno?->course?->name }}</strong></p>
                             <p>Año escolar: <strong>{{ session('year')?->year }}</strong></p>
                         </div>
                     </div>
@@ -201,16 +201,16 @@
                                         @php
                                             $asignatura = json_decode($key);
 
-                                            $promedio = getStudentAverage($alumno?->id, $asignatura?->id);
+                                            $promedio = getStudentAverageByPeriod($alumno?->id, $asignatura?->id, $alumno?->course?->id);
 
                                             $sumPromedios += $promedio;
                                         @endphp
 
                                         <tr>
-                                            <td class="text-center">{{ $asignatura?->nombre }}</td>
+                                            <td class="text-center">{{ $asignatura?->name }}</td>
 
                                             @foreach ($item as $nota)
-                                                <td class="text-center">{{ $nota->nota }}</td>
+                                                <td class="text-center">{{ $nota->score }}</td>
                                             @endforeach
 
                                             @if (count($item) < $maximo_notas)

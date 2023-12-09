@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\PeriodRequest;
 use App\Models\Period;
 use App\Models\SchoolYear;
+use App\Traits\CheckPermissionsCrud;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use Illuminate\Http\Request;
@@ -21,6 +22,7 @@ class PeriodCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation { update as traitUpdate; }
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
+    use CheckPermissionsCrud;
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -46,6 +48,7 @@ class PeriodCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::column('name');
+        CRUD::column('evaluations');
         CRUD::column('description');
         CRUD::column('start_date');
         CRUD::column('end_date');
@@ -111,6 +114,16 @@ class PeriodCrudController extends CrudController
         ]);
 
         CRUD::addField([
+            'name' => 'evaluations',
+            'label' => 'Cantidad de Evaluaciones',
+            'type' => 'number',
+            'default' => 1,
+            'attributes' => [
+                'min' => 1,
+            ],
+        ]);
+
+        CRUD::addField([
             'name' => 'description',
             'label' => 'Descripción',
             'type' => 'textarea',
@@ -165,6 +178,13 @@ class PeriodCrudController extends CrudController
     public function updateYearSession($year)
     {
         session(['year' => SchoolYear::find($year)]);
+
+        return redirect()->back();
+    }
+
+    public function updatePeriodSession($period)
+    {
+        session(['period' => Period::find($period)]);
 
         return redirect()->back();
     }

@@ -146,8 +146,6 @@
             $('select[name=course_id]').on('change', function(){
                 const selected = $(this).val()
 
-                console.log(selected);
-
                 if (selected) {
                     $.ajax({
                         url: "{{ route('obtener.alumnos') }}",
@@ -160,13 +158,14 @@
                             $('#table-assistance tbody').empty();
 
                             if (result.edit) {
-                                console.log(result.data);
                                 result.data.forEach(element => {
                                     let checked = ''
 
                                     if (element?.has_assistance == 1) {
                                         checked = 'checked'
                                     }
+
+                                    console.log(element);
 
                                     $('#table-assistance tbody').append(`
                                         <tr>
@@ -188,6 +187,7 @@
                             } else {
 
                                 result.data?.students.forEach(element => {
+                                    console.log(element);
                                     $('#table-assistance tbody').append(`
                                         <tr>
                                             <td>${element?.full_name}</td>

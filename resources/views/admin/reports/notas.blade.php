@@ -24,7 +24,7 @@
                         </div>
                         <div class="form-group">
                             <label for="sel_alumno">Alumno</label>
-                            <select name="alumno_id" class="form-control" id="sel_alumno" required>
+                            <select name="alumno_id" class="form-control select2" id="sel_alumno" required>
                                 @foreach ($alumnos as $item)
                                     <option value="{{ $item->id }}" @selected(request()->get('alumno_id') == $item->id) >{{ $item->full_name }}</option>
                                 @endforeach

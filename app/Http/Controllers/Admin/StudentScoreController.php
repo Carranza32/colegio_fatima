@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Evaluation;
 use App\Models\Score;
+use App\Models\Student;
 use App\Models\Subject;
 use Illuminate\Http\Request;
 
@@ -21,22 +22,20 @@ class StudentScoreController extends Controller
             $curso_id = request()->get('curso');
             $asignatura_id = request()->get('asignatura');
 
-            $notas = Score::with(['subject', 'course', 'student', 'evaluation'])
-                        ->whereHas('evaluation', function($query) {
-                            $query->where('evaluations.deleted_at', null);
-                        })
+            $notas = Score::with(['subject', 'course', 'student'])
                         ->where('course_id', $curso_id)->where('subject_id', $asignatura_id)
                         ->get()
                         ->groupBy(function($item) {
                             return $item->student;
                         });
+            $students = Student::where('course_id', $curso_id)->get();
 
-            $evaluaciones = Evaluation::where('subject_id', $asignatura_id)->get();
-
+            $params['students'] = $students;
             $params['notas'] = $notas;
-            $params['evaluaciones'] = $evaluaciones;
             $params['selected_asignatura'] = Subject::find($asignatura_id);
+            $params['selected_curso'] = Course::find($curso_id);
             $params['asignaturas'] = Subject::where('course_id', $curso_id)->get();
+            $params['cantidad_evaluaciones'] = session('period')?->evaluations ?? 0;
         }
 
         return view('admin.notas', $params);
@@ -58,9 +57,21 @@ class StudentScoreController extends Controller
 
             foreach ($scores as $nota) {
                 if ($nota['nota'] != null && $nota['nota'] != "null") {
-                    $score = Score::find($nota['id']);
-                    $score->score = $nota['nota'];
+                    $score = Score::where('student_id', $nota['student_id'])
+                                ->where('subject_id', $nota['subject_id'])
+                                ->where('course_id', $nota['course_id'])
+                                ->where('evaluation_number', $nota['index'])
+                                ->first();
 
+                    if (!$score) {
+                        $score = new Score();
+                        $score->student_id = $nota['student_id'];
+                        $score->subject_id = $nota['subject_id'];
+                        $score->course_id = $nota['course_id'];
+                        $score->evaluation_number = $nota['index'];
+                    }
+
+                    $score->score = $nota['nota'];
                     $score->save();
                 }
             }
