@@ -175,31 +175,6 @@
                         <div class="table-responsive">
                             <table class="table table-striped table-hover" id="tabla-notas">
                                 <thead>
-                                    {{-- <tr>
-                                        <th scope="col" rowspan="4"><div class="text-center">Asignaturas</div></th>
-                                        <th rowspan="1" colspan="10"><div class="text-center">Promedios</div></th>
-                                        <th scope="col" rowspan="4" ><div class="text-center">Promedio</div></th>
-                                    </tr>
-                                    <tr>
-                                        @php
-                                            foreach ($periodos as $periodo) {
-                                                echo "<th colspan='{$periodo->evaluations}' class='text-center'>{$periodo->name}</th>";
-
-                                                echo "<tr>";
-
-                                                for ($i=0; $i < $periodo->evaluations; $i++) {
-                                                    echo "<th class='text-center'>Evaluación ".($i)."</th>";
-                                                }
-
-                                                echo "</tr>";
-                                            }
-
-                                            $sumPromedios = 0;
-                                            $promedio_materia = 0;
-                                            $sum_promedio_general = 0;
-                                            $cant_promedio_general = 0;
-                                        @endphp
-                                    </tr> --}}
                                     <tr>
                                         <th scope="col" rowspan="4"><div class="text-center">Asignaturas</div></th>
                                         @foreach ($periodos as $periodo)

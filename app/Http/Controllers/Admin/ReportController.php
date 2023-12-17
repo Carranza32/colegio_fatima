@@ -75,56 +75,6 @@ class ReportController extends Controller
                         return $item->subject;
                     });
 
-        $asignaturas = Assistance::with('course', 'subject', 'assistance_detail.student')
-                    ->whereHas('assistance_detail', function ($query) use ($alumno_id) {
-                        $query->where('student_id', $alumno_id);
-                    })
-                    ->orderBy('date', 'asc')
-                    ->get()
-                    ->pluck('subject_id')
-                    ->unique()
-                    ->toArray();
-
-        //dd($asistencias);
-
-        $asistenciasByDate = Assistance::with('course', 'subject', 'assistance_detail.student')
-                ->orderBy('date', 'desc')
-                ->get()
-                ->groupBy(function($item) {
-                    return $item->date;
-                });
-
-        // dd($asistenciasByDate);
-
-        /*$asistencia_view = DetalleAsistenciaView::where('alumno_id', $alumno_id ?? $alumnosAllIds[0])
-                            ->orderBy('fecha', 'desc')
-                            ->orderBy('asignatura_id', 'desc')
-                            ->get();*/
-
-        // $asistencia_view = DetalleAsistenciaView::where('alumno_id', $alumno_id)
-        //                     ->join('asignaturas', 'asignaturas.id', '=', 'asignatura_id')
-        //                     ->where('asignaturas.curso_id', '=', $curso_id)
-        //                     ->where('asignaturas.deleted_at', null)
-        //                     ->orderBy('detalle_asistencia.fecha', 'desc')
-        //                     ->orderBy('orden')
-        //                     ->select('detalle_asistencia.fecha','detalle_asistencia.curso_id','detalle_asistencia.asignatura_id','detalle_asistencia.alumno_id','detalle_asistencia.has_assistance','orden')
-        //                     ->get();
-
-        // //dd($asistencia_view);
-
-        // $asistencia_header = DetalleAsistenciaView::where('alumno_id', $alumno_id)
-        //                     ->join('asignaturas', 'asignaturas.id', '=', 'asignatura_id')
-        //                     ->where('asignaturas.curso_id', '=', $curso_id)
-        //                     ->where('asignaturas.deleted_at', null)
-        //                     ->groupBy('asignatura_id')
-        //                     ->orderBy('orden')
-        //                     ->select('asignaturas.nombre')
-        //                     ->get();
-
-        //dd($asistencia_header);
-
-        //--------------------------------------------------------------------------------------------------------->
-
         $params = [
             'asistencias' => $asistencias,
             'periodo' => $period,
@@ -133,14 +83,14 @@ class ReportController extends Controller
             'total_asistidos' => $total_asistidos,
             'porcentaje_asistencia' => $porcentaje_asistencia,
             'director' => Setting::get('director_name') ?? '',
-            // 'asistencia_view' => $asistencia_view,
-            // 'asistencia_header' => $asistencia_header,
+            'subjects' => Subject::all(),
+            'student' => $alumno,
         ];
 
 
 
         // dd($notas);
-        return view('admin.reports.anual_pdf', $params);
+        return view('admin.reports.reporte_asistencia', $params);
 
         try {
             $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('admin.reports.periodo_asistencia_pdf', $params);
@@ -356,5 +306,15 @@ class ReportController extends Controller
         $data = Student::where('course_id', $curso_id)->get();
 
         return response()->json($data);
+    }
+
+    function asistanceExportIndex(Request $request) {
+        $params = [
+            'cursos' => Course::all(),
+            'periodos' => Period::all(),
+            'alumnos' => Student::all(),
+        ];
+
+        return view('admin.reports.asistencia_export', $params);
     }
 }

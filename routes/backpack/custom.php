@@ -31,6 +31,7 @@ Route::group([
     Route::get('update/year/period/session', 'PeriodCrudController@updateYearPeriodSession')->name('update.year.period.session');
     Route::get('update/period/session/{id?}', 'PeriodCrudController@updatePeriodSession')->name('update.period.session');
     Route::get('update/year/session/{id?}', 'PeriodCrudController@updateYearSession')->name('update.year.session');
+    Route::post('period/searchByYear', 'PeriodCrudController@searchByYear')->name('periods.byYear');
 
     //Notas
     Route::get('notas-alumno', 'StudentScoreController@index')->name('notas-alumno');
@@ -52,6 +53,8 @@ Route::group([
         Route::post('/downloadPeriodScoreReport', 'downloadPeriodScoreReport')->name('reporte.notas_period.download');
 
         Route::post('alumns-course', 'alumnsByCourse')->name('alumns.by_course');
+
+        Route::get('asistance-export', 'asistanceExportIndex')->name('assistance.import.index');
     });
 
     //Dashboard

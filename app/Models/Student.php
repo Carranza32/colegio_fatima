@@ -54,6 +54,21 @@ class Student extends Model
         $this->attributes['estudiante_recibe'] = is_array($value) ? implode(',',$value) : '' ;
     }
 
+    public function getAttendances($date, $subject_id){
+        $attendances = Assistance::where('course_id', $this->course_id)
+            ->where('subject_id', $subject_id)
+            ->where('date', $date)
+            ->get()
+            ->pluck('id')
+            ->toArray();
+
+        $attendanceDetails = AssistanceDetail::whereIn('assistance_id', $attendances)
+            ->where('student_id', $this->id)
+            ->first();
+
+        return $attendanceDetails;
+    }
+
 
     /*
     |--------------------------------------------------------------------------

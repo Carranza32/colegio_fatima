@@ -34,35 +34,39 @@ trait CurrentPeriod{
             }
         });
 
+        static::creating(function ($model) {
+            try {
+                if ($model?->date_scope == null) {
+                    $model->date_scope = date(session('year')?->year.'-m-d');
+                }
+
+                $model->created_by = backpack_user()?->id;
+            } catch (\Exception $th) {
+                $model->created_by == null;
+            }
+        });
+
+        static::updating(function ($model) {
+            if ($model?->date_scope == null) {
+                $model->date_scope = date(session('year')?->year.'-m-d');
+            }
+
+            try {
+                $model->updated_by = backpack_user()?->id;
+            } catch (\Exception $th) {
+                $model->updated_by == null;
+            }
+        });
+
+        static::deleting(function ($model) {
+            try {
+                $model->deleted_by = backpack_user()?->id;
+                $model->saveQuietly();
+            } catch (\Exception $th) {
+                $model->deleted_by == null;
+            }
+        });
         if (backpack_user()) {
-            static::creating(function ($model) {
-                try {
-                    if ($model?->date_scope == null) {
-                        $model->date_scope = date(session('year')?->year.'-m-d');
-                    }
-
-                    $model->created_by = backpack_user()?->id;
-                } catch (\Exception $th) {
-                    $model->created_by == null;
-                }
-            });
-
-            static::updating(function ($model) {
-                try {
-                    $model->updated_by = backpack_user()?->id;
-                } catch (\Exception $th) {
-                    $model->updated_by == null;
-                }
-            });
-
-            static::deleting(function ($model) {
-                try {
-                    $model->deleted_by = backpack_user()?->id;
-                    $model->saveQuietly();
-                } catch (\Exception $th) {
-                    $model->deleted_by == null;
-                }
-            });
         }
     }
 }

@@ -1,333 +1,326 @@
 @extends(backpack_view('blank'))
 
+@push('after_styles')
+<link rel="stylesheet" href="{{ asset('css/custom_cards.css') }}">
+@endpush
+
 @section('content')
-    <!-- Begin Page Content -->
-    <div class="container-fluid">
+    <header>
 
-        <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="mb-0 text-gray-800">Dashboard</h1>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                    class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-        </div>
+    </header>
 
-        <!-- Content Row -->
+    <h4>Seleccione el año y periodo de su preferencia</h4>
+
+    <form class="my-2 my-lg-0" method="get" action="{{ route('update.year.period.session') }}">
+        @csrf
         <div class="row">
-
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-primary shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                    Earnings (Monthly)</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
+            <div class="col-sm-4 col-md-3">
+                <div class="form-group">
+                    <label>Año escolar</label>
+                    <select name="year_selected" class="form-control" id="year_selected" aria-label="Select periodo">
+                        @foreach (\App\Models\SchoolYear::all() as $item)
+                            <option value="{{ $item->id }}" @selected(session('year')?->id == $item?->id )>{{ $item?->year }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
-
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-success shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                    Earnings (Annual)</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
+            <div class="col-sm-4 col-md-3">
+                <div class="form-group">
+                    <label>Periodos</label></br>
+                    <select name="periodo_id" class="form-control" id="periodo_id" aria-label="Select periodo">
+                        @foreach (\App\Models\Period::getAllPeriodsByYear() as $item)
+                            <option value="{{ $item->id }}" @selected(session('period')?->id == $item->id )>{{ $item->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
-
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-info shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
-                                </div>
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col-auto">
-                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="progress progress-sm mr-2">
-                                            <div class="progress-bar bg-info" role="progressbar"
-                                                style="width: 50%" aria-valuenow="50" aria-valuemin="0"
-                                                aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Pending Requests Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-warning shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                    Pending Requests</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-comments fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
+            <div class="col-sm-4 col-md-3">
+                <div style="margin-top: 30px;">
+                    <button class="btn btn-success my-sm-0" type="submit">Seleccionar</button>
                 </div>
             </div>
         </div>
+    </form>
 
-        <!-- Content Row -->
-
-        <div class="row">
-
-            <!-- Area Chart -->
-            <div class="col-xl-8 col-lg-7">
-                <div class="card shadow mb-4">
-                    <!-- Card Header - Dropdown -->
-                    <div
-                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
-                        <div class="dropdown no-arrow">
-                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                aria-labelledby="dropdownMenuLink">
-                                <div class="dropdown-header">Dropdown Header:</div>
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Card Body -->
-                    <div class="card-body">
-                        <div class="chart-area">
-                            <canvas id="myAreaChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Pie Chart -->
-            <div class="col-xl-4 col-lg-5">
-                <div class="card shadow mb-4">
-                    <!-- Card Header - Dropdown -->
-                    <div
-                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
-                        <div class="dropdown no-arrow">
-                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                aria-labelledby="dropdownMenuLink">
-                                <div class="dropdown-header">Dropdown Header:</div>
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Card Body -->
-                    <div class="card-body">
-                        <div class="chart-pie pt-4 pb-2">
-                            <canvas id="myPieChart"></canvas>
-                        </div>
-                        <div class="mt-4 text-center small">
-                            <span class="mr-2">
-                                <i class="fas fa-circle text-primary"></i> Direct
-                            </span>
-                            <span class="mr-2">
-                                <i class="fas fa-circle text-success"></i> Social
-                            </span>
-                            <span class="mr-2">
-                                <i class="fas fa-circle text-info"></i> Referral
-                            </span>
-                        </div>
-                    </div>
-                </div>
+    <form class="row mt-5" method="get" action="{{ backpack_url('dashboard') }}" id="filter_date">
+        <div class="col-3">
+            <div class="form-group">
+                <label class="form-label">Filtro por fecha</label><br>
+                <input type="text" class="form-control rounded-pill" name="daterange"/>
             </div>
         </div>
-
-        <!-- Content Row -->
-        <div class="row">
-
-            <!-- Content Column -->
-            <div class="col-lg-6 mb-4">
-
-                <!-- Project Card Example -->
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
-                    </div>
-                    <div class="card-body">
-                        <h4 class="small font-weight-bold">Server Migration <span
-                                class="float-right">20%</span></h4>
-                        <div class="progress mb-4">
-                            <div class="progress-bar bg-danger" role="progressbar" style="width: 20%"
-                                aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <h4 class="small font-weight-bold">Sales Tracking <span
-                                class="float-right">40%</span></h4>
-                        <div class="progress mb-4">
-                            <div class="progress-bar bg-warning" role="progressbar" style="width: 40%"
-                                aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <h4 class="small font-weight-bold">Customer Database <span
-                                class="float-right">60%</span></h4>
-                        <div class="progress mb-4">
-                            <div class="progress-bar" role="progressbar" style="width: 60%"
-                                aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <h4 class="small font-weight-bold">Payout Details <span
-                                class="float-right">80%</span></h4>
-                        <div class="progress mb-4">
-                            <div class="progress-bar bg-info" role="progressbar" style="width: 80%"
-                                aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <h4 class="small font-weight-bold">Account Setup <span
-                                class="float-right">Complete!</span></h4>
-                        <div class="progress">
-                            <div class="progress-bar bg-success" role="progressbar" style="width: 100%"
-                                aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Color System -->
-                <div class="row">
-                    <div class="col-lg-6 mb-4">
-                        <div class="card bg-primary text-white shadow">
-                            <div class="card-body">
-                                Primary
-                                <div class="text-white-50 small">#4e73df</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mb-4">
-                        <div class="card bg-success text-white shadow">
-                            <div class="card-body">
-                                Success
-                                <div class="text-white-50 small">#1cc88a</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mb-4">
-                        <div class="card bg-info text-white shadow">
-                            <div class="card-body">
-                                Info
-                                <div class="text-white-50 small">#36b9cc</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mb-4">
-                        <div class="card bg-warning text-white shadow">
-                            <div class="card-body">
-                                Warning
-                                <div class="text-white-50 small">#f6c23e</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mb-4">
-                        <div class="card bg-danger text-white shadow">
-                            <div class="card-body">
-                                Danger
-                                <div class="text-white-50 small">#e74a3b</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mb-4">
-                        <div class="card bg-secondary text-white shadow">
-                            <div class="card-body">
-                                Secondary
-                                <div class="text-white-50 small">#858796</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mb-4">
-                        <div class="card bg-light text-black shadow">
-                            <div class="card-body">
-                                Light
-                                <div class="text-black-50 small">#f8f9fc</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mb-4">
-                        <div class="card bg-dark text-white shadow">
-                            <div class="card-body">
-                                Dark
-                                <div class="text-white-50 small">#5a5c69</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="col-lg-6 mb-4">
-
-                <!-- Illustrations -->
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
-                    </div>
-                    <div class="card-body">
-                        <div class="text-center">
-                            <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
-                                src="img/undraw_posting_photo.svg" alt="...">
-                        </div>
-                        <p>Add some quality, svg illustrations to your project courtesy of <a
-                                target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a
-                            constantly updated collection of beautiful svg images that you can use
-                            completely free and without attribution!</p>
-                        <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on
-                            unDraw &rarr;</a>
-                    </div>
-                </div>
-
-                <!-- Approach -->
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
-                    </div>
-                    <div class="card-body">
-                        <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce
-                            CSS bloat and poor page performance. Custom CSS classes are used to create
-                            custom components and custom utility classes.</p>
-                        <p class="mb-0">Before working with this theme, you should become familiar with the
-                            Bootstrap framework, especially the utility classes.</p>
-                    </div>
-                </div>
-
+        <div class="col-sm-4 col-md-3">
+            <div style="margin-top: 30px;">
+                <button class="btn btn-outline-danger my-sm-0 btn-sm" id="clear_button" type="button">Limpiar <i class="las la-times-circle"></i></button>
             </div>
         </div>
+    </form>
 
+    <div class="row mt-5">
+        <div class="col-3">
+            <div class="card outlined-card shadow-none p-3">
+                <h5>Total estudiantes</h5>
+                <h3>{{ $students_count }}</h3>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card outlined-card shadow-none p-3">
+                <h5>Total presentes</h5>
+                <h3>{{ $assisted_count }}</h3>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card outlined-card shadow-none p-3">
+                <h5>Total ausentes</h5>
+                <h3>{{ $absences_count }}</h3>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card outlined-card shadow-none p-3">
+                <h5>Total docentes</h5>
+                <h3>{{ $teachers_count }}</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-6">
+            <div class="card outlined-card custom-shadow p-3">
+                <h4>Matriculas por curso</h4>
+                <div class="w-100" id="alumnsByCourseChart"></div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card outlined-card custom-shadow p-3">
+                <h4>Asistencias por mes</h4>
+                <div class="w-100" id="doubleChart"></div>
+            </div>
+        </div>
     </div>
 @endsection
+
+@section('after_styles')
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+@endsection
+
+@push('after_scripts')
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdnjs.com/libraries/jquery.mask"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+    <script>
+        var inputRange = $('input[name="daterange"]')
+        var date = "{{ request()->get('daterange') }}"
+        var date_array = date.split(' - ')
+
+        var date_start = date_array[0]
+        var date_end = date_array[1]
+
+        if (date_start && date_end) {
+            inputRange.val(date_start + ' - ' + date_end)
+        }
+
+        inputRange.daterangepicker({
+            ranges: {
+                'Este año': [moment().startOf('year'), moment().endOf('year')],
+                'Este mes': [moment().startOf('month'), moment().endOf('month')],
+                'Esta semana': [moment().startOf('week'), moment().endOf('week')],
+                'El mes pasado': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+                'La semana pasada': [moment().subtract(1, 'week').startOf('week'), moment().subtract(1, 'week').endOf('week')],
+            },
+        });
+
+        inputRange.on('apply.daterangepicker', function (ev, picker) {
+            $('#filter_date').submit()
+        });
+
+        $('#clear_button').on('click', function () {
+            inputRange.val('')
+            $('#filter_date').submit()
+        })
+
+        $(document).ready(function () {
+            $('body').append($('#selectAlum'))
+
+            var alumnsByCourse = @json($alumnsByCourse);
+            var asistenciasByMonth = @json($asistenciasByMonth);
+            var ausenciasByMonth = @json($ausenciasByMonth);
+
+            initCharts(alumnsByCourse)
+            doubleChart(asistenciasByMonth, ausenciasByMonth)
+
+            $('#year_selected').on('change', function () {
+                $.ajax({
+                    url: "{{ route('periods.byYear') }}",
+                    method: 'POST',
+                    data: {
+                        year: $(this).val()
+                    },
+                    success: function (response) {
+                        $('#periodo_id').empty()
+
+                        response?.periods.forEach(periodo => {
+                            $('#periodo_id').append(`
+                                <option value="${periodo?.id}">${periodo?.name}</option>
+                            `)
+                        })
+                    }
+                })
+            })
+        })
+
+        function initCharts(alums_data) {
+            var anio = "{{ session('year')?->year }}";
+
+            var alumnsByCourse = {
+                series: [{
+                    name: 'Alumnos',
+                    data: alums_data?.values
+                }],
+                labels: alums_data?.labels,
+                chart: {
+                    height: 350,
+                    type: 'bar',
+                },
+                plotOptions: {
+                bar: {
+                    borderRadius: 10,
+                    dataLabels: {
+                        position: 'top', // top, center, bottom
+                    },
+                }
+                },
+                dataLabels: {
+                    enabled: true,
+                    formatter: function (val) {
+                        return val;
+                    },
+                    offsetY: -20,
+                    style: {
+                        fontSize: '12px',
+                        colors: ["#304758"]
+                    }
+                },
+                title: {
+                    text: 'Cantidad de matriculas por curso, '+anio,
+                    floating: true,
+                    // offsetY: 330,
+                    align: 'bottom',
+                    style: {
+                        color: '#444'
+                    }
+                }
+            };
+
+            var alumnsByCourseChart = new ApexCharts(document.querySelector("#alumnsByCourseChart"), alumnsByCourse);
+            alumnsByCourseChart.render();
+        }
+
+        function doubleChart(asistenciasByMonth, ausenciasByMonth) {
+            var options = {
+                series: [{
+                    name: "Asistencias",
+                    data: asistenciasByMonth?.values
+                }, {
+                    name: "Ausencias",
+                    data: ausenciasByMonth?.values
+                }],
+                chart: {
+                    height: 350,
+                    type: 'bar',
+                },
+                stroke: {
+                    // width: [0, 4],
+                    curve: 'smooth'
+                },
+                title: {
+                    text: 'Asistencias vs Ausencias',
+                    align: 'left'
+                },
+                legend: {
+                    tooltipHoverFormatter: function(val, opts) {
+                        return val + ' - ' + opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] + ''
+                    }
+                },
+                tooltip: {
+                    fillSeriesColor: false,
+                    onDatasetHover: {
+                        highlightDataSeries: false,
+                    },
+                    theme: 'light',
+                    style: {
+                        fontSize: '12px',
+                        fontFamily: 'Inter',
+                    },
+                },
+                xaxis: {
+                    categories: asistenciasByMonth?.labels,
+                },
+                yaxis: [
+                    {
+                        title: {
+                            text: "Asistencias",
+                        },
+                    },
+                    {
+                        opposite: true,
+                        title: {
+                            text: "Ausencias",
+                        },
+                    },
+                ],
+            };
+
+            var chart = new ApexCharts(document.querySelector("#doubleChart"), options);
+            chart.render();
+        }
+
+        function ingresosChart(paymentsByMonth) {
+            var options = {
+                series: [{
+                    name: "Ingresos",
+                    data: paymentsByMonth?.values
+                }],
+                dataLabels: {
+                    enabled: true,
+                },
+                chart: {
+                    height: 350,
+                    stacked: false,
+                    type: 'area',
+                },
+                title: {
+                    text: 'Ingresos',
+                    align: 'left'
+                },
+                tooltip: {
+                    fillSeriesColor: false,
+                    onDatasetHover: {
+                        highlightDataSeries: false,
+                    },
+                    theme: 'light',
+                    style: {
+                        fontSize: '12px',
+                        fontFamily: 'Inter',
+                    },
+                },
+                fill: {
+                    type: 'gradient',
+                    gradient: {
+                        shadeIntensity: 1,
+                        opacityFrom: 0.7,
+                        opacityTo: 0.9,
+                        stops: [0, 90, 100]
+                    }
+                },
+                xaxis: {
+                    categories: paymentsByMonth?.labels,
+                },
+            };
+
+            var chart = new ApexCharts(document.querySelector("#ingresosChart"), options);
+            chart.render();
+        }
+    </script>
+@endpush

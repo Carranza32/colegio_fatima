@@ -57,13 +57,6 @@ class SubjectCrudController extends CrudController
         // ]);
 
         CRUD::addColumn([
-            'name' => 'is_averaging',
-            'label' => 'Promediable',
-            'type' => 'boolean',
-            'options' => [0 => 'No', 1 => 'Si'],
-        ]);
-
-        CRUD::addColumn([
             'name' => 'status_description',
             'label' => __('crud.field.status'),
             'wrapper' => [
@@ -92,21 +85,6 @@ class SubjectCrudController extends CrudController
         // }, function ($value) {
         //     $this->crud->addClause('where', 'course_id', $value);
         // });
-
-        CRUD::addFilter(
-            [
-            'name' => 'is_averaging',
-            'type' => 'dropdown',
-            'label' => 'Promediable',
-        ],
-            [
-            0 => 'No',
-            1 => 'Si',
-        ],
-            function ($value) {
-                $this->crud->addClause('where', 'is_averaging', $value);
-            }
-        );
 
         CRUD::addFilter(
             [
@@ -148,12 +126,6 @@ class SubjectCrudController extends CrudController
         //     'attribute' => 'name_letter',
         //     'model' => \App\Models\Course::class
         // ]);
-
-        CRUD::addField([
-            'name' => 'is_averaging',
-            'type' => 'switch',
-            'label' => 'Promediable'
-        ]);
 
         CRUD::addField([
             'name' => 'is_active',

@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Traits\Auditable;
 use App\Traits\CreateUser;
+use App\Traits\CurrentPeriod;
 use App\Traits\CurrentYear;
 use App\Traits\RecordSignature;
 use App\Traits\StatusDescription;
@@ -13,7 +15,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Teacher extends Model
 {
-    use CrudTrait, StatusDescription, SoftDeletes, RecordSignature;
+    use CrudTrait, StatusDescription, SoftDeletes;
 
     /*
     |--------------------------------------------------------------------------

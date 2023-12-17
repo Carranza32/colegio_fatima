@@ -2,35 +2,33 @@
 
 namespace App\Traits;
 
+use Illuminate\Support\Facades\Auth;
+
 trait RecordSignature
 {
     static $record = true;
 
-    protected static function boot()
+    protected static function bootRecordSignature()
     {
-        parent::boot();
-
-        if (auth()->user()) {
+        if (Auth::check()) {
             static::creating(function ($model) {
-                if (config('recordsignature.enable')) {
-                    $model->created_by = auth()->user()->id;
-                }
+                $model->created_by = Auth::user()->id;
             });
 
             static::updating(function ($model) {
-                if (config('recordsignature.enable')) {
-                    $model->updated_by = auth()->user()->id;
-                }
+                $model->updated_by = Auth::user()->id;
             });
 
             static::deleting(function ($model) {
-                if (config('recordsignature.enable')) {
-                    $model->deleted_by = auth()->user()->id;
-                    $model->saveQuietly();
-                }
+                $model->deleted_by = Auth::user()->id;
+                $model->saveQuietly();
             });
         }
     }
 
-
+    protected static function boot()
+    {
+        parent::boot();
+        static::bootRecordSignature();
+    }
 }
