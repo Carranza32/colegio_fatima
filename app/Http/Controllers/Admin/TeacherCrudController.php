@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\TeacherRequest;
+use App\Models\Teacher;
 use App\Traits\CheckPermissionsCrud;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
@@ -34,6 +35,22 @@ class TeacherCrudController extends CrudController
 
         $this->crud->denyAccess('show');
         $this->crud->enableExportButtons();
+
+        //Enviar correo al crear un profesor
+        Teacher::creating(function($entry) {
+        });
+
+        Teacher::saving(function($entry) {
+            if ($entry->created_by == null) {
+                $entry->created_by = backpack_user()->id;
+            }
+
+            if ($entry->date_scope == null) {
+                $entry->date_scope = date(session('year')?->year.'-m-d');
+            }
+
+            $entry->updated_by = backpack_user()->id;
+        });
     }
 
     /**

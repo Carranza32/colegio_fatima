@@ -31,12 +31,24 @@ class PeriodCrudController extends CrudController
      */
     public function setup()
     {
-        CRUD::setModel(\App\Models\Period::class);
+        CRUD::setModel(Period::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/period');
         CRUD::setEntityNameStrings('Periodo', 'Periodos');
 
         $this->crud->denyAccess('show');
         $this->crud->enableExportButtons();
+
+        Period::saving(function($entry) {
+            if ($entry->created_by == null) {
+                $entry->created_by = backpack_user()->id;
+            }
+
+            if ($entry->date_scope == null) {
+                $entry->date_scope = date(session('year')?->year.'-m-d');
+            }
+
+            $entry->updated_by = backpack_user()->id;
+        });
     }
 
     /**
