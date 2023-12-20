@@ -172,11 +172,17 @@ class AssistanceCrudController extends CrudController
             'attributes' => $attr_date,
         ]);
 
+        $cursos = Course::all()->pluck('name', 'id');
+
+        if (backpack_user()?->hasRole(User::ROLE_DOCENTE)) {
+            $cursos = Course::where('id', backpack_user()?->teacher?->course_id)->get()->pluck('name', 'id');
+        }
+
         CRUD::addField([
             'name' => 'course_id',
             'label' => 'Curso',
             'type' => 'select2_from_array',
-            'options' => Course::all()->pluck('name', 'id'),
+            'options' => $cursos,
             'attributes' => $this->disabled,
         ]);
 

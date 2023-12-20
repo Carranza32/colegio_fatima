@@ -55,6 +55,7 @@ Route::group([
         Route::post('alumns-course', 'alumnsByCourse')->name('alumns.by_course');
 
         Route::get('asistance-export', 'asistanceExportIndex')->name('assistance.import.index');
+        Route::post('asistance-export-download', 'asistanceExport')->name('assistance.import');
     });
 
     //Dashboard

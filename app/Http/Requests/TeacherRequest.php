@@ -28,6 +28,7 @@ class TeacherRequest extends FormRequest
             'name' => 'required',
             'last_name' => 'required',
             'email' => 'required',
+            'course_id' => 'required',
         ];
     }
 
@@ -42,6 +43,7 @@ class TeacherRequest extends FormRequest
             'name' => 'Nombres',
             'last_name' => 'Apellidos',
             'email' => 'Correo electrónico',
+            'course_id' => 'Curso',
         ];
     }
 

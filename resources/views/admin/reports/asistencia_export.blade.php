@@ -12,8 +12,13 @@
         <div class="col-md-4 col-lg-12">
             <div class="card custom-card-shadow">
                 <div class="card-body">
-                    <form action="{{ route('reporte.asistencia_period.download') }}" method="POST" id="report_form">
+                    <form action="{{ route('assistance.import') }}" method="POST" id="report_form">
                         @csrf
+                        <div class="form-group mb-2">
+                            <label for="dateFilter">Rango de fecha</label>
+                            <input class="form-control" type="text" name="daterange" id="dateFilter" value="" required />
+                        </div>
+
                         <div class="form-group">
                             <label for="sel_curso">Curso</label>
                             <select name="curso" class="form-control" id="sel_curso" aria-label="Select curso" required>
@@ -25,6 +30,7 @@
                         <div class="form-group">
                             <label for="sel_alumno">Alumno</label>
                             <select name="alumno_id" class="form-control select2" id="sel_alumno" required>
+                                <option value="all">Todos</option>
                                 @foreach ($alumnos as $item)
                                     <option value="{{ $item->id }}" @selected(request()->get('alumno_id') == $item->id) >{{ $item->full_name }}</option>
                                 @endforeach
@@ -32,15 +38,6 @@
                         </div>
 
                         <hr>
-
-                        <div class="form-group" id="toggle_periods">
-                            <label for="sel_alumno">Periodos</label>
-                            <select name="period_id" class="form-control" id="sel_period" required>
-                                @foreach ($periodos as $item)
-                                    <option value="{{ $item->id }}" @selected(session('period')?->id == $item->id) >{{ $item->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
 
                         <div class="form-group">
                             <label for="sel_curso"></label>
@@ -55,6 +52,7 @@
 
 @section('after_styles')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 <style>
     .main > .container-fluid {
         padding: 0 0 !important;
@@ -126,11 +124,18 @@
 
 @section('after_scripts')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <script>
         $('.select2').select2({
             placeholder: 'Seleccione un alumno',
             allowClear: true
         })
+
+        var from_date;
+        var to_date;
+        var formated_from_date;
+        var formated_to_date;
 
         $('#sel_curso').on('change', function () {
             $.ajax({
@@ -143,6 +148,10 @@
                     $('#sel_alumno').empty()
 
                     if (response) {
+                        $('#sel_alumno').append(`
+                            <option value="all">Todos</option>
+                        `);
+
                         response?.forEach(el => {
                             $('#sel_alumno').append(`
                                 <option value="${el?.id}">${el?.full_name}</option>
@@ -153,25 +162,48 @@
             })
         })
 
-        $('input[name="is_yearly"]').on('change', function () {
-            if ($(this).is(':checked')) {
-                $('#toggle_periods').hide()
-                $(this).val(1)
-
-                let year_url = "{{ route('reporte.notas_year.download') }}"
-
-                $('#report_form').attr('action', year_url)
-            } else {
-                $('#toggle_periods').show()
-                $(this).val(0)
-
-                let period_url = "{{ route('reporte.notas_period.download') }}"
-                $('#report_form').attr('action', period_url)
-            }
-        })
-
         $(document).ready(function() {
             $('#sel_curso').trigger('change')
+
+            var datepicker = $('input[name="daterange"]').daterangepicker({
+                showDropdowns: true,
+                locale: {
+                    format: 'DD/MM/YYYY',
+                    cancelLabel: 'Limpiar'
+                },
+                startDate: moment(),
+                endDate: moment(),
+                ranges: {
+                    'Hoy': [moment(), moment()],
+                    'Ayer': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'Últimos 7 días': [moment().subtract(6, 'days'), moment()],
+                    'Últimos 30 días': [moment().subtract(29, 'days'), moment()],
+                    'Este mes': [moment().startOf('month'), moment().endOf('month')],
+                    'Último mes': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+                    'Últimos 3 meses': [moment().subtract(3, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+                    'Últimos 6 meses': [moment().subtract(6, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+                    'Últimos 12 meses': [moment().subtract(12, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+                },
+            });
+
+            $('input[name="daterange"]').blur();
+
+            datepicker.on('apply.daterangepicker', function(ev, picker) {
+                from_date = picker.startDate.format('DD/MM/YYYY');
+                to_date = picker.endDate.format('DD/MM/YYYY');
+                formated_from_date = picker.startDate.format('YYYY-MM-DD');
+                formated_to_date = picker.endDate.format('YYYY-MM-DD');
+
+                $(this).val(from_date + ' - ' + to_date);
+            });
+
+            datepicker.on('cancel.daterangepicker', function(ev, picker) {
+                $(this).val('');
+                from_date = '';
+                to_date = '';
+                formated_from_date = '';
+                formated_to_date = '';
+            });
         })
     </script>
 @endsection

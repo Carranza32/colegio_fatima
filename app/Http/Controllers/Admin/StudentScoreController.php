@@ -7,6 +7,7 @@ use App\Models\Evaluation;
 use App\Models\Score;
 use App\Models\Student;
 use App\Models\Subject;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class StudentScoreController extends Controller
@@ -17,6 +18,10 @@ class StudentScoreController extends Controller
             'cursos' => Course::all(),
             'asignaturas' => Subject::all(),
         ];
+
+        if (backpack_user()?->hasRole(User::ROLE_DOCENTE)) {
+            $params['cursos'] = Course::where('id', backpack_user()?->teacher?->course_id)->get();
+        }
 
         if (request()->get('curso') != null && request()->get('asignatura') != null) {
             $curso_id = request()->get('curso');

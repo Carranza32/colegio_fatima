@@ -4,9 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\TeacherRequest;
 use App\Models\Teacher;
+use App\Models\User;
 use App\Traits\CheckPermissionsCrud;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use Backpack\Settings\app\Models\Setting;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NewAccountMail;
 
 /**
  * Class TeacherCrudController
@@ -38,6 +43,29 @@ class TeacherCrudController extends CrudController
 
         //Enviar correo al crear un profesor
         Teacher::creating(function($entry) {
+            $user = User::where('email', $entry->email)->first();
+            $password = Str::random(8);
+
+            if ($user == null) {
+                $user = new User;
+                $user->password = bcrypt( $password );
+            }
+
+            $user->name = $entry->name." ".$entry->last_name;
+            $user->email = $entry->email;
+            $user->save();
+
+            $entry->user_id = $user->id;
+
+            $user->assignRole(User::ROLE_DOCENTE);
+
+            $emailData = [
+                'name' => $user->name,
+                'email' => $user->email,
+                'password' => $password
+            ];
+
+            Mail::to($user->email)->cc([Setting::get('copy_email')])->send(new NewAccountMail($emailData));
         });
 
         Teacher::saving(function($entry) {

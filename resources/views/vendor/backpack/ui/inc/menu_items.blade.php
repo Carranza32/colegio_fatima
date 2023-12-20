@@ -47,12 +47,14 @@
     @endif
 </x-backpack::menu-dropdown>
 
-<li class="nav-item"><a class="nav-link" href="{{ backpack_url('dashboard') }}"><i class="la la-home nav-icon"></i> {{ trans('backpack::base.dashboard') }}</a></li>
-<x-backpack::menu-dropdown title="Autenticación" icon="la la-puzzle-piece">
-    <x-backpack::menu-dropdown-item title="Users" icon="la la-user" :link="backpack_url('user')" />
-    <x-backpack::menu-dropdown-item title="Roles" icon="la la-group" :link="backpack_url('role')" />
-    <x-backpack::menu-dropdown-item title="Permissions" icon="la la-key" :link="backpack_url('permission')" />
-</x-backpack::menu-dropdown>
+@if ( backpack_user()->hasRole(\App\Models\User::SUPERGOD_ROLE) || backpack_user()->hasRole(\App\Models\User::ROLE_ADMIN) || backpack_user()->hasRole(\App\Models\User::ROLE_DIRECTOR) )
+    <li class="nav-item"><a class="nav-link" href="{{ backpack_url('dashboard') }}"><i class="la la-home nav-icon"></i> {{ trans('backpack::base.dashboard') }}</a></li>
+    <x-backpack::menu-dropdown title="Autenticación" icon="la la-puzzle-piece">
+        <x-backpack::menu-dropdown-item title="Users" icon="la la-user" :link="backpack_url('user')" />
+        <x-backpack::menu-dropdown-item title="Roles" icon="la la-group" :link="backpack_url('role')" />
+        <x-backpack::menu-dropdown-item title="Permissions" icon="la la-key" :link="backpack_url('permission')" />
+    </x-backpack::menu-dropdown>
+@endif
 
 @canany(backpack_user()->hasAnyPermission(['setting.read', 'log.read', 'period.read', 'school-year.read', 'calendar.read']))
     <x-backpack::menu-dropdown title="Configuración" icon="la la-cog">
@@ -98,7 +100,7 @@
     </x-backpack::menu-dropdown>
 @endif
 
-@if (backpack_user()->can('reporte-asistencia.read'))
+@if (backpack_user()->can('course.read'))
     <x-backpack::menu-item title="Cursos" icon="la la-graduation-cap" :link="backpack_url('course')" />
 @endif
 

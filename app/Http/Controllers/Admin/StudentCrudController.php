@@ -135,7 +135,7 @@ class StudentCrudController extends CrudController
         $this->setupParents('Padres');
         // $this->setupOcupation('Ocupación');
         $this->setupDocuments('Información adicional');
-        $this->setupSigies('SIGIES');
+        $this->setupSigies('SIGES');
 
         CRUD::addField([
             'name' => 'custom_scripts',
@@ -567,7 +567,7 @@ class StudentCrudController extends CrudController
             'name'  => 'sigies',
             'type'  => 'custom_html',
             'tab' => $tab,
-            'value' => '<h2>SIGIES<h2/>'
+            'value' => '<h2>SIGES<h2/>'
         ]);
 
         CRUD::addField([

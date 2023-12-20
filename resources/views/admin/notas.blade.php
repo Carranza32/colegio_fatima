@@ -103,7 +103,7 @@
                                                     @endphp
 
                                                     <td>
-                                                        <input type="number" name="notas[]" data-student_id="{{ $student->id }}" data-course_id="{{ $selected_curso->id }}" data-subject_id="{{ $selected_asignatura->id }}" data-index="{{ $index }}" class="form-control w-100" value="{{ $score }}">
+                                                        <input type="number" name="notas[]" min="0" max="{{ $max_score }}" data-student_id="{{ $student->id }}" data-course_id="{{ $selected_curso->id }}" data-subject_id="{{ $selected_asignatura->id }}" data-index="{{ $index }}" class="form-control w-100" value="{{ $score }}">
                                                     </td>
                                                 @endfor
 

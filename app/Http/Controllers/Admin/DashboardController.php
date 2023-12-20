@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Assistance;
 use App\Models\AssistanceDetail;
 use App\Models\Student;
+use App\Models\Teacher;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -44,7 +45,7 @@ class DashboardController extends Controller
 
         $params = [
             'students_count' => Student::count(),
-            'teachers_count' => Student::count(),
+            'teachers_count' => Teacher::count(),
             'assisted_count' => $total_assistances,
             'absences_count' => $total_absences,
             'alumnsByCourse' => $alumnsByCourse,

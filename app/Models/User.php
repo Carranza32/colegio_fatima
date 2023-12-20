@@ -50,4 +50,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    function teacher()
+    {
+        return $this->hasOne(Teacher::class);
+    }
 }

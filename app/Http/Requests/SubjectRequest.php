@@ -26,7 +26,6 @@ class SubjectRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'course_id' => 'required',
         ];
     }
 

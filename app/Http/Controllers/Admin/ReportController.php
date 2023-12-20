@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\AssistanceExport;
 use App\Http\Controllers\Controller;
 use App\Models\Assistance;
 use App\Models\AssistanceDetail;
@@ -10,10 +11,13 @@ use App\Models\Period;
 use App\Models\Score;
 use App\Models\Student;
 use App\Models\Subject;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Backpack\Settings\app\Models\Setting;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ReportController extends Controller
 {
@@ -25,6 +29,10 @@ class ReportController extends Controller
             'cursos' => Course::all(),
         ];
 
+        if (backpack_user()?->hasRole(User::ROLE_DOCENTE)) {
+            $params['cursos'] = Course::where('id', backpack_user()?->teacher?->course_id)->get();
+        }
+
         return view('admin.reports.notas', $params);
     }
 
@@ -35,6 +43,10 @@ class ReportController extends Controller
             'periodos' => Period::all(),
             'cursos' => Course::all(),
         ];
+
+        if (backpack_user()?->hasRole(User::ROLE_DOCENTE)) {
+            $params['cursos'] = Course::where('id', backpack_user()?->teacher?->course_id)->get();
+        }
 
         return view('admin.reports.asistencia', $params);
     }
@@ -315,6 +327,41 @@ class ReportController extends Controller
             'alumnos' => Student::all(),
         ];
 
+        if (backpack_user()?->hasRole(User::ROLE_DOCENTE)) {
+            $params['cursos'] = Course::where('id', backpack_user()?->teacher?->course_id)->get();
+        }
+
         return view('admin.reports.asistencia_export', $params);
+    }
+
+    function asistanceExport(Request $request) {
+        // Obtén los datos que deseas exportar
+        $query = Assistance::withoutGlobalScopes(['current_period'])
+                    ->with('course', 'subject', 'assistance_detail.student')
+                    ->where('course_id', $request->curso);
+
+        if ($request->alumno_id != null && $request->alumno_id != '' && $request->alumno_id != 'all') {
+            $query->whereHas('assistance_detail', function ($query) use ($request) {
+                $query->where('student_id', $request->alumno_id);
+            });
+        }
+
+        if ($request->get('daterange') != null) {
+            $startString = explode(' - ', $request->get("daterange"))[0];
+            $endString = explode(' - ', $request->get("daterange"))[1];
+
+            $start = Carbon::createFromFormat('d/m/Y', $startString)->format('Y-m-d');
+            $end = Carbon::createFromFormat('d/m/Y', $endString)->format('Y-m-d');
+
+            $query->where('date', '>=', $start.' 00:00:00')->where('date', '<=', $end.' 23:59:59');
+        }
+
+        //grouping
+        $query->groupBy('assistances.id');
+
+        $data = $query->orderBy('date', 'asc')->get();
+
+        // Exporta los datos a Excel usando el paquete maatwebsite/excel
+        return Excel::download(new AssistanceExport($data), 'plantilla_control_asistencia.xlsx');
     }
 }
