@@ -439,7 +439,7 @@ class StudentCrudController extends CrudController
             'type' => 'radio',
             'inline' => true,
             'options' => [
-                'Si' => 'Si',
+                'Si' => 'SI',
                 'No' => 'No'
             ],
             'tab' => $tab,
@@ -805,6 +805,10 @@ class StudentCrudController extends CrudController
      */
     protected function setupUpdateOperation()
     {
+        $request = $this->crud->getRequest();
+
+        $documentos = $request->input('documentos');
+
         $this->setupCreateOperation();
     }
 }

@@ -1,7 +1,7 @@
 @push('after_scripts')
     <script>
         $(document).ready(function() {
-            $('#parent_data_table #family_type input').trigger('change');
+            $('#parent_data_table #family_type input:checked').trigger('change');
         });
 
         $('#parent_data_table').on('change', '#family_type input', function() {

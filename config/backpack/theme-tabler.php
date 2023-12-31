@@ -28,7 +28,7 @@ return [
      * Pick a login page layout.
      * Possible values: default, illustration, cover
      */
-    'auth_layout' => 'illustration', // default, illustration, cover
+    'auth_layout' => 'default', // default, illustration, cover
 
     /**
      * Here you can easily load your own extra css styles.
@@ -40,7 +40,11 @@ return [
      */
     'styles' => [
         base_path('vendor/backpack/theme-tabler/resources/assets/css/color-adjustments.css'),
-        base_path('vendor/backpack/theme-tabler/resources/assets/css/colors.css'),
+        // base_path('vendor/backpack/theme-tabler/resources/assets/css/colors.css'),
+        asset('css/colors.css'),
+        asset('css/color-adjustments2.css'),
+        asset('css/common2.css'),
+        asset('css/style2.css'),
     ],
 
     /**

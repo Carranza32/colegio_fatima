@@ -15,7 +15,7 @@ use App\Models\Permission;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(backpack_url());
 });
 
 Route::get('permisos', function () {

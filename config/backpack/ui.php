@@ -96,6 +96,10 @@ return [
     'styles' => [
         // 'styles/example.css',
         // 'https://some-cdn.com/example.css',
+        'css/style.css',
+        'css/color-adjustments.css',
+        'css/color.css',
+        'css/common.css',
     ],
 
     // CSS files that are loaded in all pages, using Laravel's mix() helper
@@ -116,6 +120,8 @@ return [
     // JS files that are loaded in all pages, using Laravel's asset() helper
     'scripts' => [
         'js/scripts.js',
+        'js/tabler.js',
+        'js/common.js',
         // 'https://unpkg.com/vue@2.4.4/dist/vue.min.js',
         // 'https://unpkg.com/react@16/umd/react.production.min.js',
         // 'https://unpkg.com/react-dom@16/umd/react-dom.production.min.js',
