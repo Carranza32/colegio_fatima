@@ -102,14 +102,14 @@ class ReportController extends Controller
 
 
         // dd($notas);
-        return view('admin.reports.reporte_asistencia', $params);
+        // return view('admin.reports.reporte_asistencia', $params);
 
         try {
-            $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('admin.reports.periodo_asistencia_pdf', $params);
+            $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('admin.reports.reporte_asistencia', $params);
 
-            //return view('admin.reports.anual_pdf', $params);
+            //return view('admin.reports.reporte_asistencia', $params);
 
-            return $pdf->download("{$alumno?->full_name_rut} {$period?->name}.pdf");
+            return $pdf->download("{$alumno?->full_name} Asistencia {$period?->name}.pdf");
 
         } catch (\Throwable $th) {
             \Alert::add('error', 'Error al generar el archivo')->flash();
@@ -189,11 +189,11 @@ class ReportController extends Controller
         // dd($asignaturas);
 
         try {
-            // $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('admin.reports.periodo_pdf', $params);
+            $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('admin.reports.periodo_pdf', $params);
 
             return view('admin.reports.periodo_pdf', $params);
 
-            return $pdf->download("{$alumno?->full_name_rut} {$period?->name}.pdf");
+            return $pdf->download("{$alumno?->full_name} {$period?->name}.pdf");
 
         } catch (\Throwable $th) {
             \Alert::add('error', 'Error al generar el archivo')->flash();
@@ -299,12 +299,11 @@ class ReportController extends Controller
         }
 
 
-        return view('admin.reports.anual_pdf', $params);
+        // return view('admin.reports.anual_pdf', $params);
         try {
             $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('admin.reports.anual_pdf', $params);
 
-
-            return $pdf->download("{$alumno?->full_name_rut} reporte anual.pdf");
+            return $pdf->download("{$alumno?->full_name} reporte anual.pdf");
         } catch (\Throwable $th) {
             \Alert::add('error', 'Error al generar el archivo')->flash();
 

@@ -35,7 +35,7 @@
     <div class="row">
         <div class="col">
             <div class="form-floating">
-                <textarea class="form-control" placeholder="Observaciones" id="obs"></textarea>
+                <textarea class="form-control" placeholder="Observaciones" name="observacion"></textarea>
                 <label for="obs">Observación</label>
             </div>
         </div>
@@ -118,7 +118,7 @@
 @section('after_scripts')
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.17/dist/sweetalert2.all.min.js"></script>
-    <script src="{{ asset('packages/select2/dist/js/select2.full.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.full.min.js"></script>
 
     <script>
         var assistances = $('input[name=assistances');
@@ -178,7 +178,7 @@
                                             </td>
                                             <td>
                                                 <div class="form-floating mb-3">
-                                                    <textarea class="form-control" id="justificacion"></textarea>
+                                                    <textarea class="form-control" id="justificacion">${element?.justificacion ?? ''}</textarea>
                                                 </div>
                                             </td>
                                         </tr>
@@ -235,6 +235,7 @@
                     assits.push({
                         alumno_id: $(this).data('alumno'),
                         asistencia: $(this).is(':checked') ? 1 : 0,
+                        justificacion: $(this).closest('tr').find('textarea#justificacion').val(),
                     });
                 });
 

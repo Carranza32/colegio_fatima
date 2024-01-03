@@ -160,6 +160,19 @@ class StudentCrudController extends CrudController
         ]);
 
         CRUD::addField([
+            'label' => 'Agregar foto',
+            'name' => 'foto',
+            'type' => 'image',
+            'crop' => true, // set to true to allow cropping, false to disable
+            'aspect_ratio' => 1, // omit or set to 0 to allow any aspect ratio
+            'withFiles' => [
+                'disk' => 'public',
+                'path' => 'uploads/students',
+            ],
+            'tab' => $tab,
+        ]);
+
+        CRUD::addField([
             'name' => 'NIE',
             'type' => 'text',
             'label' => 'NIE',

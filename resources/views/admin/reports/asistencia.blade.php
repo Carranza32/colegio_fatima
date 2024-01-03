@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="row container-fluid">
-        <div class="col-md-4 col-lg-12">
+        <div class="col-md-12 col-lg-12">
             <div class="card custom-card-shadow">
                 <div class="card-body">
                     <form action="{{ route('reporte.asistencia_period.download') }}" method="POST" id="report_form">

@@ -217,6 +217,11 @@ class AssistanceCrudController extends CrudController
     {
         $request = $this->crud->getRequest();
         $asistencias = $request->input('assistances');
+        $observacion = $request->input('observacion');
+
+        $request->merge([
+            'observations' => $observacion,
+        ]);
 
         $response = $this->traitStore();
 
@@ -227,6 +232,8 @@ class AssistanceCrudController extends CrudController
                 'assistance_id' => $entry->id,
                 'student_id' => $value->alumno_id,
                 'has_assistance' => $value->asistencia,
+                'justificacion' => $value->justificacion ?? '',
+                'created_by' => backpack_user()?->id,
             ]);
         }
 
@@ -237,6 +244,7 @@ class AssistanceCrudController extends CrudController
     {
         $request = $this->crud->getRequest();
         $asistencias = $request->input('assistances');
+        $observacion = $request->input('observacion');
 
         $entry = $this->crud->getCurrentEntry();
 
@@ -247,8 +255,15 @@ class AssistanceCrudController extends CrudController
                 ->where('student_id', $value->alumno_id)
                 ->update([
                     'has_assistance' => $value->asistencia,
+                    'justificacion' => $value->justificacion ?? '',
+                    'updated_by' => backpack_user()?->id,
                 ]);
         }
+
+        $entry->update([
+            'updated_by' => backpack_user()?->id,
+            'observacion' => $observacion,
+        ]);
 
         return $response;
     }

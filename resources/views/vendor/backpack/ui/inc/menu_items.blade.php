@@ -56,7 +56,7 @@
     </x-backpack::menu-dropdown>
 @endif
 
-@canany(backpack_user()->hasAnyPermission(['setting.read', 'log.read', 'period.read', 'school-year.read', 'calendar.read']))
+@if(backpack_user()->hasAnyPermission(['setting.read', 'log.read', 'period.read', 'school-year.read', 'calendar.read']))
     <x-backpack::menu-dropdown title="Configuración" icon="la la-cog">
         @if(backpack_user()->can('setting.read'))
             <x-backpack::menu-dropdown-item title='Configuraciones' icon='la la-cog' :link="backpack_url('setting')" />
@@ -71,14 +71,14 @@
         @endif
 
         @if(backpack_user()->can('school-year.read'))
-            <x-backpack::menu-dropdown-item title="Ano escolar" icon="la la-calendar" :link="backpack_url('school-year')" />
+            <x-backpack::menu-dropdown-item title="Año escolar" icon="la la-calendar" :link="backpack_url('school-year')" />
         @endif
 
         @if(backpack_user()->can('calendar.read'))
             <x-backpack::menu-dropdown-item title="Calendario" icon="la la-calendar-plus" :link="backpack_url('calendar')" />
         @endif
     </x-backpack::menu-dropdown>
-@endcanany
+@endif
 
 @if(backpack_user()->can('notas-alumno.read'))
     <x-backpack::menu-dropdown title="Evaluaciones" icon="la la-chalkboard-teacher">
@@ -96,7 +96,7 @@
             <x-backpack::menu-dropdown-item title="Reporte de asistencia" icon="la la-user-graduate" :link="backpack_url('reporte/asistencia')" />
         @endif
 
-        <x-backpack::menu-dropdown-item title="Exportar asistencia SIGIES" icon="la la-user-graduate" :link="route('assistance.import.index')" />
+        {{-- <x-backpack::menu-dropdown-item title="Exportar asistencia SIGIES" icon="la la-user-graduate" :link="route('assistance.import.index')" /> --}}
     </x-backpack::menu-dropdown>
 @endif
 

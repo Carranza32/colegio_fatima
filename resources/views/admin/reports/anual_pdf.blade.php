@@ -148,6 +148,16 @@
         </div>
     </div>
     @if (isset($anual))
+        @php
+            $countAnual = 0;
+
+            try {
+                $countAnual = count($anual);
+                $countAnual += 2;
+            } catch (\Throwable $th) {
+                $countAnual = 0;
+            }
+        @endphp
         <div class="row">
             <div class="col-md-4 col-lg-12">
                 <div class="card custom-card-shadow">
@@ -170,17 +180,16 @@
                                     <td class="text-center">Porcentaje de Asistencia: {{ $porcentaje_asistencia }}%</td>
                                 </tr>
                             </tbody>
-
                         </table>
                         <div class="table-responsive">
                             <table class="table table-striped table-hover" id="tabla-notas">
                                 <thead>
                                     <tr>
-                                        <th scope="col" rowspan="4"><div class="text-center">Asignaturas</div></th>
+                                        <th scope="col" rowspan="{{ $countAnual }}"><div class="text-center">Asignaturas</div></th>
                                         @foreach ($periodos as $periodo)
                                             <th colspan="{{ $periodo->evaluations }}" class="text-center">{{ $periodo->name }}</th>
                                         @endforeach
-                                        <th scope="col" rowspan="4"><div class="text-center">Promedio</div></th>
+                                        <th scope="col" rowspan="{{ $countAnual }}"><div class="text-center">Promedio</div></th>
                                     </tr>
                                     <tr>
                                         @foreach ($periodos as $periodo)

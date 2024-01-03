@@ -30,6 +30,9 @@ class Student extends Model
     protected $casts = [
         'documentos' => 'array',
         'parent_data' => 'array',
+        'condicion_de_discapacidad' => 'array',
+        'estudiante_referido_a' => 'array',
+        'estudiante_recibe' => 'array',
     ];
 
     /*
@@ -37,23 +40,6 @@ class Student extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
-    public function setDocumentosAttribute($value)
-    {
-        $this->attributes['documentos'] = is_array($value) ? implode(',',$value) : '' ;
-    }
-    public function setCondicionDeDiscapacidadAttribute($value)
-    {
-        $this->attributes['condicion_de_discapacidad'] = is_array($value) ? implode(',',$value) : '' ;
-    }
-    public function setEstudianteReferidoAAttribute($value)
-    {
-        $this->attributes['estudiante_referido_a'] = is_array($value) ? implode(',',$value) : '' ;
-    }
-    public function setEstudianteRecibeAttribute($value)
-    {
-        $this->attributes['estudiante_recibe'] = is_array($value) ? implode(',',$value) : '' ;
-    }
-
     public function getAttendances($date, $subject_id){
         $attendances = Assistance::where('course_id', $this->course_id)
             ->where('subject_id', $subject_id)
@@ -102,4 +88,29 @@ class Student extends Model
     | MUTATORS
     |--------------------------------------------------------------------------
     */
+
+    // Accesor para obtener el array desde la base de datos
+    public function getDocumentosAttribute($value)
+    {
+        return json_decode($value, true);
+    }
+
+    // Mutador para guardar el array en la base de datos
+    public function setDocumentosAttribute($value)
+    {
+        $this->attributes['documentos'] = json_encode($value);
+    }
+
+    public function setCondicionDeDiscapacidadAttribute($value)
+    {
+        $this->attributes['condicion_de_discapacidad'] = json_encode($value);
+    }
+    public function setEstudianteReferidoAAttribute($value)
+    {
+        $this->attributes['estudiante_referido_a'] = json_encode($value);
+    }
+    public function setEstudianteRecibeAttribute($value)
+    {
+        $this->attributes['estudiante_recibe'] = json_encode($value);
+    }
 }
