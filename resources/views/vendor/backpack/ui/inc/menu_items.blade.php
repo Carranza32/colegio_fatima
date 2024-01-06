@@ -32,19 +32,17 @@
 </x-backpack::menu-dropdown>
 
 <x-backpack::menu-dropdown :title="($period) ? $period->name : 'Ningún periodo seleccionado.'" icon="">
-    @if ($period)
-        @foreach (\App\Models\Period::all() as $item)
-            @php
-                $url = route('update.period.session', [$item?->id]);
+    @foreach (\App\Models\Period::all() as $item)
+        @php
+            $url = route('update.period.session', [$item?->id]);
 
-                echo "
-                    <a class='dropdown-item' href='{$url}'>
-                        <span>{$item?->name}</span>
-                    </a>
-                ";
-            @endphp
-        @endforeach
-    @endif
+            echo "
+                <a class='dropdown-item' href='{$url}'>
+                    <span>{$item?->name}</span>
+                </a>
+            ";
+        @endphp
+    @endforeach
 </x-backpack::menu-dropdown>
 
 @if ( backpack_user()->hasRole(\App\Models\User::SUPERGOD_ROLE) || backpack_user()->hasRole(\App\Models\User::ROLE_ADMIN) || backpack_user()->hasRole(\App\Models\User::ROLE_DIRECTOR) )

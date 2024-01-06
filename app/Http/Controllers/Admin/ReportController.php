@@ -191,7 +191,7 @@ class ReportController extends Controller
         try {
             $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('admin.reports.periodo_pdf', $params);
 
-            return view('admin.reports.periodo_pdf', $params);
+            // return view('admin.reports.periodo_pdf', $params);
 
             return $pdf->download("{$alumno?->full_name} {$period?->name}.pdf");
 
