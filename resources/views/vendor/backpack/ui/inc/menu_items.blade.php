@@ -64,6 +64,10 @@
             <x-backpack::menu-dropdown-item title='Logs' icon='la la-terminal' :link="backpack_url('log')" />
         @endif
 
+        @if(backpack_user()->can('justifications.read'))
+            <x-backpack::menu-dropdown-item title="Justificaciones de asistencia" icon="la la-th-list" :link="backpack_url('assistance-justification')" />
+        @endif
+
         @if(backpack_user()->can('period.read'))
             <x-backpack::menu-dropdown-item title="Periodos" icon="la la-calendar-week" :link="backpack_url('period')" />
         @endif
@@ -94,12 +98,16 @@
             <x-backpack::menu-dropdown-item title="Reporte de asistencia" icon="la la-user-graduate" :link="backpack_url('reporte/asistencia')" />
         @endif
 
-        {{-- <x-backpack::menu-dropdown-item title="Exportar asistencia SIGIES" icon="la la-user-graduate" :link="route('assistance.import.index')" /> --}}
+        <x-backpack::menu-dropdown-item title="Exportar asistencia SIGIES" icon="la la-user-graduate" :link="route('assistance.import.index')" />
     </x-backpack::menu-dropdown>
 @endif
 
+@if (backpack_user()->can('conduct.read'))
+    <x-backpack::menu-item title="Registros De Conducta" icon="la la-address-book" :link="backpack_url('conduct-record')" />
+@endif
+
 @if (backpack_user()->can('course.read'))
-    <x-backpack::menu-item title="Cursos" icon="la la-graduation-cap" :link="backpack_url('course')" />
+    <x-backpack::menu-item title="Grados" icon="la la-graduation-cap" :link="backpack_url('course')" />
 @endif
 
 @if (backpack_user()->can('student.read'))

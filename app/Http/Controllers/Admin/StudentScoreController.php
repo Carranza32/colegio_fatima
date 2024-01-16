@@ -34,6 +34,10 @@ class StudentScoreController extends Controller
                             return $item->student;
                         });
             $students = Student::where('course_id', $curso_id)->get();
+            $period = session('period');
+
+            $evaluacionesPruebas = $period?->evaluaciones_pruebas_objetivas ?? [];
+            $evaluacionesActividades = $period?->evaluaciones_actividades ?? [];
 
             $params['students'] = $students;
             $params['notas'] = $notas;
@@ -41,6 +45,8 @@ class StudentScoreController extends Controller
             $params['selected_curso'] = Course::find($curso_id);
             $params['asignaturas'] = Subject::where('course_id', $curso_id)->get();
             $params['cantidad_evaluaciones'] = session('period')?->evaluations ?? 0;
+            $params['evaluacionesPruebas'] = $evaluacionesPruebas;
+            $params['evaluacionesActividades'] = $evaluacionesActividades;
         }
 
         return view('admin.notas', $params);
@@ -65,6 +71,7 @@ class StudentScoreController extends Controller
                     $score = Score::where('student_id', $nota['student_id'])
                                 ->where('subject_id', $nota['subject_id'])
                                 ->where('course_id', $nota['course_id'])
+                                ->where('group', $nota['group'])
                                 ->where('evaluation_number', $nota['index'])
                                 ->first();
 
@@ -73,6 +80,7 @@ class StudentScoreController extends Controller
                         $score->student_id = $nota['student_id'];
                         $score->subject_id = $nota['subject_id'];
                         $score->course_id = $nota['course_id'];
+                        $score->group = $nota['group'];
                         $score->evaluation_number = $nota['index'];
                     }
 

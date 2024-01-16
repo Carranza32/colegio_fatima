@@ -51,7 +51,7 @@ Route::get('permisos', function () {
         "description" => "Reporte de asistencia"],
 
         ["name" => "course",
-        "description" => "Cursos"],
+        "description" => "Grados"],
 
         ["name" => "student",
         "description" => "Estudiantes"],

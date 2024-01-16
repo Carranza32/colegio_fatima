@@ -59,11 +59,39 @@ class PeriodCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column('name');
-        CRUD::column('evaluations');
-        CRUD::column('description');
-        CRUD::column('start_date');
-        CRUD::column('end_date');
+        // CRUD::addClause('is_active');
+        CRUD::orderBy('start_date', 'asc');
+
+        CRUD::addColumn([
+            'name' => 'name',
+            'label' => 'Nombre',
+        ]);
+
+        CRUD::addColumn([
+            'name' => 'evaluaciones_pruebas_objetivas',
+            'label' => 'Pruebas Objetivas',
+            'type' => 'array_count',
+            'suffix' => ''
+        ]);
+
+        CRUD::addColumn([
+            'name' => 'evaluaciones_actividades',
+            'label' => 'Actividades',
+            'type' => 'array_count',
+            'suffix' => ''
+        ]);
+
+        CRUD::addColumn([
+            'name' => 'start_date',
+            'label' => 'Fecha de Inicio',
+            'type' => 'date',
+        ]);
+
+        CRUD::addColumn([
+            'name' => 'end_date',
+            'label' => 'Fecha de Fin',
+            'type' => 'date',
+        ]);
 
         $this->setupFilters();
     }
@@ -126,6 +154,18 @@ class PeriodCrudController extends CrudController
         ]);
 
         CRUD::addField([
+            'name' => 'start_date',
+            'label' => 'Fecha de Inicio',
+            'type' => 'date_picker',
+        ]);
+
+        CRUD::addField([
+            'name' => 'end_date',
+            'label' => 'Fecha de Inicio',
+            'type' => 'date_picker',
+        ]);
+
+        CRUD::addField([
             'name' => 'evaluations',
             'label' => 'Cantidad de Evaluaciones',
             'type' => 'number',
@@ -136,21 +176,53 @@ class PeriodCrudController extends CrudController
         ]);
 
         CRUD::addField([
+            'name'  => 'html_test',
+            'type'  => 'custom_html',
+            'value' => '<h3>Cantidad de evaluciones de las pruebas objetivas <b>30%</b> <h3/>',
+        ]);
+
+        CRUD::addField([   // repeatable
+            'name'  => 'evaluaciones_pruebas_objetivas',
+            'label' => 'Pruebas Objetivas',
+            'type'  => 'repeatable',
+            'subfields' => [
+                [
+                    'name'    => 'name',
+                    'type'    => 'text',
+                    'label'   => 'Nombre de la Prueba',
+                ],
+            ],
+            'new_item_label'  => 'Agregar Prueba',
+            'min_rows' => 1,
+            'reorder' => false,
+        ]);
+
+        CRUD::addField([
+            'name'  => 'html_test2',
+            'type'  => 'custom_html',
+            'value' => '<h3>Cantidad de evaluciones de las actividades <b>70%</b> <h3/>',
+        ]);
+
+        CRUD::addField([   // repeatable
+            'name'  => 'evaluaciones_actividades',
+            'label' => 'Actividades',
+            'type'  => 'repeatable',
+            'subfields' => [
+                [
+                    'name'    => 'name',
+                    'type'    => 'text',
+                    'label'   => 'Nombre de la Actividad',
+                ],
+            ],
+            'new_item_label'  => 'Agregar Actividad',
+            'min_rows' => 1,
+            'reorder' => false,
+        ]);
+
+        CRUD::addField([
             'name' => 'description',
             'label' => 'Descripción',
             'type' => 'textarea',
-        ]);
-
-        CRUD::addField([
-            'name' => 'start_date',
-            'label' => 'Fecha de Inicio',
-            'type' => 'date_picker',
-        ]);
-
-        CRUD::addField([
-            'name' => 'end_date',
-            'label' => 'Fecha de Inicio',
-            'type' => 'date_picker',
         ]);
     }
 

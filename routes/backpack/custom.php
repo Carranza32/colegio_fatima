@@ -56,8 +56,12 @@ Route::group([
 
         Route::get('asistance-export', 'asistanceExportIndex')->name('assistance.import.index');
         Route::post('asistance-export-download', 'asistanceExport')->name('assistance.import');
+
+        Route::get('ficha-matricula/{id}', 'fichaMatricula')->name('reporte.ficha_matricula');
     });
 
     //Dashboard
     Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+    Route::crud('assistance-justification', 'AssistanceJustificationCrudController');
+    Route::crud('conduct-record', 'ConductRecordCrudController');
 }); // this should be the absolute last line of this file

@@ -1,6 +1,7 @@
 @php
     $entry = $field['entry'];
     $disabled = $field['disabled'] ?? '';
+    $justifications = $field['justifications'] ?? [];
 @endphp
 
 @include('crud::fields.inc.wrapper_start')
@@ -45,8 +46,8 @@
 
 @section('after_styles')
     <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
-    <link href="{{ asset('packages/select2/dist/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('packages/select2-bootstrap-theme/dist/select2-bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
 
     <style>
         .switch {
@@ -118,11 +119,13 @@
 @section('after_scripts')
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.17/dist/sweetalert2.all.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 
     <script>
         var assistances = $('input[name=assistances');
         var can_edit = "{{ $disabled }}";
+        var justifications = @json($justifications);
 
         const Toast = Swal.mixin({
             toast: true,
@@ -142,6 +145,10 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
             });
+
+            $('.select2').select2({
+                theme: 'bootstrap-5',
+            })
 
             $('select[name=course_id]').on('change', function(){
                 const selected = $(this).val()
@@ -177,9 +184,18 @@
                                                 </label>
                                             </td>
                                             <td>
-                                                <div class="form-floating mb-3">
-                                                    <textarea class="form-control" id="justificacion">${element?.justificacion ?? ''}</textarea>
-                                                </div>
+                                                <select class="form-select select2 mb-3" name="justificacion_id">
+                                                    <option value="">Seleccionar</option>
+                                                    ${justifications.map(justification => {
+                                                        let selected = ''
+
+                                                        if (element?.justificacion_id == justification?.id) {
+                                                            selected = 'selected'
+                                                        }
+
+                                                        return `<option value="${justification?.id}" ${selected}>${justification?.name}</option>`
+                                                    })}
+                                                </select>
                                             </td>
                                         </tr>
                                     `);
@@ -198,9 +214,18 @@
                                                 </label>
                                             </td>
                                             <td>
-                                                <div class="form-floating mb-3">
-                                                    <textarea class="form-control" id="justificacion"></textarea>
-                                                </div>
+                                                <select class="form-select select2 mb-3" name="justificacion_id">
+                                                    <option value="">Seleccionar</option>
+                                                    ${justifications?.map(justification => {
+                                                        let selected = ''
+
+                                                        if (element?.justificacion_id == justification?.id) {
+                                                            selected = 'selected'
+                                                        }
+
+                                                        return `<option value="${justification?.id}" ${selected}>${justification?.name}</option>`
+                                                    })}
+                                                </select>
                                             </td>
                                         </tr>
                                     `);
@@ -235,7 +260,7 @@
                     assits.push({
                         alumno_id: $(this).data('alumno'),
                         asistencia: $(this).is(':checked') ? 1 : 0,
-                        justificacion: $(this).closest('tr').find('textarea#justificacion').val(),
+                        justificacion_id: $(this).closest('tr').find('select').val(),
                     });
                 });
 

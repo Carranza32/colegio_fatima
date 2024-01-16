@@ -12,10 +12,10 @@ trait StatusDescription
     {
         switch ($this->is_active) {
         case static::$_STATUS_ACTIVE:
-            return $this->active_string ?? __('crud.status.active');
+            return 'Activo';
             break;
         case static::$_STATUS_INACTIVE:
-            return $this->disabled_string ?? __('crud.status.inactive');
+            return 'Inactivo';
             break;
         default:
             break;

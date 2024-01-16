@@ -43,7 +43,7 @@ class StudentRequest extends FormRequest
     public function attributes()
     {
         return [
-            'course_id' => 'Curso',
+            'course_id' => 'Grado',
             'name' => 'Nombres',
             'last_name' => 'Apellidos',
             'email' => 'Correo electrónico',

@@ -39,7 +39,13 @@ class Course extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+    function teacher() {
+        return $this->hasOne(Teacher::class);
+    }
 
+    function students() {
+        return $this->hasMany(Student::class);
+    }
     /*
     |--------------------------------------------------------------------------
     | SCOPES

@@ -86,7 +86,7 @@
     <div class="row mt-5">
         <div class="col-6">
             <div class="card outlined-card custom-shadow p-3">
-                <h4>Matriculas por curso</h4>
+                <h4>Matriculas por Grado</h4>
                 <div class="w-100" id="alumnsByCourseChart"></div>
             </div>
         </div>
@@ -203,7 +203,7 @@
                     }
                 },
                 title: {
-                    text: 'Cantidad de matriculas por curso, '+anio,
+                    text: 'Cantidad de matriculas por Grado, '+anio,
                     floating: true,
                     // offsetY: 330,
                     align: 'bottom',

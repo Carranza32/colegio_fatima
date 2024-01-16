@@ -25,7 +25,11 @@ class PeriodRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
+            'evaluaciones_pruebas_objetivas' => 'required|array',
+            'evaluaciones_pruebas_objetivas.*.name' => 'required|string',
+
+            'evaluaciones_actividades' => 'required|array',
+            'evaluaciones_actividades.*.name' => 'required|string',
         ];
     }
 
@@ -37,7 +41,11 @@ class PeriodRequest extends FormRequest
     public function attributes()
     {
         return [
-            //
+            'evaluaciones_pruebas_objetivas' => 'evaluaciones de pruebas objetivas',
+            'evaluaciones_pruebas_objetivas.*.name' => 'nombre de la prueba objetiva',
+
+            'evaluaciones_actividades' => 'evaluaciones de actividades',
+            'evaluaciones_actividades.*.name' => 'nombre de la actividad',
         ];
     }
 

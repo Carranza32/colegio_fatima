@@ -44,6 +44,10 @@ class AssistanceDetail extends Model
     {
         return $this->belongsTo(Assistance::class, 'assistance_id');
     }
+
+    public function justification() {
+        return $this->belongsTo(AssistanceJustification::class);
+    }
     /*
     |--------------------------------------------------------------------------
     | SCOPES

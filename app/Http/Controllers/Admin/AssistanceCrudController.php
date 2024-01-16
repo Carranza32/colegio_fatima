@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\AssistanceRequest;
 use App\Models\Assistance;
 use App\Models\AssistanceDetail;
+use App\Models\AssistanceJustification;
 use App\Models\Course;
 use App\Models\Student;
 use App\Models\Subject;
@@ -74,12 +75,7 @@ class AssistanceCrudController extends CrudController
 
         CRUD::addColumn([
             'name' => 'course.name',
-            'label' => 'Curso',
-        ]);
-
-        CRUD::addColumn([
-            'name' => 'subject.name',
-            'label' => 'Asignatura',
+            'label' => 'Grado',
         ]);
 
         CRUD::addColumn([
@@ -114,24 +110,12 @@ class AssistanceCrudController extends CrudController
         CRUD::addFilter([
             'name' => 'course_id',
             'type' => 'select2',
-            'label' => 'Curso',
+            'label' => 'Grado',
         ], function () {
             return $this->crud->getModel()::with('course')->get()->pluck('course.name', 'course.id')->toArray();
         }, function ($value) {
             $this->crud->addClause('where', 'course_id', $value);
         });
-
-        CRUD::addFilter([
-            'name' => 'asignatura',
-            'type' => 'select2',
-            'label' => 'Asignatura',
-        ], function () {
-            return $this->crud->getModel()->whereHas('subject')->get()->pluck('subject.name', 'subject.id')->toArray();
-        }, function ($value) {
-            $this->crud->addClause('where', 'subject_id', $value);
-        });
-
-
     }
 
     /**
@@ -158,18 +142,11 @@ class AssistanceCrudController extends CrudController
             }
         }
 
-        if (backpack_user()->hasAnyRole([User::ROLE_ADMIN, User::SUPERGOD_ROLE])) {
-            $attr_date = [
-                'min' => null,
-            ];
-        }
-
         CRUD::addField([
             'name' => 'date',
             'label' => 'Fecha',
             'type' => 'date',
             'default' => date('Y-m-d'),
-            'attributes' => $attr_date,
         ]);
 
         $cursos = Course::all()->pluck('name', 'id');
@@ -180,17 +157,9 @@ class AssistanceCrudController extends CrudController
 
         CRUD::addField([
             'name' => 'course_id',
-            'label' => 'Curso',
+            'label' => 'Grado',
             'type' => 'select2_from_array',
             'options' => $cursos,
-            'attributes' => $this->disabled,
-        ]);
-
-        CRUD::addField([
-            'name' => 'subject_id',
-            'label' => 'Asignatura',
-            'type' => 'select2_from_array',
-            'options' => Subject::pluck('name', 'id'),
             'attributes' => $this->disabled,
         ]);
 
@@ -198,6 +167,7 @@ class AssistanceCrudController extends CrudController
             'name' => 'alumns_assistances',
             'type' => 'alumns_assistances',
             'entry' => $this->crud->getCurrentEntry() ?? null,
+            'justifications' => AssistanceJustification::get(['id', 'name']),
             'disabled' => ($this->disabled == null) ? null : 'disabled',
         ]);
     }
@@ -232,7 +202,7 @@ class AssistanceCrudController extends CrudController
                 'assistance_id' => $entry->id,
                 'student_id' => $value->alumno_id,
                 'has_assistance' => $value->asistencia,
-                'justificacion' => $value->justificacion ?? '',
+                'justificacion_id' => $value->justificacion_id ?? '',
                 'created_by' => backpack_user()?->id,
             ]);
         }
@@ -255,7 +225,7 @@ class AssistanceCrudController extends CrudController
                 ->where('student_id', $value->alumno_id)
                 ->update([
                     'has_assistance' => $value->asistencia,
-                    'justificacion' => $value->justificacion ?? '',
+                    'justificacion_id' => $value->justificacion_id ?? '',
                     'updated_by' => backpack_user()?->id,
                 ]);
         }

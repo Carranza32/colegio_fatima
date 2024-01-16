@@ -39,7 +39,7 @@ class EvaluationRequest extends FormRequest
     {
         return [
             'subject_id' => 'Materia',
-            'course_id' => 'Curso',
+            'course_id' => 'Grado',
         ];
     }
 

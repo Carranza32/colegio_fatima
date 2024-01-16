@@ -9,7 +9,7 @@
             </h1>
             <div class="card custom-card-shadow">
                 <div class="card-header">
-                    <h5 class="card-title mb-0">Seleccione el curso y la asignatura, luego presione buscar.</h5>
+                    <h5 class="card-title mb-0">Seleccione el grado y la asignatura, luego presione buscar.</h5>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -19,9 +19,9 @@
                                     <form action="{{ route('notas-alumno') }}" method="get">
                                         <th scope="row">
                                             <div class="form-group">
-                                                <label for="sel_curso">Curso</label>
+                                                <label for="sel_curso">Grado</label>
                                                 <select name="curso" class="form-control select2" id="sel_curso" aria-label="Select curso">
-                                                    <option>Seleccione Curso</option>
+                                                    <option>Seleccione Grado</option>
                                                     @foreach ($cursos as $item)
                                                         <option value="{{ $item->id }}" {{ request()->get('curso') == $item->id ? "selected" : "" }}>{{ $item->name }}</option>
                                                     @endforeach
@@ -69,19 +69,32 @@
                                         <th scope="col" rowspan="2">NIE</th>
                                         <th scope="col" rowspan="2">Alumno</th>
                                         {{-- <th scope="col" rowspan="2">Asignatura</th> --}}
-                                        <th scope="col" colspan="{{ $cantidad_evaluaciones }}"><div class="text-center">Notas</div></th>
-                                        <th scope="col" rowspan="2" colspan="1"><div class="text-center">Promedio</div></th>
+                                        <th scope="col" colspan="{{ count($evaluacionesPruebas) + 1 }}"><div class="text-center">Prueba Objetiva (30%)</div></th>
+                                        <th scope="col" colspan="{{ count($evaluacionesActividades) + 1 }}"><div class="text-center">Actividades (70%)</div></th>
+                                        <th scope="col" rowspan="2" colspan="1"><div class="text-center">Promedio periodo</div></th>
                                     </tr>
                                     <tr>
-                                        @for ($i = 0; $i < $cantidad_evaluaciones; $i++)
-                                            <th scope="col" class="text-center">N{{ ($i + 1) }}</th>
-                                        @endfor
+                                        @foreach ($evaluacionesPruebas as $item)
+                                            <th scope="col" class="text-center fw-light">{{ $item['name'] }}</th>
+
+                                            @if ($loop->last)
+                                                <th scope="col" class="text-center">Promedio x 30%</th>
+                                            @endif
+                                        @endforeach
+
+                                        @foreach ($evaluacionesActividades as $item)
+                                            <th scope="col" class="text-center fw-light">{{ $item['name'] }}</th>
+
+                                            @if ($loop->last)
+                                                <th scope="col" class="text-center">Promedio x 70%</th>
+                                            @endif
+                                        @endforeach
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @if ($students == null || $students->count() == 0)
                                         <tr>
-                                            <td colspan="{{ $cantidad_evaluaciones + 3 }}" class="text-center">No hay alumnos registrados en este curso</td>
+                                            <td colspan="{{ $cantidad_evaluaciones + 3 }}" class="text-center">No hay alumnos registrados en este grado</td>
                                         </tr>
                                     @endif
 
@@ -95,17 +108,37 @@
                                                 <td>{{ $student?->NIE }}</td>
                                                 <td>{{ $student?->full_name }}</td>
 
-                                                @for ($i = 0; $i < $cantidad_evaluaciones; $i++)
+                                                @foreach ($evaluacionesPruebas as $item)
                                                     @php
-                                                        $score = getStudentScore($student->id, $selected_asignatura->id, $selected_curso->id, $i + 1);
+                                                        $score = getStudentScore($student->id, $selected_asignatura->id, $selected_curso->id, $loop->index + 1, 'pruebas');
 
-                                                        $index = $i + 1;
+                                                        $index = $loop->index + 1;
                                                     @endphp
 
                                                     <td>
-                                                        <input type="number" name="notas[]" min="0" max="{{ $max_score }}" data-student_id="{{ $student->id }}" data-course_id="{{ $selected_curso->id }}" data-subject_id="{{ $selected_asignatura->id }}" data-index="{{ $index }}" class="form-control w-100" value="{{ $score }}">
+                                                        <input style="min-width: 80px;" type="number" name="notas[]" min="{{ $min_score }}" max="{{ $max_score }}" data-student_id="{{ $student->id }}" data-course_id="{{ $selected_curso->id }}" data-subject_id="{{ $selected_asignatura->id }}" data-index="{{ $index }}" data-group="pruebas" class="form-control w-100" value="{{ $score }}">
                                                     </td>
-                                                @endfor
+
+                                                    @if ($loop->last)
+                                                        <td><input class="form-control w-100" type="number" disabled value="{{ getScoreByPeriodPruebas($student->id, $selected_asignatura->id, $selected_curso->id) }}"></td>
+                                                    @endif
+                                                @endforeach
+
+                                                @foreach ($evaluacionesActividades as $item)
+                                                    @php
+                                                        $score = getStudentScore($student->id, $selected_asignatura->id, $selected_curso->id, $loop->index + 1, 'actividades');
+
+                                                        $index = $loop->index + 1;
+                                                    @endphp
+
+                                                    <td>
+                                                        <input style="min-width: 80px;" type="number" name="notas[]" min="{{ $min_score }}" max="{{ $max_score }}" data-student_id="{{ $student->id }}" data-course_id="{{ $selected_curso->id }}" data-subject_id="{{ $selected_asignatura->id }}" data-index="{{ $index }}" data-group="actividades" class="form-control w-100" value="{{ $score }}">
+                                                    </td>
+
+                                                    @if ($loop->last)
+                                                        <td><input class="form-control w-100" type="number" disabled value="{{ getScoreByPeriodActividades($student->id, $selected_asignatura->id, $selected_curso->id) }}"></td>
+                                                    @endif
+                                                @endforeach
 
                                                 <td><input class="form-control w-100" type="number" disabled value="{{ getStudentAverageByPeriod($student->id, $selected_asignatura->id, $selected_curso->id) }}"></td>
                                             </tr>
@@ -143,6 +176,20 @@
         });
 
         $(document).ready(function() {
+            // $('#score-table').validate({
+            //     rules: {
+            //         'notas[]': {
+            //             required: true,
+            //             range: [0, 10]
+            //         }
+            //     },
+            //     messages: {
+            //         'notas[]': {
+            //             range: "Por favor ingrese un valor entre 0 y 10."
+            //         }
+            //     }
+            // });
+
             $('#score-table button').on('click', function(e) {
                 var form = $(this);
 
@@ -167,6 +214,7 @@
                         student_id: $(this).data('student_id'),
                         course_id: $(this).data('course_id'),
                         subject_id: $(this).data('subject_id'),
+                        group: $(this).data('group'),
                         index: $(this).data('index'),
                         nota: $(this).val()
                     });

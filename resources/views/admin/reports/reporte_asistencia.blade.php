@@ -159,7 +159,7 @@
                 <div class="card shadow-none border-0 mb-0">
                     <div class="card-body">
                         <p>Alumno: <strong> {{ $alumno?->full_name }}</strong></p>
-                        <p>Curso: <strong>{{ $alumno?->course?->name }}</strong></p>
+                        <p>Grado: <strong>{{ $alumno?->course?->name }}</strong></p>
                         <p>Año escolar: <strong>{{ session('year')?->year }}</strong></p>
                     </div>
                 </div>

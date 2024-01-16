@@ -11,21 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('student_parents', function (Blueprint $table) {
+        Schema::create('assistance_justifications', function (Blueprint $table) {
             $table->bigIncrements('id');
-            //complete name, phones, dui e informacion del encargado
-            $table->string('parent_data')->nullable();
-            $table->string('civil_status')->nullable();
-            $table->string('civil_marriage_date')->nullable();
-            $table->string('religious_marriage_date')->nullable();
-            $table->string('religion')->nullable();
-            $table->string('are_together')->nullable();
-            $table->string('address')->nullable();
-            $table->string('house_type')->nullable();
-            //remesas
-            $table->string('consignment')->nullable();
-            $table->string('family_group')->nullable();
-            $table->string('address')->nullable();
+            $table->string('name');
+            $table->bigInteger('order')->default(0);
+            $table->boolean('is_active')->default(true);
 
             //Global scopes
             $table->date('date_scope')->nullable();
@@ -47,6 +37,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('student_parents');
+        Schema::dropIfExists('assistance_justifications');
     }
 };

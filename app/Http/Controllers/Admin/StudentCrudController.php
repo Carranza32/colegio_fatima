@@ -57,6 +57,8 @@ class StudentCrudController extends CrudController
      */
     protected function setupListOperation()
     {
+        CRUD::addButtonFromModelFunction('line', 'ficha_matricula', 'matricula_button', 'beginning');
+
         CRUD::addColumn([
             'name' => 'full_name',
             'type' => 'text',
@@ -66,7 +68,7 @@ class StudentCrudController extends CrudController
         CRUD::addColumn([
             'name' => 'course.name',
             'type' => 'text',
-            'label' => 'Curso'
+            'label' => 'Grado'
         ]);
 
         CRUD::addColumn([
@@ -77,11 +79,11 @@ class StudentCrudController extends CrudController
 
         CRUD::addColumn([
             'name' => 'status_description',
-            'label' => __('crud.field.status'),
+            'label' => 'Estado',
             'wrapper' => [
                 'element' => 'span',
                 'class' => function ($crud, $column, $entry, $related_key) {
-                    if ($column['text'] == __('crud.status.active')) {
+                    if ($column['text'] == 'Activo') {
                         return 'badge bg-success';
                     }
 
@@ -98,7 +100,7 @@ class StudentCrudController extends CrudController
         CRUD::addFilter([
             'name' => 'course_id',
             'type' => 'select2',
-            'label' => 'Curso',
+            'label' => 'Grado',
         ], function () {
             return $this->crud->getModel()::with('course')->get()->pluck('course.name', 'course.id')->toArray();
         }, function ($value) {
@@ -109,11 +111,11 @@ class StudentCrudController extends CrudController
             [
             'name' => 'is_active',
             'type' => 'dropdown',
-            'label' => __('crud.field.status'),
+            'label' => 'Estado',
         ],
             [
-            0 => __('crud.status.inactive'),
-            1 => __('crud.status.active'),
+            0 => 'Inactivo',
+            1 => 'Activo',
         ],
             function ($value) {
                 $this->crud->addClause('where', 'is_active', $value);
@@ -183,7 +185,7 @@ class StudentCrudController extends CrudController
         CRUD::addField([
             'name' => 'course_id',
             'type' => 'select2',
-            'label' => 'Curso',
+            'label' => 'Grado',
             'entity' => 'course',
             'attribute' => 'name_letter',
             'model' => \App\Models\Course::class,

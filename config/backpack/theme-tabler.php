@@ -41,10 +41,10 @@ return [
     'styles' => [
         base_path('vendor/backpack/theme-tabler/resources/assets/css/color-adjustments.css'),
         // base_path('vendor/backpack/theme-tabler/resources/assets/css/colors.css'),
-        asset('css/colors.css'),
-        asset('css/color-adjustments2.css'),
-        asset('css/common2.css'),
-        asset('css/style2.css'),
+        'css/colors.css',
+        'css/color-adjustments2.css',
+        'css/common2.css',
+        'css/style2.css',
     ],
 
     /**

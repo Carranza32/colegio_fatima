@@ -8,10 +8,12 @@ use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class Student extends Model
 {
-    use CrudTrait, StatusDescription, SoftDeletes, CurrentYear;
+    use CrudTrait, StatusDescription, SoftDeletes;
 
     /*
     |--------------------------------------------------------------------------
@@ -53,6 +55,16 @@ class Student extends Model
             ->first();
 
         return $attendanceDetails;
+    }
+
+    function matricula_button() {
+        return '<a href="'.route('reporte.ficha_matricula', [$this->id]).'" class="btn btn-sm btn-link"><span><i class="la la-file-download"></i> Matrícula</span></a>';
+    }
+
+    function getParentData($parentType) {
+        $parent = $this->parent_data->where('family_type', $parentType)->first();
+
+        return $parent;
     }
 
 
@@ -113,4 +125,5 @@ class Student extends Model
     {
         $this->attributes['estudiante_recibe'] = json_encode($value);
     }
+
 }

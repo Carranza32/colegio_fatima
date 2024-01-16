@@ -18,6 +18,9 @@ use Backpack\Settings\app\Models\Setting;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+use Dompdf\CanvasFactory;
 
 class ReportController extends Controller
 {
@@ -53,8 +56,37 @@ class ReportController extends Controller
 
     public function downloadPeriodAsistReport(Request $request)
     {
-        $alumno = Student::find($request->alumno_id);
-        $period = Period::find($request->period_id);
+        $alumnos = [];
+
+        if ($request->curso == "all") {
+            $courses = Course::all();
+
+            return $this->generateGlobalAsistReport($courses, $request->period_id);
+        }
+
+        if ($request->alumno_id == "all") {
+            $courses = Course::whereIn('id', [$request->curso])->get();
+
+            return $this->generateGlobalAsistReport($courses, $request->period_id);
+        }else{
+            $courses = Course::whereIn('id', [$request->curso])->get();
+            $alumnos = Student::where('id', $request->alumno_id)->get();
+
+            return $this->generateGlobalAsistReport($courses, $request->period_id, $alumnos);
+        }
+
+        $dompdf = new Dompdf();
+
+        foreach ($alumnos as $alumno) {
+            $this->generateAsistReportPdf($dompdf, $alumno, $request->period_id);
+            $dompdf->getCanvas()->newPage();
+        }
+
+        $dompdf->stream("Informe de Asistencia.pdf");
+    }
+
+    function generateAsistReportPdf($pdf, Student $alumno, $periodId) {
+        $period = Period::find($periodId);
         $curso_id = $alumno?->curso_id;
         $alumno_id = $alumno?->id;
 
@@ -99,25 +131,27 @@ class ReportController extends Controller
             'student' => $alumno,
         ];
 
-
-
-        // dd($notas);
-        // return view('admin.reports.reporte_asistencia', $params);
-
         try {
-            $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('admin.reports.reporte_asistencia', $params);
-
-            //return view('admin.reports.reporte_asistencia', $params);
-
-            return $pdf->download("{$alumno?->full_name} Asistencia {$period?->name}.pdf");
+            $pdf->loadView('admin.reports.reporte_asistencia', $params);
+            $pdf->stream("{$alumno?->full_name} Asistencia {$period?->name}.pdf");
 
         } catch (\Throwable $th) {
             \Alert::add('error', 'Error al generar el archivo')->flash();
-
             return $th->getMessage();
         }
+    }
 
-        //return view('admin.reports.periodo_pdf', $params);
+    function generateGlobalAsistReport($courses, $periodId, $alumnos = null) {
+        $period = Period::find($periodId);
+
+        $params = [
+            'courses' => $courses,
+            'period' => $period,
+            'alumnos' => $alumnos,
+            'show_details' => $alumnos == null ? false : true,
+        ];
+
+        return view('admin.reports.globalAsistReport_pdf', $params);
     }
 
     public function downloadPeriodScoreReport(Request $request)
@@ -219,8 +253,13 @@ class ReportController extends Controller
 
         $asignaturas = Subject::whereIn('id', $asignaturasIds)->get();
         $asignaturas = Subject::where('course_id', $curso_id)->get();
+        $periods = [];
 
-        $periods = Period::all();
+        if ($request->period_id == null) {
+            $periods = Period::all();
+        }else {
+            $periods = Period::whereIn('id', $request->period_id)->get();
+        }
 
         $anual = [];
         $total_asistencia = 0;
@@ -237,24 +276,6 @@ class ReportController extends Controller
                                 ->whereDate('date_scope', '>=', $period?->start_date)
                                 ->whereDate('date_scope', '<=', $period?->end_date)
                                 ->avg('score');
-
-                // $detalleNota = 0;
-
-                // for ($i=0; $i < $period->evaluations; $i++) {
-                //     $detalleNota = Score::withoutGlobalScopes(['current_period'])
-                //                 ->where('student_id', $alumno?->id)
-                //                 ->where('subject_id', $asignatura?->id)
-                //                 ->whereDate('date_scope', '>=', $period?->start_date)
-                //                 ->whereDate('date_scope', '<=', $period?->end_date)
-                //                 ->where('evaluation_number', $i + 1)
-                //                 ->first();
-                // }
-
-                // $anual[$asignatura?->name][] = [
-                //     'evaluacion' => $i + 1,
-                //     'promedio' => round($promedio),
-                //     'detalle' => ($detalleNota?->score ?? 0)
-                // ];
                 $anual[$asignatura?->name][] = $asignatura->id;
             }
         }
@@ -299,7 +320,7 @@ class ReportController extends Controller
         }
 
 
-        // return view('admin.reports.anual_pdf', $params);
+        return view('admin.reports.anual_pdf', $params);
         try {
             $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('admin.reports.anual_pdf', $params);
 
@@ -335,15 +356,22 @@ class ReportController extends Controller
 
     function asistanceExport(Request $request) {
         // Obtén los datos que deseas exportar
-        $query = Assistance::withoutGlobalScopes(['current_period'])
-                    ->with('course', 'subject', 'assistance_detail.student')
-                    ->where('course_id', $request->curso);
+        // $query = Assistance::withoutGlobalScopes(['current_year', 'current_period'])
+        //             ->with('course', 'subject', 'assistance_detail.student')
+        //             ->where('course_id', $request->curso);
 
-        if ($request->alumno_id != null && $request->alumno_id != '' && $request->alumno_id != 'all') {
-            $query->whereHas('assistance_detail', function ($query) use ($request) {
-                $query->where('student_id', $request->alumno_id);
-            });
-        }
+        $query = DB::table('assistances as asis')
+                    ->select('asis.date', 'students.name as student_name', 'students.nie', 'details.has_assistance', 'assistance_justifications.name as justification_name', 'asis.observacion')
+                    ->join('assistance_details as details', 'details.assistance_id', '=', 'asis.id')
+                    ->join('courses', 'asis.course_id', '=', 'courses.id')
+                    ->join('students', 'details.student_id', '=', 'students.id')
+                    ->leftJoin('assistance_justifications', 'details.justificacion_id', '=', 'assistance_justifications.id');
+
+        // if ($request->alumno_id != null && $request->alumno_id != '' && $request->alumno_id != 'all') {
+        //     $query->whereHas('assistance_detail', function ($query) use ($request) {
+        //         $query->where('student_id', $request->alumno_id);
+        //     });
+        // }
 
         if ($request->get('daterange') != null) {
             $startString = explode(' - ', $request->get("daterange"))[0];
@@ -356,11 +384,29 @@ class ReportController extends Controller
         }
 
         //grouping
-        $query->groupBy('assistances.id');
-
         $data = $query->orderBy('date', 'asc')->get();
 
         // Exporta los datos a Excel usando el paquete maatwebsite/excel
         return Excel::download(new AssistanceExport($data), 'plantilla_control_asistencia.xlsx');
+    }
+
+    function fichaMatricula(Request $request) {
+        $student = Student::find($request->id);
+
+        $params = [
+            'student' => $student,
+        ];
+
+        return view('admin.reports.ficha_matricula', $params);
+
+        try {
+            $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('admin.reports.ficha_matricula', $params);
+
+            return $pdf->download("Matricula {$student?->full_name}.pdf");
+        } catch (\Throwable $th) {
+            \Alert::add('error', 'Error al generar el archivo')->flash();
+
+            return redirect()->back();
+        }
     }
 }

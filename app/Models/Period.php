@@ -24,6 +24,10 @@ class Period extends Model
     protected $guarded = ['id'];
     // protected $fillable = [];
     // protected $hidden = [];
+    protected $casts = [
+        'evaluaciones_pruebas_objetivas' => 'array',
+        'evaluaciones_actividades' => 'array',
+    ];
 
     /*
     |--------------------------------------------------------------------------

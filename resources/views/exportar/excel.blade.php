@@ -11,14 +11,15 @@
         </tr>
     </thead>
     <tbody>
-        @foreach($data as $item)
+        @foreach($data as $assistance)
             <tr>
                 <td></td>
                 <td></td>
-                <td>{{ $item->date }}</td>
-                <td>{{ $item->nie }}</td>
-                <td>{{ $item->falto }}</td>
-                <td>{{ $item->justificacion }}</td>
+                <td>{{ $assistance->date }}</td>
+                <td>{{ $assistance->nie }}</td>
+                <td>{{ $assistance->has_assistance }}</td>
+                <td>{{ $assistance->justification_name }}</td>
+                <td>{{ $assistance->observacion }}</td>
                 <td></td>
             </tr>
         @endforeach

@@ -140,7 +140,7 @@
     <div class="row mt-5" style="position: relative">
         <div class="col-md-4 col-lg-12" style="text-align: center">
             <h1 class="header-title mb-3">
-                Informe educacional anual
+                Informe de notas
             </h1>
         </div>
         <div class="col-md-4 col-lg-12" style="float: right">
@@ -164,8 +164,9 @@
                     <div class="card shadow-none border-0 mb-0">
                         <div class="card-body">
                             <p>Alumno: <strong> {{ $alumno?->full_name }}</strong></p>
-                            <p>Curso: <strong>{{ $alumno?->course?->name }}</strong></p>
+                            <p>Grado: <strong>{{ $alumno?->course?->name }}</strong></p>
                             <p>Año escolar: <strong>{{ session('year')?->year }}</strong></p>
+                            <p>Profesor/a encargado/a: <strong>{{ $alumno?->course?->teacher?->full_name }}</strong></p>
                         </div>
                     </div>
                     <div class="card-body">
@@ -185,17 +186,38 @@
                             <table class="table table-striped table-hover" id="tabla-notas">
                                 <thead>
                                     <tr>
-                                        <th scope="col" rowspan="{{ $countAnual }}"><div class="text-center">Asignaturas</div></th>
+                                        <th scope="col" rowspan="3"><div class="text-center">Asignaturas</div></th>
                                         @foreach ($periodos as $periodo)
-                                            <th colspan="{{ $periodo->evaluations }}" class="text-center">{{ $periodo->name }}</th>
+                                            @php
+                                                $cant_evaluaciones = count($periodo->evaluaciones_pruebas_objetivas) + count($periodo->evaluaciones_actividades);
+                                            @endphp
+
+                                            <th colspan="{{ $cant_evaluaciones + 2 }}" class="text-center">{{ $periodo->name }}</th>
                                         @endforeach
-                                        <th scope="col" rowspan="{{ $countAnual }}"><div class="text-center">Promedio</div></th>
+                                        <th scope="col" rowspan="3"><div class="text-center">Promedio</div></th>
                                     </tr>
                                     <tr>
                                         @foreach ($periodos as $periodo)
-                                            @for ($i = 0; $i < $periodo->evaluations; $i++)
-                                                <th class='text-center'>Evaluación {{ $i + 1 }}</th>
-                                            @endfor
+                                            <th scope="col" colspan="{{ count($periodo->evaluaciones_pruebas_objetivas) + 1 }}"><div class="text-center">Prueba Objetiva (30%)</div></th>
+                                            <th scope="col" colspan="{{ count($periodo->evaluaciones_actividades) + 1 }}"><div class="text-center">Actividades (70%)</div></th>
+
+                                            <tr>
+                                                @foreach ($periodo->evaluaciones_pruebas_objetivas as $item)
+                                                    <th class="text-center fw-light">{{ $item['name'] }}</th>
+
+                                                    @if ($loop->last)
+                                                        <th scope="col" class="text-center">Promedio x 30%</th>
+                                                    @endif
+                                                @endforeach
+
+                                                @foreach ($periodo->evaluaciones_actividades as $item)
+                                                    <th class="text-center fw-light">{{ $item['name'] }}</th>
+
+                                                    @if ($loop->last)
+                                                        <th scope="col" class="text-center">Promedio x 70%</th>
+                                                    @endif
+                                                @endforeach
+                                            </tr>
                                         @endforeach
                                     </tr>
                                 </thead>
@@ -211,21 +233,36 @@
                                     @foreach ($anual as $key => $item)
                                         <tr>
                                             <td class="text-center">{{ $key }}</td>
-                                            @php
-
-                                            @endphp
 
                                             @foreach ($periodos as $periodo)
-                                                @for ($i = 0; $i < $periodo->evaluations; $i++)
+                                                @foreach ($periodo->evaluaciones_pruebas_objetivas as $objetivas)
                                                     @php
-                                                        $score = getScoreByPeriod($periodo, $alumno, $item, $i + 1);
+                                                        $score = getStudentScore($alumno->id, $item, $alumno->course->id, $loop->index + 1, 'pruebas', $periodo);
                                                     @endphp
 
                                                     <th class='text-center'>{{ $score }}</th>
-                                                @endfor
+
+                                                    @if ($loop->last)
+                                                        <th class='text-center'>{{ getScoreByPeriodPruebas($alumno->id, $item, $alumno->course->id, $periodo) }}</th>
+                                                    @endif
+                                                @endforeach
+
+                                                @foreach ($periodo->evaluaciones_actividades as $actividades)
+                                                    @php
+                                                        $score = getStudentScore($alumno->id, $item, $alumno->course->id, $loop->index + 1, 'actividades', $periodo);
+
+                                                        $index = $loop->index + 1;
+                                                    @endphp
+
+                                                    <th class='text-center'>{{ $score }}</th>
+
+                                                    @if ($loop->last)
+                                                        <th class='text-center'>{{ getScoreByPeriodActividades($alumno->id, $item, $alumno->course->id, $periodo) }}</th>
+                                                    @endif
+                                                @endforeach
                                             @endforeach
 
-                                            <th class='text-center'>{{ getStudentAverageByYear($alumno, $item) }}</th>
+                                            <th class='text-center'>{{ getStudentAverageByPeriod($alumno->id, $item, $alumno->course->id, $periodo) }}</th>
                                         </tr>
                                     @endforeach
                                 </tbody>
