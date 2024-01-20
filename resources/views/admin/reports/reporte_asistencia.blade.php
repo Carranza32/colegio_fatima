@@ -233,6 +233,15 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="row md-5" style="position: relative">
+                        <div class="col-md-4" style="text-align: center">
+                            <div style="margin-top: 3rem; text-align: center;">
+                                <p style="font-size: 13px !important; text-transform: uppercase; border-bottom: 2px solid #000; margin-left: 25%; margin-right: 25%">{{ $director }}</p>
+                                <h5>Firma Director(a)</h5>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

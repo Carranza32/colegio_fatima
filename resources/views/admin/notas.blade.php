@@ -235,7 +235,8 @@
                     url: "{{ route('asignatura.by_course') }}",
                     method: 'POST',
                     data: {
-                        curso_id: $(this).val()
+                        curso_id: $(this).val(),
+                        _token: "{{ csrf_token() }}"
                     },
                     success: function (response) {
                         $('#sel_asignatura').empty()

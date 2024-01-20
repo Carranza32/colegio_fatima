@@ -80,6 +80,10 @@ class Student extends Model
     function course() {
         return $this->belongsTo(Course::class);
     }
+
+    function conduct_records() {
+        return $this->hasMany(ConductRecord::class);
+    }
     /*
     |--------------------------------------------------------------------------
     | SCOPES

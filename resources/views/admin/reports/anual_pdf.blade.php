@@ -183,21 +183,19 @@
                             </tbody>
                         </table>
                         <div class="table-responsive">
-                            <table class="table table-striped table-hover" id="tabla-notas">
-                                <thead>
-                                    <tr>
-                                        <th scope="col" rowspan="3"><div class="text-center">Asignaturas</div></th>
-                                        @foreach ($periodos as $periodo)
+                            @foreach ($periodos as $periodo)
+                                <table class="table table-striped table-hover" id="tabla-notas">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" rowspan="3"><div class="text-center">Asignaturas</div></th>
                                             @php
                                                 $cant_evaluaciones = count($periodo->evaluaciones_pruebas_objetivas) + count($periodo->evaluaciones_actividades);
                                             @endphp
 
                                             <th colspan="{{ $cant_evaluaciones + 2 }}" class="text-center">{{ $periodo->name }}</th>
-                                        @endforeach
-                                        <th scope="col" rowspan="3"><div class="text-center">Promedio</div></th>
-                                    </tr>
-                                    <tr>
-                                        @foreach ($periodos as $periodo)
+                                            <th scope="col" rowspan="3"><div class="text-center">Promedio</div></th>
+                                        </tr>
+                                        <tr>
                                             <th scope="col" colspan="{{ count($periodo->evaluaciones_pruebas_objetivas) + 1 }}"><div class="text-center">Prueba Objetiva (30%)</div></th>
                                             <th scope="col" colspan="{{ count($periodo->evaluaciones_actividades) + 1 }}"><div class="text-center">Actividades (70%)</div></th>
 
@@ -218,23 +216,21 @@
                                                     @endif
                                                 @endforeach
                                             </tr>
-                                        @endforeach
-                                    </tr>
-                                </thead>
+                                        </tr>
+                                    </thead>
 
-                                @php
-                                    $sumPromedios = 0;
-                                    $promedio_materia = 0;
-                                    $sum_promedio_general = 0;
-                                    $cant_promedio_general = 0;
-                                @endphp
+                                    @php
+                                        $sumPromedios = 0;
+                                        $promedio_materia = 0;
+                                        $sum_promedio_general = 0;
+                                        $cant_promedio_general = 0;
+                                    @endphp
 
-                                <tbody>
-                                    @foreach ($anual as $key => $item)
-                                        <tr>
-                                            <td class="text-center">{{ $key }}</td>
+                                    <tbody>
+                                        @foreach ($anual as $key => $item)
+                                            <tr>
+                                                <td class="text-center">{{ $key }}</td>
 
-                                            @foreach ($periodos as $periodo)
                                                 @foreach ($periodo->evaluaciones_pruebas_objetivas as $objetivas)
                                                     @php
                                                         $score = getStudentScore($alumno->id, $item, $alumno->course->id, $loop->index + 1, 'pruebas', $periodo);
@@ -260,20 +256,45 @@
                                                         <th class='text-center'>{{ getScoreByPeriodActividades($alumno->id, $item, $alumno->course->id, $periodo) }}</th>
                                                     @endif
                                                 @endforeach
+
+                                                <th class='text-center'>{{ getStudentAverageByPeriod($alumno->id, $item, $alumno->course->id, $periodo) }}</th>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            @endforeach
+
+                            @if (count($alumno?->conduct_records) > 0)
+                                <div class="row mt-5" style="position: relative">
+                                    <div class="col-md-4 col-lg-12">
+                                        <div style="margin-top: 0.2rem;">
+                                            Registros de conducta: <br>
+
+                                            @foreach ($alumno?->conduct_records as $item)
+                                                <p>{{ $item->name }}</p>
+                                                <br>
+                                                <p>{!! $item->description !!}</p>
                                             @endforeach
-
-                                            <th class='text-center'>{{ getStudentAverageByPeriod($alumno->id, $item, $alumno->course->id, $periodo) }}</th>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
-
                         <div class="row mt-5" style="position: relative">
                             <div class="col-md-4 col-lg-12" style="text-align: center">
                                 <div style="margin-top: 3rem; text-align: center;">
                                     <p style="font-size: 13px !important; text-transform: uppercase; border-bottom: 2px solid #000; margin-left: 25%; margin-right: 25%">{{ $director }}</p>
                                     <h5>Firma Director(a)</h5>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-5" style="position: relative">
+                            <div class="col-md-4 col-lg-12" style="text-align: center">
+                                <div style="margin-top: 3rem; text-align: center;">
+
+                                    <p style="font-size: 13px !important; text-transform: uppercase; border-bottom: 2px solid #000; margin-left: 25%; margin-right: 25%"><img src="{{ $alumno?->course?->teacher?->signature }}" alt="Firma"></p>
+                                    <h5>Firma Profesor(a) Encargado(a)</h5>
                                 </div>
                             </div>
                         </div>

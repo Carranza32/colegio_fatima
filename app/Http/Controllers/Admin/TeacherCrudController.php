@@ -21,8 +21,8 @@ use App\Mail\NewAccountMail;
 class TeacherCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation { store as traitStore; }
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation { update as traitUpdate; }
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
     use CheckPermissionsCrud;
@@ -219,6 +219,15 @@ class TeacherCrudController extends CrudController
         ]);
 
         CRUD::addField([
+            'name' => 'signature',
+            'type' => 'teacher.signaturePad',
+            'label' => 'Firma digital',
+            'wrapper' => [
+                'class' => 'form-group col-md-12'
+            ]
+        ]);
+
+        CRUD::addField([
             'name' => 'is_active',
             'label' => 'Activo',
             'type' => 'switch',
@@ -235,5 +244,37 @@ class TeacherCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+    }
+
+    public function store()
+    {
+        $request = $this->crud->getRequest();
+        $signature = $request->input('signature');
+
+        $response = $this->traitStore();
+
+        $entry = $this->crud->getCurrentEntry();
+
+        if (!empty($signature)) {
+            $entry->update(['signature' => $signature]);
+        }
+
+        return $response;
+    }
+
+    public function update()
+    {
+        $request = $this->crud->getRequest();
+        $signature = $request->input('signature');
+
+        $response = $this->traitUpdate();
+
+        $entry = $this->crud->getCurrentEntry();
+
+        if (!empty($signature)) {
+            $entry->update(['signature' => $signature]);
+        }
+
+        return $response;
     }
 }

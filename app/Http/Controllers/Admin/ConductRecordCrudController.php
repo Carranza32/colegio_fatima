@@ -170,7 +170,6 @@ class ConductRecordCrudController extends CrudController
         CRUD::addField([
             'name' => 'custom_scripts',
             'type' => 'conductRecord.custom_scripts',
-            'tab' => 'Estudiante',
         ]);
     }
 

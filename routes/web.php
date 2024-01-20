@@ -18,6 +18,10 @@ Route::get('/', function () {
     return redirect(backpack_url());
 });
 
+Route::get('home', function () {
+    return redirect(backpack_url('dashboard'));
+});
+
 Route::get('permisos', function () {
     $permissions = [
         ["name" => "setting",

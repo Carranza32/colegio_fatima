@@ -151,7 +151,15 @@ class ReportController extends Controller
             'show_details' => $alumnos == null ? false : true,
         ];
 
-        return view('admin.reports.globalAsistReport_pdf', $params);
+        try {
+            $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('admin.reports.globalAsistReport_pdf', $params);
+
+            return $pdf->download("Informe de Asistencia.pdf");
+        } catch (\Throwable $th) {
+            \Alert::add('error', 'Error al generar el archivo')->flash();
+
+            return $th->getMessage();
+        }
     }
 
     public function downloadPeriodScoreReport(Request $request)
@@ -295,11 +303,6 @@ class ReportController extends Controller
                                         ->count();
 
         try {
-        } catch (\Throwable $th) {
-            \Alert::add('error', 'Error al generar el archivo')->flash();
-        }
-
-        try {
             $porcentaje_asistencia = round($total_asistidos * 100 / $total_asistencia);
         } catch (\Throwable $th) {
             $porcentaje_asistencia = 0;
@@ -314,13 +317,9 @@ class ReportController extends Controller
             'porcentaje_asistencia' => $porcentaje_asistencia,
             'director' => Setting::get('director_name') ?? '',
         ];
-        try {
-        } catch (\Throwable $th) {
-            \Alert::add('error', 'Error al generar el archivo')->flash();
-        }
 
+        // return view('admin.reports.anual_pdf', $params);
 
-        return view('admin.reports.anual_pdf', $params);
         try {
             $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('admin.reports.anual_pdf', $params);
 
@@ -396,8 +395,6 @@ class ReportController extends Controller
         $params = [
             'student' => $student,
         ];
-
-        return view('admin.reports.ficha_matricula', $params);
 
         try {
             $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('admin.reports.ficha_matricula', $params);
